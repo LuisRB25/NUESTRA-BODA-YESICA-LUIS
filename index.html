@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yésica & Luis</title>
+
+<style>
+body{
+font-family: Georgia, serif;
+background:#f5f0e6;
+color:#4a4a4a;
+text-align:center;
+margin:0;
+padding:0;
+}
+
+header{
+background:#6b8e23;
+color:white;
+padding:50px 20px;
+}
+
+h1{
+font-size:3em;
+margin:0;
+}
+
+h2{
+color:#6b8e23;
+}
+
+section{
+padding:30px;
+}
+
+.boton{
+display:inline-block;
+background:#6b8e23;
+color:white;
+padding:15px 25px;
+margin:10px;
+text-decoration:none;
+border-radius:10px;
+font-size:18px;
+}
+
+#contador{
+font-size:2em;
+font-weight:bold;
+margin:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Yésica & Luis</h1>
+<p>Nos casamos</p>
+<p>28 de Noviembre de 2026</p>
+</header>
+
+<section>
+<h2>Cuenta Regresiva</h2>
+<div id="contador"></div>
+</section>
+
+<section>
+<h2>Ceremonia Religiosa</h2>
+<p>Iglesia San Miguel Arcángel</p>
+
+<a class="boton"
+href="https://maps.app.goo.gl/GtrYc5KbXZhDnB2u6"
+target="_blank">
+Ver ubicación
+</a>
+</section>
+
+<section>
+<h2>Recepción</h2>
+<p>Salón La Joya</p>
+
+<a class="boton"
+href="https://maps.app.goo.gl/1jtz6UzbF7jfUd2XA"
+target="_blank">
+Cómo llegar
+</a>
+</section>
+
+<section>
+<h2>Confirmar Asistencia</h2>
+
+<a class="boton"
+href="https://docs.google.com/forms/d/e/1FAIpQLSecyADGBUg2BuRoezHR4y5-qg-bLTPtGfHX9mhOSMz1iPzpgA/viewform"
+target="_blank">
+Confirmar
+</a>
+</section>
+
+<script>
+const fechaBoda = new Date("Nov 28, 2026 13:00:00").getTime();
+
+setInterval(function(){
+
+const ahora = new Date().getTime();
+const distancia = fechaBoda - ahora;
+
+const dias = Math.floor(distancia/(1000*60*60*24));
+const horas = Math.floor((distancia%(1000*60*60*24))/(1000*60*60));
+const minutos = Math.floor((distancia%(1000*60*60))/(1000*60));
+
+document.getElementById("contador").innerHTML =
+dias + " días " + horas + " horas " + minutos + " minutos";
+
+},1000);
+</script>
+
+</body>
+</html>
