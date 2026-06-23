@@ -116,17 +116,19 @@ font-weight:bold;
 .familias{
 display:flex;
 justify-content:center;
-gap:40px;
-flex-wrap:nowrap;
   aling-items:stretch;
+gap:30px;
+flex-wrap:wrap;
 margin:30px 0;
+  max-width:900px;
 }
 
 .columna{
 background:white;
 padding:20px;
 border-radius:15px;
-min-width:250px;
+  width:320px;
+  max-width:90%;
 box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
@@ -148,7 +150,20 @@ border-radius:12px;
 box-shadow:0 4px 10px rgba(0,0,0,0.1);
 }
 
+@media (max-width: 768px){
 
+.familias{
+flex-direction:column;
+align-items:center;
+gap:20px;
+}
+
+.columna{
+width:90%;
+max-width:400px;
+}
+}
+  
   
 </style>
 </head>
@@ -176,7 +191,8 @@ box-shadow:0 4px 10px rgba(0,0,0,0.1);
 
 <section>
 
-<h2>Con la bendición de nuestros padres</h2>
+<h2>Con la bendición de nuestros padres y el cariño de nuestros padrinos</h2>
+  <p><em>Nos acompañan en este momento tan especial de nuestras vidas.</em></p>
 <div class="familias">
 <div class="columna">
 <h3>Padres de la Novia</h3>
