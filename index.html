@@ -82,11 +82,37 @@ font-size:18px;
   }
 }
 
-#contador{
+#contadorPremium{
+display:flex;
+justify-content:center;
+gap:15px;
+flex-wrap:wrap;
+margin-top:20px;
+}
+
+.tiempo{
+text-align:center;
+}
+
+.tiempo div{
+background:#6F4E37;
+color:white;
+padding:20px;
+border-radius:15px;
+min-width:80px;
 font-size:2em;
 font-weight:bold;
-margin:20px;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
+
+.tiempo span{
+display:block;
+margin-top:8px;
+font-size:0.9em;
+color:#6F4E37;
+font-weight:bold;
+}
+  
 </style>
 </head>
 
@@ -111,10 +137,30 @@ margin:20px;
 <p>28 de Noviembre de 2026</p>
 </header>
 
+
 <section>
 <h2>Cuenta Regresiva</h2>
-<div id="contador"></div>
+<div id="contadorPremium">
+<div class="tiempo">
+<div id="dias">0</div>
+<span>Días</span>
+</div>
+<div class="tiempo">
+<div id="horas">0</div>
+<span>Horas</span>
+</div>
+<div class="tiempo">
+<div id="minutos">0</div>
+<span>Min.</span>
+</div>
+<div class="tiempo">
+<div id="segundos">0</div>
+<span>Seg.</span>
+</div>
+</div>
 </section>
+
+
 
 <section>
 <h2>Ceremonia Religiosa</h2>
