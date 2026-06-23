@@ -5,8 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yésica & Luis</title>
 
+
+
+  
 <style>
 body{
+  #bienvenida{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:#f8f4ed;
+padding:20px;
+}
+
+.contenido-bienvenida{
+max-width:600px;
+animation:fadeIn 2s;
+}
+
+.contenido-bienvenida h1{
+font-size:3rem;
+color:#6F4E37;
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 font-family: Georgia, serif;
 background:#f8f4ed;
 color:#4a4a4a;
@@ -58,6 +91,19 @@ margin:20px;
 </head>
 
 <body>
+  <div id="bienvenida">
+    <div class="contenido-bienvenida">
+      <h1>Yésica & Luis</h1>
+      <h2>28 de Noviembre de 2026</h2>
+      <p>Las Vigas de Ramírez, Veracruz</p>
+      <p><em>"Juntos emprenderemos el viaje más importante de nuestras vidas."</em></p>
+      <button onclick="abrirInvitacion()"
+        class="boton">
+        💍 Abrir Invitación
+      </button>
+    </div>
+  </div>
+  <div id="contenidoPrincipal" style="display:none;>
 
 <header>
 <h1>Yésica & Luis</h1>
@@ -120,5 +166,12 @@ dias + " días " + horas + " horas " + minutos + " minutos";
 },1000);
 </script>
 
+</div>
+  <script>
+    function abrirInvitacion(){
+      document.getElementById("bienvenida").style.display="none";
+      document.getElementById("contenidoPrincipal").style.display="block";
+    }
+  </script>
 </body>
 </html>
