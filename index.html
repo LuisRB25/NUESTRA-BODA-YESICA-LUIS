@@ -264,7 +264,33 @@ transform:translateY(0);
 
 
 
+  .recuerdo{
+    padding:50px 20px;
+    text-aling:center;
+  }
+  .foto-recuerdo{
+    width:100%
+    max-width:450px;
+    margin-top:25px;
+    border-radius:18px;
+    box-shadow:0 12px 30px rgba(0,0,0,0.25);
+    opacity:0;
+    transform:translateY(40px) scale(0.95);
+    animation:fotoAparecer 2s ease forwards;
+  }
 
+  @keyframes fotoAparecer{
+    from{
+  opacity:0;
+  transform:translateY(40px) scale(0.95);
+  }
+to{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+  }
+
+  
 
 
 
@@ -272,6 +298,12 @@ transform:translateY(0);
   
   
 </style>
+
+
+
+
+
+  
 </head>
 
 <body>
@@ -354,9 +386,24 @@ Guadalupe López Zamora
   
 </div>
 </section>
-    
+
+
+
+    <section class="recuerdo">
+      <h2>Nuestra historia continua...</h2>
+      <p>
+        <em>
+          💕 De tantos momentos juntos, hoy elegimos compartir con ustedes el mas importante 💕
+        </em>
+      </p>
+    <img src="0817559a-97ff-44e-bd70-e2fec1ad4ad1.jpg"
+      alt="Yésica & Luis"
+      class="foto-recuerdo">
 
 <section>
+
+
+  
 <h2>FALTAN...⏳</h2>
 <div id="contadorPremium">
 <div class="tiempo">
