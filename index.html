@@ -172,104 +172,6 @@ max-width:400px;
 
 
   
-.animar0{
-opacity:0;
-transform:translateY(30px);
-animation:aparecer 4s ease forwards;
-}
-
-@keyframes aparecer{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-
-.animar1{
-opacity:0;
-transform:translateY(30px);
-animation:aparecer 4.8s ease forwards;
-}
-
-@keyframes aparecer{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-
-
-  
-
-  .animar2{
-opacity:0;
-transform:translateY(30px);
-animation:aparecer 1.8s ease forwards;
-animation-delay:5s;
-}
-
-@keyframes aparecer{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-.animar3{
-  opacity:0;
-  transform:translateY(30px);
-  animation:aparecer 1.8s ease forwards;
-  animation-delay:5.8s;
-}
-
-
-.animar4{
-  opacity:0;
-  transform:translateY(30px);
-  animation:aparecer 1.8s ease forwards;
-  animation-delay:6.6s;
-}
-
-
-
-.animar5{
-  opacity:0;
-  transform:translateY(30px);
-  animation:aparecer 1.8s ease forwards;
-  animation-delay:7.4s;
-}
-  
-.animar6{
-  opacity:0;
-  transform:translateY(30px);
-  animation:aparecer 1.8s ease forwards;
-  animation-delay:8.2s;
-}
-
-
-.animar7{
-  opacity:0;
-  transform:translateY(30px);
-  animation:aparecer 1.8s ease forwards;
-  animation-delay:9s;
-}
-
-
-
   .recuerdo{
     padding:50px 20px;
     text-aling:center;
@@ -401,6 +303,25 @@ to{
   }
 }
 
+
+
+.reveal{
+
+opacity:0;
+
+transform:translateY(80px);
+
+transition:all 1.2s ease;
+
+}
+
+.reveal.active{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
   
   
 </style>
@@ -438,14 +359,14 @@ to{
 <h2>Con la bendición 🙏🏼 de nuestros padres</h2>
   <p><em>Nos acompañan en este momento tan especial de nuestras vidas.</em></p>
 <div class="familias">
-<div class="columna animar0">
+<div class="columna reveal">
 <h3>Padres de la Novia</h3>
 <p>
 José Guadalupe Hernández Acosta<br>
 Yesenia Sánchez Ortega
 </p>
 </div>
-<div class="columna animar1">
+<div class="columna reveal">
   
 <h3>Padres del Novio</h3>
 <p>
@@ -458,32 +379,32 @@ Ana Lilia Bonilla García
 <h2>Y el cariño 🫶🏼 de nuestros padrinos</h2>
   
 <div class="padrinos">
-<p class="animar3">
+<p class="reveal">
 <strong>Velación</strong><br>
 José Luis Ramón Vázquez
            & 
 Ana Lilia Bonilla García
 </p>
-<p class="animar4">
+<p class="reveal">
 <strong>Anillos</strong><br>
 José Guadalupe Hernández Acosta
             & 
 Yesenia Sánchez Ortega
 </p>
-<p class="animar5">
+<p class="reveal">
 <strong>Arras</strong><br>
 José Norberto Rogelio Bonilla García
             & 
 Ana Lilia García Y Martinez
 </p>
-<p class="animar6">
+<p class="reveal">
 <strong>Lazo</strong><br>
 Reynaldo Sánchez Mendoza
           & 
 Maria Cecilia Guadalupe Ortega López
 </p>
 
-<p class="animar7">
+<p class="reveal">
 <strong>Biblia y rosario</strong><br>
 Rosendo Hernández Acosta
           & 
@@ -493,7 +414,7 @@ Guadalupe López Zamora
 </div>
 
 
-      <section class="recuerdo">
+      <section class="recuerdo reveal">
       <h2>Nuestra historia continua...</h2>
       <p>
         <em>
@@ -509,7 +430,7 @@ Guadalupe López Zamora
 <section>
 
 
-<section class="contador-portada">
+<section class="contador-portada reveal">
 
   <div class="contador-capa">
 
@@ -614,5 +535,38 @@ document.getElementById("segundos").innerHTML = segundos;
       document.getElementById("contenidoPrincipal").style.display="block";
     }
   </script>
+
+
+<script>
+
+const reveals = document.querySelectorAll(".reveal");
+
+function revelar(){
+
+const alturaVentana = window.innerHeight;
+
+reveals.forEach((elemento)=>{
+
+const distancia = elemento.getBoundingClientRect().top;
+
+if(distancia < alturaVentana - 120){
+
+elemento.classList.add("active");
+
+}
+
+});
+
+}
+
+window.addEventListener("scroll", revelar);
+
+window.addEventListener("load", revelar);
+
+</script>
+
+
+
+  
 </body>
 </html>
