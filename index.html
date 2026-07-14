@@ -44,6 +44,7 @@
 
 #bienvenida{
   min-height:100vh;
+  min-height:100svh;
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -51,13 +52,16 @@
   padding:30px 20px;
 
   background-image:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.55)),
+    url("./portada.jpg");
 
-linear-gradient(rgba(0,0,0,.45),
-rgba(0,0,0,.55)),
-
-url("portada.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  color:var(--blanco);
+  overflow:hidden;
 }
-
+    
 .intro-fecha{
   margin-bottom:35px;
   font-size:0.85rem;
@@ -102,7 +106,7 @@ animation:entradaNombre 2s ease forwards;
 font-size:3rem;
 color:var(--dorado);
 font-family:'Cormorant Garamond',serif;
-}}
+}
 
 .frase-principal{
   margin:35px auto 25px;
@@ -456,7 +460,7 @@ font-family:'Cormorant Garamond',serif;
 
     <h1>Yésica</h1>
 
-    <div class="simbolo-amor">♥</div>
+    <div class="simbolo-amor">&amp;</div>
 
     <h1>Luis</h1>
 
