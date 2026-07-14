@@ -103,11 +103,14 @@ animation:entradaNombre 2s ease forwards;
 }
 
 .simbolo-amor{
+margin:12px 0;
 font-size:3rem;
 color:var(--dorado);
-font-family:'Cormorant Garamond',serif;
+font-family:'Cormorant Garamond', serif;
+opacity:0;
+animation:entradaAmpersand 1.8s ease 1.8s forwards;
 }
-
+    
 .frase-principal{
   margin:35px auto 25px;
   font-size:1.05rem;
@@ -180,6 +183,23 @@ font-family:'Cormorant Garamond',serif;
     opacity:1;
     transform:translateY(0);
   }
+}
+    @keyframes entradaAmpersand{
+
+0%{
+opacity:0;
+transform:scale(.4) rotate(-15deg);
+}
+
+60%{
+opacity:1;
+transform:scale(1.15) rotate(4deg);
+}
+
+100%{
+opacity:1;
+transform:scale(1) rotate(0deg);
+}
 }
 
 @media (max-width:480px){
