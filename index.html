@@ -240,18 +240,22 @@
     /* ANIMACIÓN AL DESLIZAR */
 
     .reveal{
-      opacity:0;
-      transform:translateY(60px);
-      transition:
-        opacity 1.3s ease,
-        transform 1.3s ease;
-    }
+  opacity:0;
+  transform:translateY(70px);
+  filter:blur(5px);
+  transition:
+    opacity 1.8s ease,
+    transform 1.8s ease,
+    filter 1.8s ease;
+  will-change:opacity, transform, filter;
+}
 
-    .reveal.active{
-      opacity:1;
-      transform:translateY(0);
-    }
-
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+  filter:blur(0);
+}
+    
     /* CELULARES */
 
     @media (max-width:768px){
@@ -593,18 +597,6 @@
     actualizarContador();
     setInterval(actualizarContador, 1000);
 
-    function revelarElementos() {
-      const elementos = document.querySelectorAll(".reveal");
-      const alturaVentana = window.innerHeight;
-
-      elementos.forEach((elemento) => {
-        const posicion = elemento.getBoundingClientRect().top;
-
-        if (posicion < alturaVentana - 80) {
-          elemento.classList.add("active");
-        }
-      });
-    }
 
     function abrirInvitacion() {
       document.getElementById("bienvenida").style.display = "none";
@@ -612,14 +604,31 @@
 
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "auto"
       });
-
-      setTimeout(revelarElementos, 100);
+      setTimeout(iniciarAnimaciones, 200);
     }
 
-    window.addEventListener("scroll", revelarElementos);
-    window.addEventListener("resize", revelarElementos);
+    const observador = new IntersectionObserver(
+  (entradas) => {
+    entradas.forEach((entrada) => {
+      if (entrada.isIntersecting) {
+        entrada.target.classList.add("active");
+        observador.unobserve(entrada.target);
+      }
+    });
+  },
+  {
+    threshold:0.25,
+    rootMargin:"0px 0px -60px 0px"
+  }
+);
+
+function iniciarAnimaciones() {
+  document.querySelectorAll(".reveal").forEach((elemento) => {
+    observador.observe(elemento);
+  });
+}
   </script>
 
 </body>
