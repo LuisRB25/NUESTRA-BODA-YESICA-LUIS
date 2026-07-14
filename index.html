@@ -85,34 +85,41 @@ font-size:18px;
 #contadorPremium{
 display:flex;
 justify-content:center;
-gap:15px;
-flex-wrap:wrap;
-margin-top:20px;
+align-items:center;
+gap:12px;
+flex-wrap:nowrap;
+margin-top:30px;
 }
-
+  
 .tiempo{
+width:75px;
 text-align:center;
 }
-
+  
 .tiempo div{
-background:#6F4E37;
+background:rgba(255,255,255,0.20);
+backdrop-filter:blur(6px);
+-webkit-backdrop-filter:blur(6px);
 color:white;
-padding:20px;
+padding:18px 5px;
 border-radius:15px;
-min-width:80px;
-font-size:2em;
+font-size:2rem;
 font-weight:bold;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
+border:1px solid rgba(255,255,255,0.30);
+box-shadow:0 8px 25px rgba(0,0,0,0.25);
 }
 
+  
 .tiempo span{
 display:block;
 margin-top:8px;
-font-size:0.9em;
-color:#6F4E37;
-font-weight:bold;
+color:white;
+font-size:12px;
+letter-spacing:1px;
+text-transform:uppercase;
 }
 
+  
 .familias{
 display:flex;
 justify-content:center;
@@ -298,7 +305,102 @@ to{
   
 
 
+.contador-portada{
+  min-height: 620px;
+  width: 100%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  background-image:
+    linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.48)),
+    url("./portada-contador.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.contador-capa{
+  width: 100%;
+  padding: 70px 15px;
+  text-align: center;
+  color: white;
+}
+
+.contador-capa h2{
+  color: white;
+  font-size: 3.2rem;
+  margin-bottom: 35px;
+  font-style: italic;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.7);
+}
+
+#contadorPremium{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.tiempo{
+  width: 78px;
+  text-align: center;
+}
+
+.tiempo div{
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.45);
+  backdrop-filter: blur(4px);
+  color: white;
+  padding: 16px 6px;
+  border-radius: 12px;
+  font-size: 2rem;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.75);
+}
+
+.tiempo span{
+  display: block;
+  margin-top: 10px;
+  color: white;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+}
+
+@media (max-width: 480px){
+
+  .contador-portada{
+    min-height: 540px;
+    background-position: center;
+  }
+
+  .contador-capa h2{
+    font-size: 2.5rem;
+  }
+
+  #contadorPremium{
+    gap: 7px;
+  }
+
+  .tiempo{
+    width: 68px;
+  }
+
+  .tiempo div{
+    font-size: 1.6rem;
+    padding: 14px 4px;
+  }
+
+  .tiempo span{
+    font-size: 0.61rem;
+  }
+}
 
   
   
@@ -408,30 +510,41 @@ Guadalupe López Zamora
 <section>
 
 
-  
-<h2>FALTAN...⏳</h2>
-<div id="contadorPremium">
-<div class="tiempo">
-<div id="dias">0</div>
-<span>Días</span>
-</div>
-<div class="tiempo">
-<div id="horas">0</div>
-<span>Horas</span>
-</div>
-<div class="tiempo">
-<div id="minutos">0</div>
-<span>Min.</span>
-</div>
-<div class="tiempo">
-<div id="segundos">0</div>
-<span>Seg.</span>
-</div>
-</div>
+<section class="contador-portada">
+
+  <div class="contador-capa">
+
+    <h2>Faltan...</h2>
+
+    <div id="contadorPremium">
+
+      <div class="tiempo">
+        <div id="dias">0</div>
+        <span>Días</span>
+      </div>
+
+      <div class="tiempo">
+        <div id="horas">0</div>
+        <span>Horas</span>
+      </div>
+
+      <div class="tiempo">
+        <div id="minutos">0</div>
+        <span>Minutos</span>
+      </div>
+
+      <div class="tiempo">
+        <div id="segundos">0</div>
+        <span>Segundos</span>
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
 
-
-
+  
 <section>
 <h2>Ceremonia Religiosa</h2>
   <p>28 de Noviembre del 2026</p>
