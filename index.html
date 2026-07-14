@@ -1,572 +1,626 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yésica & Luis</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Yésica & Luis</title>
 
-  
-<style>
-body{
-  #bienvenida{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:#f8f4ed;
-padding:20px;
-}
+  <style>
+    *{
+      box-sizing:border-box;
+    }
 
-.contenido-bienvenida{
-max-width:600px;
-animation:fadeIn 1.8s ease;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-.contenido-bienvenida h1{
-font-size:3rem;
-color:#6F4E37;
-}
+    body{
+      font-family:Georgia, serif;
+      background:#f8f4ed;
+      color:#4a4a4a;
+      text-align:center;
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+    }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-font-family: Georgia, serif;
-background:#f8f4ed;
-color:#4a4a4a;
-text-align:center;
-margin:0;
-padding:0;
-}
+    /* PANTALLA DE BIENVENIDA */
 
-header{
-background:#6F4E37;
-color:white;
-padding:50px 20px;
-}
+    #bienvenida{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      background:#f8f4ed;
+    }
 
-h1{
-font-size:3em;
-margin:0;
-}
+    .contenido-bienvenida{
+      width:100%;
+      max-width:600px;
+      animation:fadeIn 1.8s ease;
+    }
 
-h2{
-color:#6F4E37;
-}
+    .contenido-bienvenida h1{
+      margin:0;
+      color:#6f4e37;
+      font-size:3rem;
+    }
 
-section{
-padding:30px;
-}
+    .contenido-bienvenida h2{
+      margin-top:15px;
+    }
 
-.boton{
-display:inline-block;
-background:#6F4E37;
-color:white;
-padding:15px 25px;
-margin:10px;
-text-decoration:none;
-border-radius:10px;
-font-size:18px;
-  transition:0.3s;
-  .boton:hover{
-    transform:scale(1.05);
-  }
-}
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
 
-#contadorPremium{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:12px;
-flex-wrap:nowrap;
-margin-top:30px;
-}
-  
-.tiempo{
-width:75px;
-text-align:center;
-}
-  
-.tiempo div{
-background:rgba(255,255,255,0.20);
-backdrop-filter:blur(6px);
--webkit-backdrop-filter:blur(6px);
-color:white;
-padding:18px 5px;
-border-radius:15px;
-font-size:2rem;
-font-weight:bold;
-border:1px solid rgba(255,255,255,0.30);
-box-shadow:0 8px 25px rgba(0,0,0,0.25);
-}
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
 
-  
-.tiempo span{
-display:block;
-margin-top:8px;
-color:white;
-font-size:12px;
-letter-spacing:1px;
-text-transform:uppercase;
-}
+    /* CONTENIDO GENERAL */
 
-  
-.familias{
-display:flex;
-justify-content:center;
-  aling-items:stretch;
-gap:30px;
-flex-wrap:wrap;
-margin:30px 0;
-  max-width:900px;
-}
+    header{
+      background:#6f4e37;
+      color:white;
+      padding:50px 20px;
+    }
 
-.columna{
-background:white;
-padding:20px;
-border-radius:15px;
-  width:320px;
-  max-width:90%;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
+    header h1{
+      margin:0;
+      font-size:3rem;
+    }
 
-.columna h3{
-color:#6F4E37;
-margin-bottom:10px;
-}
+    h2{
+      color:#6f4e37;
+    }
 
-.padrinos{
-max-width:700px;
-margin:auto;
-}
+    section{
+      width:100%;
+      padding:45px 20px;
+    }
 
-.padrinos p{
-background:white;
-padding:15px;
-margin:12px 0;
-border-radius:12px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
+    /* BOTONES */
 
-@media (max-width: 768px){
+    .boton{
+      display:inline-block;
+      background:#6f4e37;
+      color:white;
+      padding:15px 25px;
+      margin:10px;
+      text-decoration:none;
+      border:none;
+      border-radius:10px;
+      font-family:inherit;
+      font-size:18px;
+      cursor:pointer;
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.familias{
-flex-direction:column;
-align-items:center;
-gap:20px;
-}
+    .boton:hover,
+    .boton:active{
+      transform:translateY(-3px);
+      box-shadow:0 8px 18px rgba(0,0,0,0.22);
+    }
 
-.columna{
-width:90%;
-max-width:400px;
-}
-}
+    /* PADRES */
 
+    .familias{
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+      gap:30px;
+      flex-wrap:wrap;
+      max-width:900px;
+      margin:30px auto;
+    }
 
-  
-  .recuerdo{
-    padding:50px 20px;
-    text-aling:center;
-  }
+    .columna{
+      width:320px;
+      max-width:100%;
+      padding:20px;
+      background:white;
+      border-radius:15px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.10);
+    }
 
+    .columna h3{
+      color:#6f4e37;
+      margin-top:0;
+    }
 
-  .foto-recuerdo{
-  width: 230px !important;
-  max-width: 70vw !important;
-  height: auto !important;
-  display: block;
-  margin: 25px auto;
-  border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    /* PADRINOS */
 
-  opacity: 0;
-  transform: translateY(40px) scale(0.95);
-  animation: fotoAparecer 2s ease forwards;
-}
+    .padrinos{
+      width:100%;
+      max-width:700px;
+      margin:25px auto 0;
+    }
 
-  @keyframes fotoAparecer{
-    from{
-  opacity:0;
-  transform:translateY(40px) scale(0.95);
-  }
-to{
-  opacity:1;
-  transform:translateY(0) scale(1);
-}
-  }
+    .padrinos p{
+      margin:15px 0;
+      padding:18px;
+      background:white;
+      border-radius:12px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.10);
+    }
 
-  
+    /* FOTO DE RECUERDO */
 
+    .recuerdo{
+      text-align:center;
+    }
 
-.contador-portada{
-  min-height: 620px;
-  width: 100%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    .foto-recuerdo{
+      display:block;
+      width:230px;
+      max-width:70vw;
+      height:auto;
+      margin:25px auto 0;
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.25);
+    }
 
-  background-image:
-    linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.48)),
-    url("./portada-contador.jpg");
+    /* CONTADOR CON FOTO DE FONDO */
 
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+    .contador-portada{
+      min-height:620px;
+      padding:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
 
-.contador-capa{
-  width: 100%;
-  padding: 70px 15px;
-  text-align: center;
-  color: white;
-}
+      background-image:
+        linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.58)),
+        url("./portada-contador.jpg");
 
-.contador-capa h2{
-  color: white;
-  font-size: 3.2rem;
-  margin-bottom: 35px;
-  font-style: italic;
-  text-shadow: 0 3px 12px rgba(0,0,0,0.7);
-}
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+    }
 
-#contadorPremium{
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 12px;
-  flex-wrap: nowrap;
-}
+    .contador-capa{
+      width:100%;
+      padding:70px 10px;
+      color:white;
+    }
 
-.tiempo{
-  width: 78px;
-  text-align: center;
-}
+    .contador-capa h2{
+      margin:0 0 35px;
+      color:white;
+      font-size:3.2rem;
+      font-style:italic;
+      font-weight:normal;
+      text-shadow:0 3px 12px rgba(0,0,0,0.8);
+    }
 
-.tiempo div{
-  background: rgba(255,255,255,0.16);
-  border: 1px solid rgba(255,255,255,0.45);
-  backdrop-filter: blur(4px);
-  color: white;
-  padding: 16px 6px;
-  border-radius: 12px;
-  font-size: 2rem;
-  font-weight: bold;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
-  text-shadow: 0 2px 8px rgba(0,0,0,0.75);
-}
+    #contadorPremium{
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      gap:10px;
+      flex-wrap:nowrap;
+    }
 
-.tiempo span{
-  display: block;
-  margin-top: 10px;
-  color: white;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.8);
-}
+    .tiempo{
+      width:78px;
+      text-align:center;
+    }
 
-@media (max-width: 480px){
+    .tiempo div{
+      padding:16px 5px;
+      color:white;
+      background:rgba(255,255,255,0.16);
+      border:1px solid rgba(255,255,255,0.45);
+      border-radius:12px;
+      font-size:2rem;
+      font-weight:bold;
+      box-shadow:0 6px 20px rgba(0,0,0,0.28);
+      text-shadow:0 2px 8px rgba(0,0,0,0.8);
+      backdrop-filter:blur(5px);
+      -webkit-backdrop-filter:blur(5px);
+    }
 
-  .contador-portada{
-    min-height: 540px;
-    background-position: center;
-  }
+    .tiempo span{
+      display:block;
+      margin-top:10px;
+      color:white;
+      font-size:0.68rem;
+      letter-spacing:0.8px;
+      text-transform:uppercase;
+      text-shadow:0 2px 6px rgba(0,0,0,0.9);
+    }
 
-  .contador-capa h2{
-    font-size: 2.5rem;
-  }
+    /* ANIMACIÓN AL DESLIZAR */
 
-  #contadorPremium{
-    gap: 7px;
-  }
+    .reveal{
+      opacity:0;
+      transform:translateY(60px);
+      transition:
+        opacity 1.3s ease,
+        transform 1.3s ease;
+    }
 
-  .tiempo{
-    width: 68px;
-  }
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
 
-  .tiempo div{
-    font-size: 1.6rem;
-    padding: 14px 4px;
-  }
+    /* CELULARES */
 
-  .tiempo span{
-    font-size: 0.61rem;
-  }
-}
+    @media (max-width:768px){
+      .familias{
+        flex-direction:column;
+        align-items:center;
+        gap:20px;
+      }
 
+      .columna{
+        width:100%;
+        max-width:400px;
+      }
+    }
 
+    @media (max-width:480px){
+      header h1,
+      .contenido-bienvenida h1{
+        font-size:2.5rem;
+      }
 
-.reveal{
+      section{
+        padding:38px 16px;
+      }
 
-opacity:0;
+      .contador-portada{
+        min-height:560px;
+        background-position:center;
+      }
 
-transform:translateY(80px);
+      .contador-capa h2{
+        font-size:2.6rem;
+      }
 
-transition:all 1.2s ease;
+      #contadorPremium{
+        gap:5px;
+      }
 
-}
+      .tiempo{
+        width:68px;
+      }
 
-.reveal.active{
+      .tiempo div{
+        padding:14px 3px;
+        font-size:1.6rem;
+      }
 
-opacity:1;
-
-transform:translateY(0);
-
-}
-  
-  
-</style>
-
-
-
-
-
-  
+      .tiempo span{
+        font-size:0.54rem;
+        letter-spacing:0.3px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
+  <!-- BIENVENIDA -->
+
   <div id="bienvenida">
     <div class="contenido-bienvenida">
+
       <h1>Yésica & Luis</h1>
-      <h2>28 de Noviembre de 2026</h2>
+
+      <h2>28 de noviembre de 2026</h2>
+
       <p>Las Vigas de Ramírez, Veracruz</p>
-      <p><em>"Juntos emprenderemos el viaje más importante de nuestras vidas🤵👰."</em></p>
-      <button onclick="abrirInvitacion()"
-        class="boton">
-         Abrir Invitación💍
-      </button>
-    </div>
-  </div>
-  <div id="contenidoPrincipal" style="display:none";>
 
-<header>
-<h1>Yésica & Luis</h1>
-<p>Nos casamos</p>
-<p>28 de Noviembre de 2026</p>
-</header>
-
-<section>
-
-<h2>Con la bendición 🙏🏼 de nuestros padres</h2>
-  <p><em>Nos acompañan en este momento tan especial de nuestras vidas.</em></p>
-<div class="familias">
-<div class="columna reveal">
-<h3>Padres de la Novia</h3>
-<p>
-José Guadalupe Hernández Acosta<br>
-Yesenia Sánchez Ortega
-</p>
-</div>
-<div class="columna reveal">
-  
-<h3>Padres del Novio</h3>
-<p>
-José Luis Ramón Vázquez<br>
-Ana Lilia Bonilla García
-</p>
-</div>
-
-</div>
-<h2>Y el cariño 🫶🏼 de nuestros padrinos</h2>
-  
-<div class="padrinos">
-<p class="reveal">
-<strong>Velación</strong><br>
-José Luis Ramón Vázquez
-           & 
-Ana Lilia Bonilla García
-</p>
-<p class="reveal">
-<strong>Anillos</strong><br>
-José Guadalupe Hernández Acosta
-            & 
-Yesenia Sánchez Ortega
-</p>
-<p class="reveal">
-<strong>Arras</strong><br>
-José Norberto Rogelio Bonilla García
-            & 
-Ana Lilia García Y Martinez
-</p>
-<p class="reveal">
-<strong>Lazo</strong><br>
-Reynaldo Sánchez Mendoza
-          & 
-Maria Cecilia Guadalupe Ortega López
-</p>
-
-<p class="reveal">
-<strong>Biblia y rosario</strong><br>
-Rosendo Hernández Acosta
-          & 
-Guadalupe López Zamora
-</p>
-  
-</div>
-
-
-      <section class="recuerdo reveal">
-      <h2>Nuestra historia continua...</h2>
       <p>
         <em>
-          💕 De tantos momentos juntos, hoy elegimos compartir con ustedes el mas importante 💕
+          “Juntos emprenderemos el viaje más importante de nuestras vidas.”
         </em>
       </p>
-    <img src="recuerdo1.jpg"
-      alt="Yésica & Luis"
-      class="foto-recuerdo">
 
-        
-</section>
-<section>
-
-
-<section class="contador-portada reveal">
-
-  <div class="contador-capa">
-
-    <h2>Faltan...</h2>
-
-    <div id="contadorPremium">
-
-      <div class="tiempo">
-        <div id="dias">0</div>
-        <span>Días</span>
-      </div>
-
-      <div class="tiempo">
-        <div id="horas">0</div>
-        <span>Horas</span>
-      </div>
-
-      <div class="tiempo">
-        <div id="minutos">0</div>
-        <span>Minutos</span>
-      </div>
-
-      <div class="tiempo">
-        <div id="segundos">0</div>
-        <span>Segundos</span>
-      </div>
+      <button class="boton" onclick="abrirInvitacion()">
+        Abrir invitación 💍
+      </button>
 
     </div>
-
   </div>
 
-</section>
+  <!-- INVITACIÓN -->
 
-  
-<section>
-<h2>Ceremonia Religiosa</h2>
-  <p>28 de Noviembre del 2026</p>
-  <p>A las 13:00hrs</p>  
-<p>Iglesia San Miguel Arcángel</p>
-<p>Las Vigas de Ramirez, Ver.</p>
-<a class="boton"
-href="https://maps.app.goo.gl/GtrYc5KbXZhDnB2u6"
-target="_blank">
-Ver ubicación
-</a>
-</section>
+  <main id="contenidoPrincipal" style="display:none;">
 
-<section>
-<h2>Recepción</h2>
-<p>Salón de eventos mi ranchito</p>
-  <p>A partir de las 15:00 hrs</p>
-  <p>La Joya, Ver.</p>
-<a class="boton"
-href="https://maps.app.goo.gl/1jtz6UzbF7jfUd2XA"
-target="_blank">
-Cómo llegar
-</a>
-</section>
+    <header>
+      <h1>Yésica & Luis</h1>
+      <p>Nos casamos</p>
+      <p>28 de noviembre de 2026</p>
+    </header>
 
-<section>
-<h2>Confirmar Asistencia</h2>
+    <!-- PADRES Y PADRINOS -->
 
-<a class="boton"
-href="https://docs.google.com/forms/d/e/1FAIpQLSecyADGBUg2BuRoezHR4y5-qg-bLTPtGfHX9mhOSMz1iPzpgA/viewform"
-target="_blank">
-Confirmar
-</a>
-</section>
+    <section>
 
-<script>
-const fechaBoda = new Date("Nov 28, 2026 13:00:00").getTime();
+      <div class="reveal">
+        <h2>Con la bendición 🙏🏼 de nuestros padres</h2>
 
-setInterval(function(){
+        <p>
+          <em>
+            Nos acompañan en este momento tan especial de nuestras vidas.
+          </em>
+        </p>
+      </div>
 
-const ahora = new Date().getTime();
-const distancia = fechaBoda - ahora;
+      <div class="familias">
 
-const dias = Math.floor(distancia/(1000*60*60*24));
-const horas = Math.floor((distancia%(1000*60*60*24))/(1000*60*60));
-const minutos = Math.floor((distancia%(1000*60*60))/(1000*60));
+        <div class="columna reveal">
+          <h3>Padres de la novia</h3>
 
+          <p>
+            José Guadalupe Hernández Acosta<br>
+            Yesenia Sánchez Ortega
+          </p>
+        </div>
 
-  
+        <div class="columna reveal">
+          <h3>Padres del novio</h3>
 
-const segundos = Math.floor((distancia%(1000*60))/1000);
+          <p>
+            José Luis Ramón Vázquez<br>
+            Ana Lilia Bonilla García
+          </p>
+        </div>
 
-document.getElementById("dias").innerHTML = dias;
-document.getElementById("horas").innerHTML = horas;
-document.getElementById("minutos").innerHTML = minutos;
-document.getElementById("segundos").innerHTML = segundos;
+      </div>
 
+      <div class="reveal">
+        <h2>Y el cariño 🫶🏼 de nuestros padrinos</h2>
+      </div>
 
+      <div class="padrinos">
 
-  
-},1000);
-</script>
+        <p class="reveal">
+          <strong>Velación</strong><br>
+          José Luis Ramón Vázquez<br>
+          &amp;<br>
+          Ana Lilia Bonilla García
+        </p>
 
-</div>
+        <p class="reveal">
+          <strong>Anillos</strong><br>
+          José Guadalupe Hernández Acosta<br>
+          &amp;<br>
+          Yesenia Sánchez Ortega
+        </p>
+
+        <p class="reveal">
+          <strong>Arras</strong><br>
+          José Norberto Rogelio Bonilla García<br>
+          &amp;<br>
+          Ana Lilia García y Martínez
+        </p>
+
+        <p class="reveal">
+          <strong>Lazo</strong><br>
+          Reynaldo Sánchez Mendoza<br>
+          &amp;<br>
+          María Cecilia Guadalupe Ortega López
+        </p>
+
+        <p class="reveal">
+          <strong>Biblia y rosario</strong><br>
+          Rosendo Hernández Acosta<br>
+          &amp;<br>
+          Guadalupe López Zamora
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- FOTO -->
+
+    <section class="recuerdo reveal">
+
+      <h2>Nuestra historia continúa...</h2>
+
+      <p>
+        <em>
+          💕 De tantos momentos juntos, hoy elegimos compartir con ustedes
+          el más importante. 💕
+        </em>
+      </p>
+
+      <img
+        src="./recuerdo1.jpg"
+        alt="Yésica y Luis"
+        class="foto-recuerdo"
+      >
+
+    </section>
+
+    <!-- CONTADOR -->
+
+    <section class="contador-portada reveal">
+
+      <div class="contador-capa">
+
+        <h2>Faltan...</h2>
+
+        <div id="contadorPremium">
+
+          <div class="tiempo">
+            <div id="dias">0</div>
+            <span>Días</span>
+          </div>
+
+          <div class="tiempo">
+            <div id="horas">0</div>
+            <span>Horas</span>
+          </div>
+
+          <div class="tiempo">
+            <div id="minutos">0</div>
+            <span>Minutos</span>
+          </div>
+
+          <div class="tiempo">
+            <div id="segundos">0</div>
+            <span>Segundos</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CEREMONIA -->
+
+    <section class="reveal">
+
+      <h2>Ceremonia religiosa</h2>
+
+      <p>28 de noviembre de 2026</p>
+      <p>A las 13:00 hrs</p>
+      <p>Iglesia San Miguel Arcángel</p>
+      <p>Las Vigas de Ramírez, Veracruz</p>
+
+      <a
+        class="boton"
+        href="https://maps.app.goo.gl/GtrYc5KbXZhDnB2u6"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Ver ubicación
+      </a>
+
+    </section>
+
+    <!-- RECEPCIÓN -->
+
+    <section class="reveal">
+
+      <h2>Recepción</h2>
+
+      <p>Salón de eventos Mi Ranchito</p>
+      <p>A partir de las 15:00 hrs</p>
+      <p>La Joya, Veracruz</p>
+
+      <a
+        class="boton"
+        href="https://maps.app.goo.gl/1jtz6UzbF7jfUd2XA"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Cómo llegar
+      </a>
+
+    </section>
+
+    <!-- CONFIRMACIÓN -->
+
+    <section class="reveal">
+
+      <h2>Confirmar asistencia</h2>
+
+      <p>
+        Nos dará mucha alegría contar con tu presencia.
+      </p>
+
+      <a
+        class="boton"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSecyADGBUg2BuRoezHR4y5-qg-bLTPtGfHX9mhOSMz1iPzpgA/viewform"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Confirmar asistencia
+      </a>
+
+    </section>
+
+  </main>
+
   <script>
-    function abrirInvitacion(){
-      document.getElementById("bienvenida").style.display="none";
-      document.getElementById("contenidoPrincipal").style.display="block";
+    const fechaBoda = new Date("2026-11-28T13:00:00").getTime();
+
+    function actualizarContador() {
+      const ahora = new Date().getTime();
+      const distancia = fechaBoda - ahora;
+
+      if (distancia <= 0) {
+        document.getElementById("dias").textContent = "0";
+        document.getElementById("horas").textContent = "0";
+        document.getElementById("minutos").textContent = "0";
+        document.getElementById("segundos").textContent = "0";
+        return;
+      }
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+
+      const horas = Math.floor(
+        (distancia % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+      );
+
+      const minutos = Math.floor(
+        (distancia % (1000 * 60 * 60)) /
+        (1000 * 60)
+      );
+
+      const segundos = Math.floor(
+        (distancia % (1000 * 60)) /
+        1000
+      );
+
+      document.getElementById("dias").textContent = dias;
+      document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+
+      document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+
+      document.getElementById("segundos").textContent =
+        String(segundos).padStart(2, "0");
     }
+
+    actualizarContador();
+    setInterval(actualizarContador, 1000);
+
+    function revelarElementos() {
+      const elementos = document.querySelectorAll(".reveal");
+      const alturaVentana = window.innerHeight;
+
+      elementos.forEach((elemento) => {
+        const posicion = elemento.getBoundingClientRect().top;
+
+        if (posicion < alturaVentana - 80) {
+          elemento.classList.add("active");
+        }
+      });
+    }
+
+    function abrirInvitacion() {
+      document.getElementById("bienvenida").style.display = "none";
+      document.getElementById("contenidoPrincipal").style.display = "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+      setTimeout(revelarElementos, 100);
+    }
+
+    window.addEventListener("scroll", revelarElementos);
+    window.addEventListener("resize", revelarElementos);
   </script>
 
-
-<script>
-
-const reveals = document.querySelectorAll(".reveal");
-
-function revelar(){
-
-const alturaVentana = window.innerHeight;
-
-reveals.forEach((elemento)=>{
-
-const distancia = elemento.getBoundingClientRect().top;
-
-if(distancia < alturaVentana - 120){
-
-elemento.classList.add("active");
-
-}
-
-});
-
-}
-
-window.addEventListener("scroll", revelar);
-
-window.addEventListener("load", revelar);
-
-</script>
-
-
-
-  
 </body>
 </html>
