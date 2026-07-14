@@ -14,6 +14,14 @@
 
   <style>
     
+    :root{
+--marfil:#F8F6F2;
+--dorado:#C8A96A;
+--cafe:#6F4E37;
+--texto:#3F3F3F;
+--blanco:#FFFFFF;
+}
+    
     *{
       box-sizing:border-box;
     }
@@ -24,8 +32,8 @@
 
     body{
       font-family:'Cormorant Garamond', serif;
-      background:#f8f4ed;
-      color:#4a4a4a;
+      background:var(--marfil);
+      color:var(--texto);
       text-align:center;
       margin:0;
       padding:0;
@@ -190,7 +198,7 @@ animation:entradaNombre 2s ease forwards;
     /* CONTENIDO GENERAL */
 
     header{
-      background:#6f4e37;
+      background:var(--cafe);
       color:white;
       padding:50px 20px;
     }
@@ -201,7 +209,7 @@ animation:entradaNombre 2s ease forwards;
     }
 
     h2{
-      color:#6f4e37;
+      color:var(--cafe);
     }
 
     section{
@@ -213,7 +221,8 @@ animation:entradaNombre 2s ease forwards;
 
     .boton{
       display:inline-block;
-      background:#6f4e37;
+      background:var(--cafe);
+      border: 2px solid var(--dorado);
       color:white;
       padding:15px 25px;
       margin:10px;
@@ -245,6 +254,7 @@ animation:entradaNombre 2s ease forwards;
     }
 
     .columna{
+      border:1px solid rgba(200,169,106,.35);
       width:320px;
       max-width:100%;
       padding:20px;
@@ -267,6 +277,7 @@ animation:entradaNombre 2s ease forwards;
     }
 
     .padrinos p{
+      border:1px solid rgba(200,169,106,.35);
       margin:15px 0;
       padding:18px;
       background:white;
