@@ -27,43 +27,159 @@
 
     /* PANTALLA DE BIENVENIDA */
 
-    #bienvenida{
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-      background:#f8f4ed;
-    }
+#bienvenida{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px 20px;
 
-    .contenido-bienvenida{
-      width:100%;
-      max-width:600px;
-      animation:fadeIn 1.8s ease;
-    }
+  background:
+    linear-gradient(rgba(24,16,10,0.78), rgba(24,16,10,0.86)),
+    #3f2c20;
 
-    .contenido-bienvenida h1{
-      margin:0;
-      color:#6f4e37;
-      font-size:3rem;
-    }
+  color:#f7efe5;
+  overflow:hidden;
+}
 
-    .contenido-bienvenida h2{
-      margin-top:15px;
-    }
+.intro-fecha{
+  margin-bottom:35px;
+  font-size:0.85rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  opacity:0;
+  animation:entradaFecha 1.8s ease forwards;
+}
 
-    @keyframes fadeIn{
-      from{
-        opacity:0;
-        transform:translateY(30px);
-      }
+.contenido-bienvenida{
+  width:100%;
+  max-width:650px;
+}
 
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
+.intro-frase{
+  margin-bottom:25px;
+  font-size:1rem;
+  letter-spacing:2px;
+  opacity:0;
+  animation:entradaSuave 1.8s ease 0.8s forwards;
+}
 
+.contenido-bienvenida h1{
+  margin:0;
+  color:#fffaf3;
+  font-size:4rem;
+  font-weight:normal;
+  line-height:1.05;
+  opacity:0;
+  animation:entradaNombre 2s ease forwards;
+}
+
+.contenido-bienvenida h1:first-of-type{
+  animation-delay:1.3s;
+}
+
+.contenido-bienvenida h1:last-of-type{
+  animation-delay:2.1s;
+}
+
+.simbolo-amor{
+  margin:12px 0;
+  color:#c6a36b;
+  font-size:1.5rem;
+  opacity:0;
+  animation:latidoEntrada 1.6s ease 1.8s forwards;
+}
+
+.frase-principal{
+  margin:35px auto 25px;
+  font-size:1.05rem;
+  line-height:1.8;
+  opacity:0;
+  animation:entradaSuave 1.8s ease 2.8s forwards;
+}
+
+.boton-abrir{
+  opacity:0;
+  animation:entradaBoton 1.5s ease 3.5s forwards;
+}
+
+@keyframes entradaFecha{
+  from{
+    opacity:0;
+    transform:translateY(-20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes entradaNombre{
+  from{
+    opacity:0;
+    transform:scale(0.92);
+    letter-spacing:8px;
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+    letter-spacing:1px;
+  }
+}
+
+@keyframes entradaSuave{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes latidoEntrada{
+  0%{
+    opacity:0;
+    transform:scale(0.7);
+  }
+  50%{
+    opacity:1;
+    transform:scale(1.2);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+@keyframes entradaBoton{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media (max-width:480px){
+
+  .contenido-bienvenida h1{
+    font-size:3.2rem;
+  }
+
+  .intro-fecha{
+    font-size:0.72rem;
+    letter-spacing:3px;
+  }
+
+  .frase-principal{
+    font-size:0.95rem;
+  }
+}
     /* CONTENIDO GENERAL */
 
     header{
@@ -316,27 +432,32 @@
   <!-- BIENVENIDA -->
 
   <div id="bienvenida">
-    <div class="contenido-bienvenida">
 
-      <h1>Yésica & Luis</h1>
+  <div class="intro-fecha">28 de noviembre de 2026</div>
 
-      <h2>28 de noviembre de 2026</h2>
+  <div class="contenido-bienvenida">
 
-      <p>Las Vigas de Ramírez, Veracruz</p>
+    <p class="intro-frase">Dos historias, un mismo camino.</p>
 
-      <p>
-        <em>
-          “Juntos emprenderemos el viaje más importante de nuestras vidas.”
-        </em>
-      </p>
+    <h1>Yésica</h1>
 
-      <button class="boton" onclick="abrirInvitacion()">
-        Abrir invitación 💍
-      </button>
+    <div class="simbolo-amor">♥</div>
 
-    </div>
+    <h1>Luis</h1>
+
+    <p class="frase-principal">
+      Hay momentos que permanecen para siempre.<br>
+      Este será uno de ellos.
+    </p>
+
+    <button class="boton boton-abrir" onclick="abrirInvitacion()">
+      Abrir invitación
+    </button>
+
   </div>
 
+</div>
+  
   <!-- INVITACIÓN -->
 
   <main id="contenidoPrincipal" style="display:none;">
