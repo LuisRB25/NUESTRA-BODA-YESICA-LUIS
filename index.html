@@ -66,66 +66,12 @@
         linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.28));
     }
 
-    .ramita{
-      position:absolute;
-      z-index:3;
-      width:150px;
-      height:150px;
-      opacity:.92;
-      pointer-events:none;
-    }
-
-    .ramita::before,
-    .ramita::after{
-      content:"";
-      position:absolute;
-      background:linear-gradient(135deg,var(--dorado-claro),var(--dorado-oscuro));
-      filter:drop-shadow(0 2px 5px rgba(86,55,20,.18));
-    }
-
-    .ramita::before{
-      width:115px;
-      height:2px;
-      transform:rotate(-35deg);
-      transform-origin:left center;
-      left:10px;
-      top:80px;
-    }
-
-    .ramita::after{
-      width:20px;
-      height:42px;
-      border-radius:100% 0 100% 0;
-      box-shadow:
-        26px -14px 0 -1px var(--dorado),
-        50px -28px 0 -2px var(--dorado-claro),
-        74px -43px 0 -3px var(--dorado),
-        18px 18px 0 -2px var(--dorado-claro),
-        43px 5px 0 -2px var(--dorado),
-        69px -11px 0 -3px var(--dorado-claro);
-      transform:rotate(-35deg);
-      left:16px;
-      top:50px;
-    }
-
-    .ramita.superior{
-      top:4%;
-      right:2%;
-      transform:rotate(28deg);
-    }
-
-    .ramita.inferior{
-      left:0;
-      bottom:24%;
-      transform:rotate(198deg);
-    }
-
     .portada-nombres{
       position:absolute;
       z-index:4;
-      top:11%;
-      right:5%;
-      width:50%;
+      top:6%;
+      right:4%;
+      width:52%;
       display:flex;
       flex-direction:column;
       align-items:center;
@@ -444,34 +390,6 @@
       padding:18px;
     }
 
-  
-    .adorno-recuerdo{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:12px;
-
-margin:25px 0 12px;
-
-color:#cfa64a;
-
-}
-
-.adorno-recuerdo span{
-width:90px;
-height:1px;
-background:linear-gradient(to right,transparent,#d4af37,transparent);
-}
-.frase-recuerdo{
-font-family:'Great Vibes',cursive;
-font-size:2rem;
-color:#b88a2c;
-margin-bottom:10px;
-}
     .contador-portada{
       min-height:620px;
       padding:0;
@@ -623,9 +541,9 @@ margin-bottom:10px;
       }
 
       .portada-nombres{
-        top:8%;
+        top:4%;
         right:2%;
-        width:58%;
+        width:60%;
       }
 
       .portada-nombres h1{
@@ -715,140 +633,156 @@ margin-bottom:10px;
 
     /* SECCIÓN NUESTRA HISTORIA */
 
-.recuerdo{
-  padding:50px 14px;
-}
+    .recuerdo{
+      padding:65px 18px;
+      text-align:center;
+      background:
+        radial-gradient(
+          circle at top,
+          #fffefb 0%,
+          var(--marfil) 58%,
+          var(--crema) 100%
+        );
+    }
 
-.encabezado-recuerdo h2{
-  font-size:2.8rem;
-}
+    .encabezado-recuerdo{
+      max-width:680px;
+      margin:0 auto 30px;
+    }
 
-.texto-recuerdo{
-  font-size:1rem;
-}
+    .etiqueta-recuerdo{
+      margin:0 0 8px;
+      color:var(--dorado-oscuro);
+      font-size:.82rem;
+      letter-spacing:5px;
+      text-transform:uppercase;
+    }
 
-.marco-recuerdo{
-  width:96%;
-  padding:8px 8px 17px;
-}
+    .encabezado-recuerdo h2{
+      margin:0 0 15px;
+      color:var(--dorado-oscuro);
+      font-family:'Great Vibes', cursive;
+      font-size:3.4rem;
+      font-weight:normal;
+    }
 
-.pie-fotografia{
-  font-size:1.7rem;
-}
+    .texto-recuerdo{
+      max-width:570px;
+      margin:auto;
+      color:var(--cafe);
+      font-size:1.15rem;
+      line-height:1.6;
+    }
 
-.adorno-recuerdo span{
-  width:65px;
-}
+    .marco-recuerdo{
+      width:95%;
+      max-width:760px;
+      margin:35px auto 20px;
+      padding:10px 10px 20px;
+      background:#fffefb;
+      border:1px solid rgba(212,175,93,.65);
+      border-radius:22px;
+      box-shadow:
+        0 28px 65px rgba(70,45,25,.18),
+        0 8px 22px rgba(212,175,93,.15),
+        inset 0 0 0 4px rgba(255,255,255,.65);
+      opacity:0;
+      transform:
+        translateY(45px)
+        scale(.92)
+        rotate(-1.8deg);
+      transition:
+        opacity 1.8s ease,
+        transform 1.8s ease;
+    }
 
-.frase-recuerdo{
-  font-size:1.9rem;
-}
-/* Marco tipo fotografía impresa */
+    .foto-recuerdo{
+      display:block;
+      width:100%;
+      height:auto;
+      margin:0;
+      border-radius:15px;
+      object-fit:cover;
+    }
 
-.marco-recuerdo{
-  width:92%;
-  max-width:680px;
+    .pie-fotografia{
+      margin-top:13px;
+      color:var(--dorado-oscuro);
+      font-family:'Great Vibes', cursive;
+      font-size:2rem;
+    }
 
-  margin:35px auto 20px;
-  padding:10px 10px 20px;
+    .recuerdo.active .marco-recuerdo{
+      opacity:1;
+      transform:
+        translateY(0)
+        scale(1)
+        rotate(0deg);
+    }
 
-  background:#fffefb;
+    .adorno-recuerdo{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      margin:28px auto 10px;
+      color:var(--dorado);
+    }
 
-  border:1px solid rgba(212,175,93,.65);
-  border-radius:22px;
+    .adorno-recuerdo span{
+      width:90px;
+      height:1px;
+      background:
+        linear-gradient(
+          to right,
+          transparent,
+          var(--dorado),
+          transparent
+        );
+    }
 
-  box-shadow:
-    0 28px 65px rgba(70,45,25,.18),
-    0 8px 22px rgba(212,175,93,.15),
-    inset 0 0 0 4px rgba(255,255,255,.65);
+    .adorno-recuerdo strong{
+      font-size:1rem;
+      text-shadow:0 0 10px rgba(212,175,93,.45);
+    }
 
-  opacity:0;
+    .frase-recuerdo{
+      margin:0;
+      color:var(--dorado-oscuro);
+      font-family:'Great Vibes', cursive;
+      font-size:2.3rem;
+    }
 
-  transform:
-    translateY(45px)
-    scale(.92)
-    rotate(-1.8deg);
+    @media(max-width:480px){
+      .recuerdo{
+        padding:50px 14px;
+      }
 
-  transition:
-    opacity 1.8s ease,
-    transform 1.8s ease;
-}
+      .encabezado-recuerdo h2{
+        font-size:2.8rem;
+      }
 
-.foto-recuerdo{
-  display:block;
+      .texto-recuerdo{
+        font-size:1rem;
+      }
 
-  width:100%;
-  height:auto;
+      .marco-recuerdo{
+        width:96%;
+        padding:8px 8px 17px;
+      }
 
-  margin:0;
+      .pie-fotografia{
+        font-size:1.7rem;
+      }
 
-  border-radius:15px;
+      .adorno-recuerdo span{
+        width:65px;
+      }
 
-  object-fit:cover;
-}
-
-.pie-fotografia{
-  margin-top:13px;
-
-  font-family:'Great Vibes', cursive;
-  font-size:2rem;
-
-  color:var(--dorado-oscuro);
-}
-
-/* Animación al llegar con el scroll */
-
-.recuerdo.active .marco-recuerdo{
-  opacity:1;
-
-  transform:
-    translateY(0)
-    scale(1)
-    rotate(0deg);
-}
-
-/* Adorno inferior */
-
-.adorno-recuerdo{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  gap:12px;
-
-  margin:28px auto 10px;
-
-  color:var(--dorado);
-}
-
-.adorno-recuerdo span{
-  width:90px;
-  height:1px;
-
-  background:
-    linear-gradient(
-      to right,
-      transparent,
-      var(--dorado),
-      transparent
-    );
-}
-
-.adorno-recuerdo strong{
-  font-size:1rem;
-
-  text-shadow:
-    0 0 10px rgba(212,175,93,.45);
-}
-
-.frase-recuerdo{
-  margin:0;
-
-  font-family:'Great Vibes', cursive;
-  font-size:2.3rem;
-
-  color:var(--dorado-oscuro);
-}
+      .frase-recuerdo{
+        font-size:1.9rem;
+      }
+    }
   </style>
 </head>
 
@@ -858,8 +792,6 @@ margin-bottom:10px;
 
   <div id="bienvenida">
     <div class="portada-foto"></div>
-    <div class="ramita superior"></div>
-    <div class="ramita inferior"></div>
 
     <div class="portada-nombres">
       <h1>Yésica</h1>
@@ -1013,7 +945,6 @@ margin-bottom:10px;
   </p>
 
 </section>
-    </section>
 
     <section class="contador-portada reveal">
       <div class="contador-capa">
