@@ -444,19 +444,34 @@
       padding:18px;
     }
 
-    .recuerdo{text-align:center}
+  
+    .adorno-recuerdo{
 
-    .foto-recuerdo{
-      display:block;
-      width:230px;
-      max-width:70vw;
-      height:auto;
-      margin:25px auto 0;
-      border:4px solid rgba(255,255,255,.92);
-      border-radius:18px;
-      box-shadow:0 14px 34px rgba(0,0,0,.20);
-    }
+display:flex;
 
+align-items:center;
+
+justify-content:center;
+
+gap:12px;
+
+margin:25px 0 12px;
+
+color:#cfa64a;
+
+}
+
+.adorno-recuerdo span{
+width:90px;
+height:1px;
+background:linear-gradient(to right,transparent,#d4af37,transparent);
+}
+.frase-recuerdo{
+font-family:'Great Vibes',cursive;
+font-size:2rem;
+color:#b88a2c;
+margin-bottom:10px;
+}
     .contador-portada{
       min-height:620px;
       padding:0;
@@ -697,6 +712,143 @@
         letter-spacing:.3px;
       }
     }
+
+    /* SECCIÓN NUESTRA HISTORIA */
+
+.recuerdo{
+  padding:50px 14px;
+}
+
+.encabezado-recuerdo h2{
+  font-size:2.8rem;
+}
+
+.texto-recuerdo{
+  font-size:1rem;
+}
+
+.marco-recuerdo{
+  width:96%;
+  padding:8px 8px 17px;
+}
+
+.pie-fotografia{
+  font-size:1.7rem;
+}
+
+.adorno-recuerdo span{
+  width:65px;
+}
+
+.frase-recuerdo{
+  font-size:1.9rem;
+}
+/* Marco tipo fotografía impresa */
+
+.marco-recuerdo{
+  width:92%;
+  max-width:680px;
+
+  margin:35px auto 20px;
+  padding:10px 10px 20px;
+
+  background:#fffefb;
+
+  border:1px solid rgba(212,175,93,.65);
+  border-radius:22px;
+
+  box-shadow:
+    0 28px 65px rgba(70,45,25,.18),
+    0 8px 22px rgba(212,175,93,.15),
+    inset 0 0 0 4px rgba(255,255,255,.65);
+
+  opacity:0;
+
+  transform:
+    translateY(45px)
+    scale(.92)
+    rotate(-1.8deg);
+
+  transition:
+    opacity 1.8s ease,
+    transform 1.8s ease;
+}
+
+.foto-recuerdo{
+  display:block;
+
+  width:100%;
+  height:auto;
+
+  margin:0;
+
+  border-radius:15px;
+
+  object-fit:cover;
+}
+
+.pie-fotografia{
+  margin-top:13px;
+
+  font-family:'Great Vibes', cursive;
+  font-size:2rem;
+
+  color:var(--dorado-oscuro);
+}
+
+/* Animación al llegar con el scroll */
+
+.recuerdo.active .marco-recuerdo{
+  opacity:1;
+
+  transform:
+    translateY(0)
+    scale(1)
+    rotate(0deg);
+}
+
+/* Adorno inferior */
+
+.adorno-recuerdo{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:12px;
+
+  margin:28px auto 10px;
+
+  color:var(--dorado);
+}
+
+.adorno-recuerdo span{
+  width:90px;
+  height:1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      var(--dorado),
+      transparent
+    );
+}
+
+.adorno-recuerdo strong{
+  font-size:1rem;
+
+  text-shadow:
+    0 0 10px rgba(212,175,93,.45);
+}
+
+.frase-recuerdo{
+  margin:0;
+
+  font-family:'Great Vibes', cursive;
+  font-size:2.3rem;
+
+  color:var(--dorado-oscuro);
+}
   </style>
 </head>
 
@@ -823,21 +975,44 @@
         </p>
       </div>
     </section>
+<section class="recuerdo reveal">
 
-    <section class="recuerdo reveal">
-      <h2>Nuestra historia continúa...</h2>
-      <p>
-        <em>
-          💕 De tantos momentos juntos, hoy elegimos compartir con ustedes
-          el más importante. 💕
-        </em>
-      </p>
+  <div class="encabezado-recuerdo">
+    <p class="etiqueta-recuerdo">Nuestros momentos</p>
 
-      <img
-        src="./recuerdo1.jpg"
-        alt="Yésica y Luis"
-        class="foto-recuerdo"
-      >
+    <h2>Nuestra historia continúa...</h2>
+
+    <p class="texto-recuerdo">
+      De tantos momentos juntos, hoy elegimos compartir con ustedes
+      el más importante.
+    </p>
+  </div>
+
+  <div class="marco-recuerdo">
+
+    <img
+      src="./recuerdo1.jpg"
+      alt="Yésica y Luis"
+      class="foto-recuerdo"
+    >
+
+    <div class="pie-fotografia">
+      Yésica &amp; Luis
+    </div>
+
+  </div>
+
+  <div class="adorno-recuerdo">
+    <span></span>
+    <strong>♥</strong>
+    <span></span>
+  </div>
+
+  <p class="frase-recuerdo">
+    Nuestra historia apenas comienza...
+  </p>
+
+</section>
     </section>
 
     <section class="contador-portada reveal">
