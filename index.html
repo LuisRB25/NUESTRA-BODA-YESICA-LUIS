@@ -818,6 +818,25 @@ opacity:1;
 transform:translateY(0);
 
 }
+    #contenidoPrincipal{
+  display:none;
+  opacity:0;
+  transform:translateY(35px);
+  transition:
+    opacity 1.2s ease,
+    transform 1.2s ease;
+}
+
+body.entrando #bienvenida{
+  opacity:0;
+  transform:scale(1.08);
+  pointer-events:none;
+}
+
+body.abierto #contenidoPrincipal{
+  opacity:1;
+  transform:translateY(0);
+}
   </style>
 </head>
 
@@ -842,10 +861,14 @@ transform:translateY(0);
         <span>Este será uno de ellos.</span>
       </p>
 
-      <button class="boton boton-abrir" onclick="abrirInvitacion()">
-        Abrir invitación
-      </button>
-
+      <button
+  type="button"
+  class="boton boton-abrir"
+  onclick="abrirInvitacion()"
+>
+  Abrir invitación
+</button>
+      
       <div class="flecha-portada">⌄</div>
     </div>
 
@@ -862,7 +885,7 @@ transform:translateY(0);
 
   <!-- INVITACIÓN -->
 
-  <main id="contenidoPrincipal" style="display:none;">
+  <main id="contenidoPrincipal">
 
     <header class="encabezado-invitacion reveal">
       <p class="invitacion-etiqueta">Nuestro gran día</p>
@@ -1109,15 +1132,32 @@ transform:translateY(0);
     }
 
     function abrirInvitacion(){
-document.body.classList.add("entrando");
-setTimeout(()=>{
-document.getElementById("bienvenida").style.display="none";
-document.getElementById("contenidoPrincipal").style.display="block";
-document.body.classList.add("abierto");
-window.scrollTo({
-top:0,
-behavior:"auto"
-});
+
+  const bienvenida = document.getElementById("bienvenida");
+  const contenido = document.getElementById("contenidoPrincipal");
+
+  document.body.classList.add("entrando");
+
+  setTimeout(() => {
+
+    bienvenida.style.display = "none";
+    contenido.style.display = "block";
+
+    window.scrollTo({
+      top:0,
+      behavior:"auto"
+    });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.add("abierto");
+      });
+    });
+
+    setTimeout(iniciarAnimaciones, 250);
+
+  }, 750);
+}
   
 setTimeout(iniciarAnimaciones,250);
 
