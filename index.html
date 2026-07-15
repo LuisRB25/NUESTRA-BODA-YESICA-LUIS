@@ -783,10 +783,45 @@
         font-size:1.9rem;
       }
     }
+    /* ========= TRANSICIÓN PREMIUM ========= */
+
+body{
+
+transition:
+background .8s ease;
+
+}
+    
+#bienvenida{
+transition:
+opacity .8s ease,
+transform .8s ease;
+transform-origin:center;
+}
+#contenidoPrincipal{
+opacity:0;
+transform:translateY(35px);
+transition:
+opacity 1.2s ease,
+transform 1.2s ease;
+}
+body.entrando #bienvenida{
+opacity:0;
+transform:scale(1.08);
+pointer-events:none;
+}
+body.entrando #contenidoPrincipal{
+display:block !important;
+}
+body.abierto #contenidoPrincipal{
+opacity:1;
+transform:translateY(0);
+
+}
   </style>
 </head>
 
-<body>
+<body class="inicio">
 
   <!-- PORTADA -->
 
@@ -1074,14 +1109,21 @@
     }
 
     function abrirInvitacion(){
-      document.getElementById("bienvenida").style.display = "none";
-      document.getElementById("contenidoPrincipal").style.display = "block";
+document.body.classList.add("entrando");
+setTimeout(()=>{
+document.getElementById("bienvenida").style.display="none";
+document.getElementById("contenidoPrincipal").style.display="block";
+document.body.classList.add("abierto");
+window.scrollTo({
+top:0,
+behavior:"auto"
+});
+  
+setTimeout(iniciarAnimaciones,250);
 
-      window.scrollTo({
-        top:0,
-        behavior:"auto"
-      });
+},750);
 
+}
       setTimeout(iniciarAnimaciones,180);
     }
   </script>
