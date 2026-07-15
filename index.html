@@ -785,62 +785,40 @@
     }
     /* ========= TRANSICIÓN PREMIUM ========= */
 
-body{
+    body{
+      transition:background .8s ease;
+    }
 
-transition:
-background .8s ease;
+    #bienvenida{
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+      transform-origin:center;
+    }
 
-}
-    
-#bienvenida{
-transition:
-opacity .8s ease,
-transform .8s ease;
-transform-origin:center;
-}
-#contenidoPrincipal{
-opacity:0;
-transform:translateY(35px);
-transition:
-opacity 1.2s ease,
-transform 1.2s ease;
-}
-body.entrando #bienvenida{
-opacity:0;
-transform:scale(1.08);
-pointer-events:none;
-}
-body.entrando #contenidoPrincipal{
-display:block !important;
-}
-body.abierto #contenidoPrincipal{
-opacity:1;
-transform:translateY(0);
-
-}
     #contenidoPrincipal{
-  display:none;
-  opacity:0;
-  transform:translateY(35px);
-  transition:
-    opacity 1.2s ease,
-    transform 1.2s ease;
-}
+      display:none;
+      opacity:0;
+      transform:translateY(35px);
+      transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+    }
 
-body.entrando #bienvenida{
-  opacity:0;
-  transform:scale(1.08);
-  pointer-events:none;
-}
+    body.entrando #bienvenida{
+      opacity:0;
+      transform:scale(1.08);
+      pointer-events:none;
+    }
 
-body.abierto #contenidoPrincipal{
-  opacity:1;
-  transform:translateY(0);
-}
-  </style>
+    body.abierto #contenidoPrincipal{
+      opacity:1;
+      transform:translateY(0);
+    }
+</style>
 </head>
 
-<body class="inicio">
+<body>
 
   <!-- PORTADA -->
 
@@ -1097,18 +1075,30 @@ body.abierto #contenidoPrincipal{
       }
 
       const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+      const horas = Math.floor(
+        (distancia % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+      );
+      const minutos = Math.floor(
+        (distancia % (1000 * 60 * 60)) /
+        (1000 * 60)
+      );
+      const segundos = Math.floor(
+        (distancia % (1000 * 60)) /
+        1000
+      );
 
       document.getElementById("dias").textContent = dias;
-      document.getElementById("horas").textContent = String(horas).padStart(2,"0");
-      document.getElementById("minutos").textContent = String(minutos).padStart(2,"0");
-      document.getElementById("segundos").textContent = String(segundos).padStart(2,"0");
+      document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+      document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+      document.getElementById("segundos").textContent =
+        String(segundos).padStart(2, "0");
     }
 
     actualizarContador();
-    setInterval(actualizarContador,1000);
+    setInterval(actualizarContador, 1000);
 
     const observador = new IntersectionObserver(
       (entradas) => {
@@ -1120,7 +1110,7 @@ body.abierto #contenidoPrincipal{
         });
       },
       {
-        threshold:.22,
+        threshold:0.22,
         rootMargin:"0px 0px -55px 0px"
       }
     );
@@ -1132,39 +1122,32 @@ body.abierto #contenidoPrincipal{
     }
 
     function abrirInvitacion(){
+      const bienvenida = document.getElementById("bienvenida");
+      const contenido = document.getElementById("contenidoPrincipal");
 
-  const bienvenida = document.getElementById("bienvenida");
-  const contenido = document.getElementById("contenidoPrincipal");
+      if(!bienvenida || !contenido){
+        return;
+      }
 
-  document.body.classList.add("entrando");
+      document.body.classList.add("entrando");
 
-  setTimeout(() => {
+      setTimeout(() => {
+        bienvenida.style.display = "none";
+        contenido.style.display = "block";
 
-    bienvenida.style.display = "none";
-    contenido.style.display = "block";
+        window.scrollTo({
+          top:0,
+          behavior:"auto"
+        });
 
-    window.scrollTo({
-      top:0,
-      behavior:"auto"
-    });
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            document.body.classList.add("abierto");
+          });
+        });
 
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.body.classList.add("abierto");
-      });
-    });
-
-    setTimeout(iniciarAnimaciones, 250);
-
-  }, 750);
-}
-  
-setTimeout(iniciarAnimaciones,250);
-
-},750);
-
-}
-      setTimeout(iniciarAnimaciones,180);
+        setTimeout(iniciarAnimaciones, 250);
+      }, 750);
     }
   </script>
 
