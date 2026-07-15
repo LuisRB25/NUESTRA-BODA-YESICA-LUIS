@@ -45,23 +45,47 @@
 #bienvenida{
   min-height:100vh;
   min-height:100svh;
+  position:relative;
+  isolation:isolate;
+
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+
   padding:30px 20px;
-
-  background-image:
-    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.55)),
-    url("./portada.jpg");
-
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
   color:var(--blanco);
   overflow:hidden;
 }
-    
+
+/* Imagen con movimiento cinematográfico */
+#bienvenida::before{
+  content:"";
+  position:absolute;
+  inset:-5%;
+  z-index:-2;
+
+  background-image:url("./portada.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+
+  animation:movimientoPortada 18s ease-in-out infinite alternate;
+}
+
+/* Capa oscura para leer bien las letras */
+#bienvenida::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+
+  background:
+    linear-gradient(
+      rgba(24,16,10,.42),
+      rgba(24,16,10,.63)
+    );
+}    
 .intro-fecha{
   margin-bottom:45px;
   font-size:1.25rem;
@@ -109,13 +133,16 @@ animation:entradaNombre 2s ease forwards;
 }
 
 .simbolo-amor{
-margin:12px 0;
-font-size:3rem;
-color:var(--dorado);
-font-family:'Cormorant Garamond', serif;
-opacity:0;
-animation:entradaAmpersand 1.8s ease 1.8s forwards;
-}
+  margin:8px 0;
+  font-family:'Cormorant Garamond', serif;
+  font-size:3.2rem;
+  line-height:1;
+  color:var(--dorado);
+  opacity:0;
+  animation:
+    entradaAmpersand 1.8s ease 1.8s forwards,
+    brilloAmpersand 3s ease-in-out 3.5s infinite;
+}    
     
 .frase-principal{
   margin:35px auto 25px;
@@ -206,6 +233,45 @@ transform:scale(1.15) rotate(4deg);
 opacity:1;
 transform:scale(1) rotate(0deg);
 }
+      
+}
+    @keyframes movimientoPortada{
+  from{
+    transform:scale(1);
+  }
+
+  to{
+    transform:scale(1.12);
+  }
+}
+    @keyframes entradaAmpersand{
+  0%{
+    opacity:0;
+    transform:scale(.4) rotate(-12deg);
+  }
+
+  65%{
+    opacity:1;
+    transform:scale(1.15) rotate(3deg);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1) rotate(0);
+  }
+}
+
+@keyframes brilloAmpersand{
+  0%,100%{
+    text-shadow:
+      0 0 4px rgba(200,169,106,.25);
+  }
+
+  50%{
+    text-shadow:
+      0 0 8px rgba(200,169,106,.85),
+      0 0 22px rgba(200,169,106,.45);
+  }
 }
 
 @media (max-width:480px){
@@ -252,25 +318,61 @@ font-size:1.05rem;
     /* BOTONES */
 
     .boton{
-      display:inline-block;
-      background:var(--cafe);
-      border: 2px solid var(--dorado);
-      color:white;
-      padding:15px 25px;
-      margin:10px;
-      text-decoration:none;
-      border-radius:10px;
-      font-family:inherit;
-      font-size:18px;
-      cursor:pointer;
-      transition:transform 0.3s ease, box-shadow 0.3s ease;
-    }
+  position:relative;
+  overflow:hidden;
 
-    .boton:hover,
-    .boton:active{
-      transform:translateY(-3px);
-      box-shadow:0 8px 18px rgba(0,0,0,0.22);
-    }
+  display:inline-block;
+  padding:15px 28px;
+  margin:10px;
+
+  background:var(--cafe);
+  color:var(--blanco);
+  border:1px solid var(--dorado);
+  border-radius:10px;
+
+  font-family:inherit;
+  font-size:18px;
+  text-decoration:none;
+  cursor:pointer;
+
+  box-shadow:0 6px 18px rgba(60,40,25,.18);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.boton::before{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-80%;
+  width:45%;
+  height:180%;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.65),
+      transparent
+    );
+
+  transform:rotate(20deg);
+  transition:left .7s ease;
+}
+
+.boton:hover::before,
+.boton:active::before{
+  left:140%;
+}
+
+.boton:hover,
+.boton:active{
+  transform:translateY(-3px);
+  background:#5d402e;
+  box-shadow:0 10px 24px rgba(60,40,25,.28);
+}
 
     /* PADRES */
 
@@ -289,9 +391,18 @@ font-size:1.05rem;
       width:320px;
       max-width:100%;
       padding:20px;
-      background:white;
+      background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.98),
+    rgba(248,246,242,.96)
+  );
       border-radius:15px;
       box-shadow:0 4px 15px rgba(0,0,0,0.10);
+    border:1px solid rgba(200,169,106,.55);
+box-shadow:
+  0 12px 30px rgba(80,55,35,.09),
+  inset 0 0 0 4px rgba(255,255,255,.45);
     }
 
     .columna h3{
@@ -311,11 +422,24 @@ font-size:1.05rem;
       border:1px solid rgba(200,169,106,.35);
       margin:15px 0;
       padding:18px;
-      background:white;
+      background:
+  linear-gradient(
+    145deg,
+    rgba(255,255,255,.98),
+    rgba(248,246,242,.96)
+  );
+
+border:1px solid rgba(200,169,106,.55);
+
+box-shadow:
+  0 12px 30px rgba(80,55,35,.09),
+  inset 0 0 0 4px rgba(255,255,255,.45);
       border-radius:12px;
       box-shadow:0 4px 15px rgba(0,0,0,0.10);
     }
 
+
+    
     /* FOTO DE RECUERDO */
 
     .recuerdo{
@@ -348,6 +472,7 @@ font-size:1.05rem;
       background-size:cover;
       background-position:center;
       background-repeat:no-repeat;
+      background-attachment:fixed;
     }
 
     .contador-capa{
@@ -434,6 +559,9 @@ font-size:1.05rem;
         width:100%;
         max-width:400px;
       }
+      .contador-portada{
+  background-attachment:scroll;
+      }
     }
 
     @media (max-width:480px){
@@ -473,6 +601,28 @@ font-size:1.05rem;
         letter-spacing:0.3px;
       }
     }
+    main > section:not(.contador-portada):not(:last-child)::after{
+  content:"✦";
+  display:block;
+
+  width:120px;
+  margin:55px auto -15px;
+
+  color:var(--dorado);
+  font-size:1.2rem;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      rgba(200,169,106,.55),
+      transparent
+    );
+
+  background-size:100% 1px;
+  background-position:center;
+  background-repeat:no-repeat;
+}
   </style>
 </head>
 
