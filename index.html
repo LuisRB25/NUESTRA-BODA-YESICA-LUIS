@@ -8,42 +8,38 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --marfil:#F8F6F2;
-      --crema:#F3E8D8;
-      --dorado:#C8A96A;
-      --dorado-oscuro:#9C762F;
-      --cafe:#6F4E37;
-      --texto:#3F3F3F;
-      --blanco:#FFFFFF;
+      --marfil:#fbf7ef;
+      --crema:#f3e8d7;
+      --dorado:#d4af5d;
+      --dorado-claro:#f2d58b;
+      --dorado-oscuro:#a57722;
+      --cafe:#5a3b28;
+      --texto:#3e332c;
+      --blanco:#ffffff;
     }
 
-    *{
-      box-sizing:border-box;
-    }
+    *{box-sizing:border-box}
 
-    html{
-      scroll-behavior:smooth;
-    }
+    html{scroll-behavior:smooth}
 
     body{
       margin:0;
-      padding:0;
-      overflow-x:hidden;
-      background:var(--marfil);
+      background:
+        radial-gradient(circle at top, #fffdf8 0%, var(--marfil) 52%, var(--crema) 100%);
       color:var(--texto);
       font-family:'Cormorant Garamond', serif;
       text-align:center;
+      overflow-x:hidden;
     }
 
     /* PORTADA */
 
     #bienvenida{
       position:relative;
-      width:100%;
       min-height:100vh;
       min-height:100svh;
       overflow:hidden;
@@ -52,186 +48,305 @@
 
     .portada-foto{
       position:absolute;
-      inset:0 0 34% 0;
+      inset:0 0 27% 0;
       background-image:url("./portada.jpg");
       background-size:cover;
       background-position:center;
       background-repeat:no-repeat;
-      animation:movimientoPortada 20s ease-in-out infinite alternate;
+      animation:movimientoPortada 18s ease-in-out infinite alternate;
+      transform-origin:center;
     }
 
-    .portada-sombra{
+    .portada-foto::after{
+      content:"";
       position:absolute;
-      inset:0 0 34% 0;
+      inset:0;
       background:
-        linear-gradient(
-          90deg,
-          rgba(30,20,12,.10),
-          rgba(30,20,12,.38)
-        );
+        linear-gradient(90deg, rgba(30,20,12,.05) 0%, rgba(30,20,12,.12) 42%, rgba(30,20,12,.48) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.28));
+    }
+
+    .ramita{
+      position:absolute;
+      z-index:3;
+      width:150px;
+      height:150px;
+      opacity:.92;
+      pointer-events:none;
+    }
+
+    .ramita::before,
+    .ramita::after{
+      content:"";
+      position:absolute;
+      background:linear-gradient(135deg,var(--dorado-claro),var(--dorado-oscuro));
+      filter:drop-shadow(0 2px 5px rgba(86,55,20,.18));
+    }
+
+    .ramita::before{
+      width:115px;
+      height:2px;
+      transform:rotate(-35deg);
+      transform-origin:left center;
+      left:10px;
+      top:80px;
+    }
+
+    .ramita::after{
+      width:20px;
+      height:42px;
+      border-radius:100% 0 100% 0;
+      box-shadow:
+        26px -14px 0 -1px var(--dorado),
+        50px -28px 0 -2px var(--dorado-claro),
+        74px -43px 0 -3px var(--dorado),
+        18px 18px 0 -2px var(--dorado-claro),
+        43px 5px 0 -2px var(--dorado),
+        69px -11px 0 -3px var(--dorado-claro);
+      transform:rotate(-35deg);
+      left:16px;
+      top:50px;
+    }
+
+    .ramita.superior{
+      top:4%;
+      right:2%;
+      transform:rotate(28deg);
+    }
+
+    .ramita.inferior{
+      left:0;
+      bottom:24%;
+      transform:rotate(198deg);
     }
 
     .portada-nombres{
       position:absolute;
-      z-index:3;
-      top:14%;
-      right:6%;
+      z-index:4;
+      top:11%;
+      right:5%;
       width:50%;
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      color:var(--blanco);
-      text-align:center;
     }
 
     .portada-nombres h1{
       margin:0;
       color:#fffdf8;
       font-family:'Great Vibes', cursive;
-      font-size:clamp(4.4rem, 10vw, 7rem);
+      font-size:clamp(4.6rem, 10vw, 7.4rem);
       font-weight:normal;
-      line-height:.9;
-      text-shadow:0 3px 16px rgba(0,0,0,.42);
+      line-height:.88;
+      text-shadow:
+        0 4px 18px rgba(0,0,0,.45),
+        0 0 2px rgba(255,255,255,.5);
       opacity:0;
       animation:entradaNombre 1.8s ease forwards;
     }
 
-    .portada-nombres h1:first-child{
-      animation-delay:.5s;
-    }
-
-    .portada-nombres h1:last-child{
-      animation-delay:1.6s;
-    }
+    .portada-nombres h1:first-child{animation-delay:.45s}
+    .portada-nombres h1:last-child{animation-delay:1.55s}
 
     .simbolo-amor{
-      margin:-4px 0;
+      position:relative;
+      margin:-7px 0 -4px;
       color:var(--dorado);
       font-family:'Cormorant Garamond', serif;
-      font-size:4.2rem;
+      font-size:5rem;
       line-height:1;
       text-shadow:
-        0 0 10px rgba(200,169,106,.65),
-        0 3px 12px rgba(0,0,0,.35);
+        0 0 10px rgba(242,213,139,.75),
+        0 4px 16px rgba(0,0,0,.35);
       opacity:0;
       animation:
-        entradaAmpersand 1.5s ease 1.1s forwards,
-        brilloAmpersand 3s ease-in-out 3s infinite;
+        entradaAmpersand 1.5s ease 1s forwards,
+        brilloAmpersand 3.2s ease-in-out 3s infinite;
     }
 
-    .portada-panel{
-      position:absolute;
-      z-index:4;
-      left:-5%;
-      bottom:-3%;
-      width:110%;
-      min-height:39%;
+    .corazon-bajo-nombres{
       display:flex;
-      flex-direction:column;
       align-items:center;
-      justify-content:flex-start;
-      padding:55px 25px 35px;
-      background:
-        radial-gradient(
-          circle at top,
-          #fffdf8 0%,
-          var(--marfil) 58%,
-          var(--crema) 100%
-        );
-      border-top:2px solid var(--dorado);
-      border-radius:50% 50% 0 0 / 15% 15% 0 0;
-      box-shadow:0 -12px 35px rgba(70,45,25,.15);
-    }
-
-    .ornamento{
-      margin-bottom:7px;
-      color:var(--dorado);
-      font-size:1.1rem;
-    }
-
-    .frase-principal{
-      max-width:520px;
-      margin:0 auto 20px;
-      color:var(--cafe);
-      font-size:1.18rem;
-      line-height:1.55;
-      letter-spacing:.5px;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      margin:13px 0 18px;
+      color:var(--dorado-claro);
       opacity:0;
-      animation:entradaSuave 1.6s ease 2.2s forwards;
+      animation:entradaSuave 1.5s ease 2.15s forwards;
     }
 
-    .frase-principal span{
-      display:inline-block;
-      margin-top:5px;
-      color:var(--dorado-oscuro);
+    .corazon-bajo-nombres::before,
+    .corazon-bajo-nombres::after{
+      content:"";
+      width:95px;
+      height:1px;
+      background:linear-gradient(to right,transparent,var(--dorado),transparent);
+    }
+
+    .corazon-bajo-nombres span{
+      color:var(--dorado);
+      font-size:1.05rem;
+      text-shadow:0 0 8px rgba(242,213,139,.7);
+    }
+
+    .frase-portada{
+      max-width:380px;
+      margin:0 auto 18px;
+      color:#fffdf8;
+      font-size:1.06rem;
+      line-height:1.55;
+      letter-spacing:1.7px;
+      text-transform:uppercase;
+      text-shadow:0 3px 12px rgba(0,0,0,.62);
+      opacity:0;
+      animation:entradaSuave 1.6s ease 2.35s forwards;
+    }
+
+    .frase-portada span{
+      display:block;
+      margin-top:6px;
+      color:var(--dorado-claro);
       font-family:'Great Vibes', cursive;
       font-size:2rem;
+      letter-spacing:.2px;
+      text-transform:none;
+    }
+
+    .boton{
+      position:relative;
+      overflow:hidden;
+      display:inline-block;
+      margin:10px;
+      padding:15px 30px;
+      border:1.5px solid var(--dorado);
+      border-radius:999px;
+      background:rgba(255,253,248,.94);
+      color:var(--dorado-oscuro);
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.15rem;
+      font-weight:600;
+      letter-spacing:2px;
+      text-decoration:none;
+      text-transform:uppercase;
+      cursor:pointer;
+      box-shadow:
+        0 10px 28px rgba(94,58,18,.18),
+        inset 0 0 0 3px rgba(255,255,255,.8),
+        0 0 0 1px rgba(242,213,139,.35);
+      transition:transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease;
+    }
+
+    .boton::before{
+      content:"";
+      position:absolute;
+      top:-45%;
+      left:-90%;
+      width:42%;
+      height:190%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);
+      transform:rotate(20deg);
+      transition:left .75s ease;
+    }
+
+    .boton:hover::before,
+    .boton:active::before{left:145%}
+
+    .boton:hover,
+    .boton:active{
+      transform:translateY(-3px);
+      background:var(--dorado);
+      color:var(--blanco);
+      box-shadow:0 14px 30px rgba(94,58,18,.26);
     }
 
     .boton-abrir{
-      min-width:230px;
-      background:rgba(255,255,255,.94);
-      color:var(--dorado-oscuro);
-      border:2px solid var(--dorado);
-      border-radius:999px;
-      box-shadow:
-        0 8px 24px rgba(90,60,25,.15),
-        inset 0 0 0 3px rgba(255,255,255,.72);
+      min-width:260px;
       opacity:0;
       animation:entradaBoton 1.4s ease 3s forwards;
     }
 
-    .boton-abrir:hover,
-    .boton-abrir:active{
-      background:var(--dorado);
-      color:var(--blanco);
-    }
-
     .flecha-portada{
       margin-top:10px;
-      color:var(--dorado);
-      font-size:2rem;
+      color:var(--dorado-claro);
+      font-size:2.35rem;
+      text-shadow:0 3px 10px rgba(0,0,0,.45);
       animation:flechaPortada 1.5s ease-in-out infinite;
     }
 
-    /* CONTENIDO GENERAL */
+    .curva-portada{
+      position:absolute;
+      z-index:5;
+      left:-5%;
+      bottom:-3%;
+      width:110%;
+      min-height:30%;
+      padding:46px 24px 36px;
+      background:
+        radial-gradient(circle at top, #fffefb 0%, var(--marfil) 58%, var(--crema) 100%);
+      border-top:2px solid var(--dorado);
+      border-radius:50% 50% 0 0 / 20% 20% 0 0;
+      box-shadow:0 -14px 40px rgba(75,46,20,.13);
+    }
+
+    .curva-portada::before{
+      content:"";
+      position:absolute;
+      inset:10px 12px auto;
+      height:1px;
+      background:linear-gradient(to right,transparent,var(--dorado-claro),transparent);
+      opacity:.75;
+    }
+
+    .curva-portada .etiqueta{
+      margin:0 0 10px;
+      color:var(--cafe);
+      font-size:.82rem;
+      letter-spacing:5px;
+      text-transform:uppercase;
+    }
+
+    .curva-portada h2{
+      margin:0;
+      color:var(--cafe);
+      font-size:2.7rem;
+      font-weight:400;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .ornamento-dorado{
+      margin:10px auto 13px;
+      color:var(--dorado);
+      font-size:1rem;
+    }
+
+    .curva-portada p{
+      max-width:580px;
+      margin:0 auto;
+      color:var(--cafe);
+      font-size:1.1rem;
+      line-height:1.5;
+    }
+
+    /* INVITACIÓN */
 
     main{
       background:
-        linear-gradient(
-          180deg,
-          #fffdf8 0%,
-          var(--marfil) 45%,
-          var(--crema) 100%
-        );
-    }
-
-    section{
-      width:100%;
-      padding:45px 20px;
-    }
-
-    h2{
-      color:var(--dorado-oscuro);
-      font-size:2rem;
+        radial-gradient(circle at top, #fffefb 0%, var(--marfil) 52%, var(--crema) 100%);
     }
 
     .encabezado-invitacion{
-      padding:70px 20px;
+      padding:68px 20px;
       background:
-        linear-gradient(
-          145deg,
-          #fffdf8,
-          var(--marfil),
-          var(--crema)
-        );
+        radial-gradient(circle at top, #fffefb 0%, var(--marfil) 56%, var(--crema) 100%);
       color:var(--cafe);
     }
 
     .invitacion-etiqueta{
       margin:0 0 12px;
-      color:var(--dorado);
+      color:var(--dorado-oscuro);
       font-size:.9rem;
       letter-spacing:5px;
       text-transform:uppercase;
@@ -240,32 +355,27 @@
     .encabezado-invitacion h1{
       margin:0;
       color:var(--cafe);
-      font-size:3.2rem;
+      font-size:3.1rem;
       font-weight:400;
       letter-spacing:3px;
       text-transform:uppercase;
     }
 
-    .separador-dorado{
-      margin:12px auto;
-      color:var(--dorado);
-    }
-
     .mensaje-invitacion{
-      max-width:580px;
-      margin:0 auto 35px;
+      max-width:590px;
+      margin:0 auto 32px;
       font-size:1.15rem;
       line-height:1.6;
     }
 
     .fecha-evento{
-      max-width:650px;
+      max-width:680px;
       margin:auto;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:20px;
-      padding:20px;
+      gap:18px;
+      padding:18px;
       color:var(--cafe);
       border-top:1px solid var(--dorado);
       border-bottom:1px solid var(--dorado);
@@ -274,103 +384,54 @@
 
     .fecha-evento strong{
       padding:0 20px;
-      color:var(--dorado);
-      border-left:1px solid rgba(200,169,106,.45);
-      border-right:1px solid rgba(200,169,106,.45);
+      color:var(--dorado-oscuro);
+      border-left:1px solid rgba(200,169,106,.5);
+      border-right:1px solid rgba(200,169,106,.5);
       font-size:4rem;
       font-weight:400;
     }
 
-    /* BOTONES */
+    section{
+      width:100%;
+      padding:46px 20px;
+    }
 
-    .boton{
-      position:relative;
-      overflow:hidden;
-      display:inline-block;
-      margin:10px;
-      padding:15px 28px;
-      background:rgba(255,255,255,.92);
+    h2{
       color:var(--dorado-oscuro);
-      border:1px solid var(--dorado);
-      border-radius:999px;
-      font-family:inherit;
-      font-size:18px;
-      text-decoration:none;
-      cursor:pointer;
-      box-shadow:0 6px 18px rgba(90,60,25,.14);
-      transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        background .3s ease,
-        color .3s ease;
+      font-size:2rem;
     }
-
-    .boton::before{
-      content:"";
-      position:absolute;
-      top:-40%;
-      left:-80%;
-      width:45%;
-      height:180%;
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(255,255,255,.8),
-          transparent
-        );
-      transform:rotate(20deg);
-      transition:left .7s ease;
-    }
-
-    .boton:hover::before,
-    .boton:active::before{
-      left:140%;
-    }
-
-    .boton:hover,
-    .boton:active{
-      transform:translateY(-3px);
-      background:var(--dorado);
-      color:var(--blanco);
-      box-shadow:0 10px 24px rgba(90,60,25,.24);
-    }
-
-    /* PADRES */
 
     .familias{
       display:flex;
       justify-content:center;
       align-items:stretch;
-      gap:30px;
+      gap:28px;
       flex-wrap:wrap;
       max-width:900px;
       margin:30px auto;
     }
 
+    .columna,
+    .padrinos p{
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.98),rgba(248,246,242,.98));
+      border:1px solid rgba(212,175,93,.58);
+      border-radius:16px;
+      box-shadow:
+        0 14px 34px rgba(80,55,35,.08),
+        inset 0 0 0 4px rgba(255,255,255,.48);
+    }
+
     .columna{
       width:320px;
       max-width:100%;
-      padding:20px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.98),
-          rgba(248,246,242,.96)
-        );
-      border:1px solid rgba(200,169,106,.58);
-      border-radius:15px;
-      box-shadow:
-        0 12px 30px rgba(80,55,35,.09),
-        inset 0 0 0 4px rgba(255,255,255,.45);
+      padding:22px;
     }
 
     .columna h3{
       margin-top:0;
       color:var(--dorado-oscuro);
     }
-
-    /* PADRINOS */
 
     .padrinos{
       width:100%;
@@ -381,24 +442,9 @@
     .padrinos p{
       margin:15px 0;
       padding:18px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.98),
-          rgba(248,246,242,.96)
-        );
-      border:1px solid rgba(200,169,106,.58);
-      border-radius:12px;
-      box-shadow:
-        0 12px 30px rgba(80,55,35,.09),
-        inset 0 0 0 4px rgba(255,255,255,.45);
     }
 
-    /* FOTO */
-
-    .recuerdo{
-      text-align:center;
-    }
+    .recuerdo{text-align:center}
 
     .foto-recuerdo{
       display:block;
@@ -406,12 +452,10 @@
       max-width:70vw;
       height:auto;
       margin:25px auto 0;
-      border:3px solid rgba(255,255,255,.9);
+      border:4px solid rgba(255,255,255,.92);
       border-radius:18px;
-      box-shadow:0 12px 30px rgba(0,0,0,.22);
+      box-shadow:0 14px 34px rgba(0,0,0,.20);
     }
-
-    /* CONTADOR */
 
     .contador-portada{
       min-height:620px;
@@ -420,7 +464,7 @@
       align-items:center;
       justify-content:center;
       background-image:
-        linear-gradient(rgba(0,0,0,.30), rgba(0,0,0,.52)),
+        linear-gradient(rgba(26,18,10,.28),rgba(26,18,10,.54)),
         url("./portada-contador.jpg");
       background-size:cover;
       background-position:center;
@@ -434,12 +478,12 @@
     }
 
     .contador-capa h2{
-      margin:0 0 35px;
+      margin:0 0 34px;
       color:var(--blanco);
-      font-size:3.2rem;
-      font-style:italic;
+      font-family:'Great Vibes', cursive;
+      font-size:4rem;
       font-weight:normal;
-      text-shadow:0 3px 12px rgba(0,0,0,.8);
+      text-shadow:0 4px 14px rgba(0,0,0,.75);
     }
 
     #contadorPremium{
@@ -458,12 +502,14 @@
     .tiempo div{
       padding:16px 5px;
       color:var(--blanco);
-      background:rgba(255,255,255,.18);
-      border:1px solid rgba(255,255,255,.52);
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(242,213,139,.72);
       border-radius:12px;
       font-size:2rem;
       font-weight:bold;
-      box-shadow:0 6px 20px rgba(0,0,0,.28);
+      box-shadow:
+        0 7px 22px rgba(0,0,0,.26),
+        0 0 20px rgba(212,175,93,.10);
       text-shadow:0 2px 8px rgba(0,0,0,.8);
       backdrop-filter:blur(5px);
       -webkit-backdrop-filter:blur(5px);
@@ -472,24 +518,19 @@
     .tiempo span{
       display:block;
       margin-top:10px;
-      color:var(--blanco);
+      color:var(--dorado-claro);
       font-size:.68rem;
       letter-spacing:.8px;
       text-transform:uppercase;
       text-shadow:0 2px 6px rgba(0,0,0,.9);
     }
 
-    /* ANIMACIONES AL DESLIZAR */
-
     .reveal{
       opacity:0;
       transform:translateY(70px);
       filter:blur(5px);
-      transition:
-        opacity 1.8s ease,
-        transform 1.8s ease,
-        filter 1.8s ease;
-      will-change:opacity, transform, filter;
+      transition:opacity 1.8s ease,transform 1.8s ease,filter 1.8s ease;
+      will-change:opacity,transform,filter;
     }
 
     .reveal.active{
@@ -499,108 +540,55 @@
     }
 
     main > section:not(.contador-portada):not(:last-child)::after{
-      content:"✦";
+      content:"♥";
       display:block;
-      width:120px;
-      margin:55px auto -15px;
+      width:150px;
+      margin:56px auto -15px;
       color:var(--dorado);
-      font-size:1.2rem;
+      font-size:.9rem;
       background:
-        linear-gradient(
-          to right,
-          transparent,
-          rgba(200,169,106,.55),
-          transparent
-        );
+        linear-gradient(to right,transparent,rgba(212,175,93,.68),transparent);
       background-size:100% 1px;
       background-position:center;
       background-repeat:no-repeat;
     }
 
-    /* ANIMACIONES */
-
     @keyframes movimientoPortada{
-      from{
-        transform:scale(1.03);
-      }
-      to{
-        transform:scale(1.12);
-      }
+      from{transform:scale(1.03)}
+      to{transform:scale(1.11)}
     }
 
     @keyframes entradaNombre{
-      from{
-        opacity:0;
-        transform:scale(.92);
-        letter-spacing:8px;
-      }
-      to{
-        opacity:1;
-        transform:scale(1);
-        letter-spacing:1px;
-      }
+      from{opacity:0;transform:scale(.92);letter-spacing:8px}
+      to{opacity:1;transform:scale(1);letter-spacing:1px}
     }
 
     @keyframes entradaAmpersand{
-      from{
-        opacity:0;
-        transform:scale(.45) rotate(-12deg);
-      }
-      to{
-        opacity:1;
-        transform:scale(1) rotate(0);
-      }
+      from{opacity:0;transform:scale(.45) rotate(-12deg)}
+      to{opacity:1;transform:scale(1) rotate(0)}
     }
 
     @keyframes brilloAmpersand{
-      0%,100%{
-        text-shadow:
-          0 0 7px rgba(200,169,106,.35),
-          0 3px 12px rgba(0,0,0,.35);
-      }
-      50%{
-        text-shadow:
-          0 0 14px rgba(255,220,140,.95),
-          0 0 32px rgba(200,169,106,.55);
-      }
+      0%,100%{text-shadow:0 0 7px rgba(212,175,93,.35),0 3px 12px rgba(0,0,0,.35)}
+      50%{text-shadow:0 0 15px rgba(255,229,163,.98),0 0 34px rgba(212,175,93,.60)}
     }
 
     @keyframes entradaSuave{
-      from{
-        opacity:0;
-        transform:translateY(20px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
     @keyframes entradaBoton{
-      from{
-        opacity:0;
-        transform:translateY(15px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+      from{opacity:0;transform:translateY(15px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
     @keyframes flechaPortada{
-      0%,100%{
-        transform:translateY(0);
-        opacity:.6;
-      }
-      50%{
-        transform:translateY(8px);
-        opacity:1;
-      }
+      0%,100%{transform:translateY(0);opacity:.6}
+      50%{transform:translateY(8px);opacity:1}
     }
 
-    /* RESPONSIVE */
-
-    @media (max-width:768px){
+    @media(max-width:768px){
       .familias{
         flex-direction:column;
         align-items:center;
@@ -613,94 +601,91 @@
       }
     }
 
-    @media (max-width:480px){
-      #bienvenida{
-        min-height:100svh;
-      }
-
+    @media(max-width:480px){
       .portada-foto{
-        inset:0 0 40% 0;
-        background-position:42% center;
-      }
-
-      .portada-sombra{
-        inset:0 0 40% 0;
-        background:
-          linear-gradient(
-            rgba(20,14,9,.10),
-            rgba(20,14,9,.48)
-          );
+        inset:0 0 32% 0;
+        background-position:39% center;
       }
 
       .portada-nombres{
-        top:12%;
-        right:4%;
-        width:56%;
+        top:8%;
+        right:2%;
+        width:58%;
       }
 
       .portada-nombres h1{
-        font-size:4.4rem;
+        font-size:4.1rem;
       }
 
       .simbolo-amor{
-        margin:-6px 0;
-        font-size:3.3rem;
+        margin:-8px 0 -5px;
+        font-size:3.7rem;
       }
 
-      .portada-panel{
-        min-height:43%;
-        padding:50px 22px 25px;
-        border-radius:50% 50% 0 0 / 10% 10% 0 0;
+      .corazon-bajo-nombres{
+        margin:8px 0 12px;
       }
 
-      .frase-principal{
-        font-size:1rem;
-        line-height:1.4;
+      .corazon-bajo-nombres::before,
+      .corazon-bajo-nombres::after{
+        width:56px;
       }
 
-      .frase-principal span{
-        font-size:1.7rem;
+      .frase-portada{
+        max-width:230px;
+        font-size:.77rem;
+        line-height:1.45;
+        letter-spacing:1.2px;
+      }
+
+      .frase-portada span{
+        font-size:1.55rem;
       }
 
       .boton-abrir{
         min-width:215px;
-        padding:14px 24px;
+        padding:13px 22px;
+        font-size:.95rem;
+      }
+
+      .curva-portada{
+        min-height:32%;
+        padding:36px 20px 25px;
+        border-radius:50% 50% 0 0 / 12% 12% 0 0;
+      }
+
+      .curva-portada h2{
+        font-size:2rem;
+      }
+
+      .curva-portada p{
+        font-size:.95rem;
       }
 
       .encabezado-invitacion h1{
-        font-size:2.4rem;
+        font-size:2.35rem;
       }
 
       .fecha-evento{
-        gap:10px;
-        padding:16px 5px;
-        font-size:.78rem;
+        gap:9px;
+        padding:15px 4px;
+        font-size:.75rem;
       }
 
       .fecha-evento strong{
-        padding:0 12px;
+        padding:0 11px;
         font-size:3.2rem;
       }
 
-      section{
-        padding:38px 16px;
-      }
+      section{padding:38px 16px}
 
-      .contador-portada{
-        min-height:560px;
-      }
+      .contador-portada{min-height:560px}
 
-      .contador-capa h2{
-        font-size:2.6rem;
-      }
+      .contador-capa h2{font-size:3.2rem}
 
-      #contadorPremium{
-        gap:5px;
-      }
+      #contadorPremium{gap:5px}
 
-      .tiempo{
-        width:68px;
-      }
+      .tiempo{width:68px}
 
       .tiempo div{
         padding:14px 3px;
@@ -721,21 +706,20 @@
 
   <div id="bienvenida">
     <div class="portada-foto"></div>
-    <div class="portada-sombra"></div>
+    <div class="ramita superior"></div>
+    <div class="ramita inferior"></div>
 
     <div class="portada-nombres">
       <h1>Yésica</h1>
-      
       <div class="simbolo-amor">&amp;</div>
-      
       <h1>Luis</h1>
-    </div>
 
-    <div class="portada-panel">
-      <div class="ornamento">✦</div>
+      <div class="corazon-bajo-nombres">
+        <span>♥</span>
+      </div>
 
-      <p class="frase-principal">
-        Hay momentos que permanecen para siempre.<br>
+      <p class="frase-portada">
+        Hay momentos que permanecen para siempre.
         <span>Este será uno de ellos.</span>
       </p>
 
@@ -745,55 +729,49 @@
 
       <div class="flecha-portada">⌄</div>
     </div>
+
+    <div class="curva-portada">
+      <p class="etiqueta">Estás invitado a</p>
+      <h2>Nuestra boda</h2>
+      <div class="ornamento-dorado">✦ ♥ ✦</div>
+      <p>
+        Acompáñanos a celebrar el inicio de nuestra nueva historia,
+        llena de amor, sueños y felicidad.
+      </p>
+    </div>
   </div>
 
   <!-- INVITACIÓN -->
 
   <main id="contenidoPrincipal" style="display:none;">
 
-    <header class="encabezado-invitacion">
-      <p class="invitacion-etiqueta">Estás invitado a</p>
-
-      <h1>Nuestra boda</h1>
-
-      <div class="separador-dorado">✦</div>
+    <header class="encabezado-invitacion reveal">
+      <p class="invitacion-etiqueta">Nuestro gran día</p>
+      <h1>Yésica &amp; Luis</h1>
+      <div class="ornamento-dorado">✦ ♥ ✦</div>
 
       <p class="mensaje-invitacion">
-        Acompáñanos a celebrar el inicio de nuestra nueva historia,
-        llena de amor, sueños y felicidad.
+        Con mucha alegría queremos compartir contigo el comienzo
+        de esta nueva etapa de nuestras vidas.
       </p>
 
       <div class="fecha-evento">
         <span>Sábado</span>
-
         <strong>28</strong>
-
-        <span>
-          Noviembre<br>
-          2026
-        </span>
-
+        <span>Noviembre<br>2026</span>
         <span>13:00 hrs</span>
       </div>
     </header>
 
-    <!-- PADRES Y PADRINOS -->
-
     <section>
       <div class="reveal">
         <h2>Con la bendición 🙏🏼 de nuestros padres</h2>
-
-        <p>
-          <em>
-            Nos acompañan en este momento tan especial de nuestras vidas.
-          </em>
-        </p>
+        <p><em>Nos acompañan en este momento tan especial de nuestras vidas.</em></p>
       </div>
 
       <div class="familias">
         <div class="columna reveal">
           <h3>Padres de la novia</h3>
-
           <p>
             José Guadalupe Hernández Acosta<br>
             Yesenia Sánchez Ortega
@@ -802,7 +780,6 @@
 
         <div class="columna reveal">
           <h3>Padres del novio</h3>
-
           <p>
             José Luis Ramón Vázquez<br>
             Ana Lilia Bonilla García
@@ -817,46 +794,38 @@
       <div class="padrinos">
         <p class="reveal">
           <strong>Velación</strong><br>
-          José Luis Ramón Vázquez<br>
-          &amp;<br>
+          José Luis Ramón Vázquez<br>&amp;<br>
           Ana Lilia Bonilla García
         </p>
 
         <p class="reveal">
           <strong>Anillos</strong><br>
-          José Guadalupe Hernández Acosta<br>
-          &amp;<br>
+          José Guadalupe Hernández Acosta<br>&amp;<br>
           Yesenia Sánchez Ortega
         </p>
 
         <p class="reveal">
           <strong>Arras</strong><br>
-          José Norberto Rogelio Bonilla García<br>
-          &amp;<br>
+          José Norberto Rogelio Bonilla García<br>&amp;<br>
           Ana Lilia García y Martínez
         </p>
 
         <p class="reveal">
           <strong>Lazo</strong><br>
-          Reynaldo Sánchez Mendoza<br>
-          &amp;<br>
+          Reynaldo Sánchez Mendoza<br>&amp;<br>
           María Cecilia Guadalupe Ortega López
         </p>
 
         <p class="reveal">
           <strong>Biblia y rosario</strong><br>
-          Rosendo Hernández Acosta<br>
-          &amp;<br>
+          Rosendo Hernández Acosta<br>&amp;<br>
           Guadalupe López Zamora
         </p>
       </div>
     </section>
 
-    <!-- FOTO -->
-
     <section class="recuerdo reveal">
       <h2>Nuestra historia continúa...</h2>
-
       <p>
         <em>
           💕 De tantos momentos juntos, hoy elegimos compartir con ustedes
@@ -871,11 +840,9 @@
       >
     </section>
 
-    <!-- CONTADOR -->
-
     <section class="contador-portada reveal">
       <div class="contador-capa">
-        <h2>Faltan... ⏳</h2>
+        <h2>Faltan...</h2>
 
         <div id="contadorPremium">
           <div class="tiempo">
@@ -901,11 +868,8 @@
       </div>
     </section>
 
-    <!-- CEREMONIA -->
-
     <section class="reveal">
       <h2>Ceremonia religiosa</h2>
-
       <p>28 de noviembre de 2026</p>
       <p>A las 13:00 hrs</p>
       <p>Iglesia San Miguel Arcángel</p>
@@ -921,11 +885,8 @@
       </a>
     </section>
 
-    <!-- RECEPCIÓN -->
-
     <section class="reveal">
       <h2>Recepción</h2>
-
       <p>Salón de eventos Mi Ranchito</p>
       <p>A partir de las 15:00 hrs</p>
       <p>La Joya, Veracruz</p>
@@ -940,14 +901,9 @@
       </a>
     </section>
 
-    <!-- CONFIRMACIÓN -->
-
     <section class="reveal">
       <h2>Confirmar asistencia</h2>
-
-      <p>
-        Nos dará mucha alegría contar con tu presencia.
-      </p>
+      <p>Nos dará mucha alegría contar con tu presencia.</p>
 
       <a
         class="boton"
@@ -965,7 +921,7 @@
     const fechaBoda = new Date("2026-11-28T13:00:00").getTime();
 
     function actualizarContador(){
-      const ahora = new Date().getTime();
+      const ahora = Date.now();
       const distancia = fechaBoda - ahora;
 
       if(distancia <= 0){
@@ -977,33 +933,18 @@
       }
 
       const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-
-      const horas = Math.floor(
-        (distancia % (1000 * 60 * 60 * 24)) /
-        (1000 * 60 * 60)
-      );
-
-      const minutos = Math.floor(
-        (distancia % (1000 * 60 * 60)) /
-        (1000 * 60)
-      );
-
-      const segundos = Math.floor(
-        (distancia % (1000 * 60)) /
-        1000
-      );
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
 
       document.getElementById("dias").textContent = dias;
-      document.getElementById("horas").textContent =
-        String(horas).padStart(2, "0");
-      document.getElementById("minutos").textContent =
-        String(minutos).padStart(2, "0");
-      document.getElementById("segundos").textContent =
-        String(segundos).padStart(2, "0");
+      document.getElementById("horas").textContent = String(horas).padStart(2,"0");
+      document.getElementById("minutos").textContent = String(minutos).padStart(2,"0");
+      document.getElementById("segundos").textContent = String(segundos).padStart(2,"0");
     }
 
     actualizarContador();
-    setInterval(actualizarContador, 1000);
+    setInterval(actualizarContador,1000);
 
     const observador = new IntersectionObserver(
       (entradas) => {
@@ -1015,8 +956,8 @@
         });
       },
       {
-        threshold:.25,
-        rootMargin:"0px 0px -60px 0px"
+        threshold:.22,
+        rootMargin:"0px 0px -55px 0px"
       }
     );
 
@@ -1035,7 +976,7 @@
         behavior:"auto"
       });
 
-      setTimeout(iniciarAnimaciones, 200);
+      setTimeout(iniciarAnimaciones,180);
     }
   </script>
 
