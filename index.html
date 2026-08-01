@@ -818,15 +818,12 @@
   
 <body>
 
- <audio
-    id="musica"
-    src="./16437-dias.mp3"
-    preload="auto"
-    loop
-    playsinline
-    controls>
-</audio>  
+<audio id="musica" preload="auto" loop playsinline>
+  <source src="./nuestra-cancion.mp3" type="audio/mpeg">
+  Tu navegador no admite la reproducción de audio.
+</audio>
 
+  
   <!-- PORTADA -->
 
   <div id="bienvenida">
@@ -1129,55 +1126,61 @@
       });
     }
 
-    function abrirInvitacion(){
-      const bienvenida = document.getElementById("bienvenida");
-      const contenido = document.getElementById("contenidoPrincipal");
+    function abrirInvitacion() {
+  const bienvenida = document.getElementById("bienvenida");
+  const contenido = document.getElementById("contenidoPrincipal");
+  const musica = document.getElementById("musica");
 
-      
-      // ===== Iniciar música =====
-const musica = document.getElementById("musica");
+  if (!bienvenida || !contenido) {
+    console.error("No se encontró la portada o el contenido principal.");
+    return;
+  }
 
-if (musica) {
-    musica.volume = 1;
-    musica.load();
+  // Reproducir la canción mediante el clic del usuario
+  if (musica) {
+    musica.volume = 0;
 
     musica.play()
-        .then(() => {
-            alert("La canción sí empezó correctamente.");
-        })
-        .catch((error) => {
-            alert(
-                "No pudo reproducirse.\n" +
-                "Error: " + error.name + "\n" +
-                "Mensaje: " + error.message
-            );
-        });
-}
-      if(!bienvenida || !contenido){
-        return;
-      }
+      .then(() => {
+        let volumen = 0;
 
-      document.body.classList.add("entrando");
+        const fadeIn = setInterval(() => {
+          volumen += 0.05;
 
-      setTimeout(() => {
-        bienvenida.style.display = "none";
-        contenido.style.display = "block";
+          if (volumen >= 0.75) {
+            volumen = 0.75;
+            clearInterval(fadeIn);
+          }
 
-        window.scrollTo({
-          top:0,
-          behavior:"auto"
-        });
+          musica.volume = volumen;
+        }, 150);
+      })
+      .catch((error) => {
+        console.error("No se pudo reproducir la música:", error);
+      });
+  }
 
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            document.body.classList.add("abierto");
-          });
-        });
+  // Iniciar la transición de la portada
+  document.body.classList.add("entrando");
 
-        setTimeout(iniciarAnimaciones, 250);
-      }, 750);
-    }
-  </script>
+  setTimeout(() => {
+    bienvenida.style.display = "none";
+    contenido.style.display = "block";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "auto"
+    });
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.add("abierto");
+      });
+    });
+
+    setTimeout(iniciarAnimaciones, 250);
+  }, 750);
+}  </script>
 
 </body>
 </html>
