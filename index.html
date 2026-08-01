@@ -815,8 +815,14 @@
     }
 </style>
 </head>
-
+  
 <body>
+  
+<audio id="musica" preload="auto" loop>
+    <source src="1647 dias.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+</audio>
+  
 
   <!-- PORTADA -->
 
@@ -1123,6 +1129,30 @@
     function abrirInvitacion(){
       const bienvenida = document.getElementById("bienvenida");
       const contenido = document.getElementById("contenidoPrincipal");
+
+      
+      // ===== Iniciar música =====
+const musica = document.getElementById("musica");
+
+if (musica) {
+    musica.volume = 0;
+    musica.play().catch(error => console.log(error));
+
+    let volumen = 0;
+
+    const fade = setInterval(() => {
+        volumen += 0.05;
+
+        if (volumen >= 1) {
+            volumen = 1;
+            clearInterval(fade);
+        }
+
+        musica.volume = volumen;
+
+    }, 200);
+}
+    
 
       if(!bienvenida || !contenido){
         return;
