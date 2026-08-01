@@ -817,10 +817,14 @@
 </head>
   
 <body>
-  
-<audio id="musica" preload="auto" loop>
-    <source src="16437-dias.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio.
+
+  <audio
+    id="musica"
+    src="./16437-dias.mp3"
+    preload="auto"
+    loop
+    playsinline
+    controls>
 </audio>
   
 
@@ -1135,25 +1139,21 @@
 const musica = document.getElementById("musica");
 
 if (musica) {
-    musica.volume = 0;
-    musica.play().catch(error => console.log(error));
+    musica.volume = 1;
+    musica.load();
 
-    let volumen = 0;
-
-    const fade = setInterval(() => {
-        volumen += 0.05;
-
-        if (volumen >= 1) {
-            volumen = 1;
-            clearInterval(fade);
-        }
-
-        musica.volume = volumen;
-
-    }, 200);
+    musica.play()
+        .then(() => {
+            alert("La canción sí empezó correctamente.");
+        })
+        .catch((error) => {
+            alert(
+                "No pudo reproducirse.\n" +
+                "Error: " + error.name + "\n" +
+                "Mensaje: " + error.message
+            );
+        });
 }
-    
-
       if(!bienvenida || !contenido){
         return;
       }
