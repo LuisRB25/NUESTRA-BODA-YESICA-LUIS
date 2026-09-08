@@ -813,13 +813,55 @@
       opacity:1;
       transform:translateY(0);
     }
-</style>
+
+    /* ===== ÁLBUM DE FOTOS ===== */
+    .album-boda{padding:70px 14px;background:radial-gradient(circle at top,#fffefb 0%,var(--marfil) 58%,var(--crema) 100%);overflow:hidden}
+    .album-encabezado{max-width:680px;margin:0 auto 32px}
+    .album-etiqueta{margin:0 0 7px;color:var(--dorado-oscuro);font-size:.82rem;letter-spacing:5px;text-transform:uppercase}
+    .album-encabezado h2{margin:0 0 12px;color:var(--dorado-oscuro);font-family:'Great Vibes',cursive;font-size:3.6rem;font-weight:normal}
+    .album-encabezado p{max-width:570px;margin:auto;color:var(--cafe);font-size:1.1rem;line-height:1.6}
+    .album-grid{width:min(100%,920px);margin:32px auto 24px;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:105px;gap:10px}
+    .album-foto{position:relative;overflow:hidden;padding:0;border:0;border-radius:17px;background:#eee;cursor:pointer;box-shadow:0 13px 32px rgba(73,46,24,.14)}
+    .album-foto::after{content:"";position:absolute;inset:0;border:1px solid rgba(242,213,139,.65);border-radius:inherit;pointer-events:none}
+    .album-foto img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .7s ease}
+    .album-foto:hover img,.album-foto:active img{transform:scale(1.055)}
+    .album-foto:nth-child(1){grid-column:span 7;grid-row:span 3}
+    .album-foto:nth-child(2){grid-column:span 5;grid-row:span 2}
+    .album-foto:nth-child(3){grid-column:span 5;grid-row:span 2}
+    .album-foto:nth-child(4){grid-column:span 4;grid-row:span 3}
+    .album-foto:nth-child(5){grid-column:span 8;grid-row:span 3}
+    .album-foto:nth-child(6){grid-column:span 6;grid-row:span 3}
+    .album-foto:nth-child(7){grid-column:span 6;grid-row:span 3}
+    .album-foto:nth-child(8){grid-column:span 5;grid-row:span 3}
+    .album-foto:nth-child(9){grid-column:span 7;grid-row:span 3}
+    .album-foto:nth-child(10){grid-column:3/span 8;grid-row:span 3}
+    .album-extra{display:none}
+    .album-grid.album-abierto .album-extra{display:block;animation:aparecerAlbum .7s ease both}
+    @keyframes aparecerAlbum{from{opacity:0;transform:translateY(20px) scale(.96)}to{opacity:1;transform:none}}
+    .album-nota{margin:20px auto 0;color:var(--dorado-oscuro);font-family:'Great Vibes',cursive;font-size:2rem}
+    .lightbox-album{position:fixed;z-index:99999;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(18,12,8,.94);backdrop-filter:blur(8px)}
+    .lightbox-album.abierto{display:flex}
+    .lightbox-imagen{display:block;max-width:min(94vw,1100px);max-height:86vh;object-fit:contain;border-radius:12px;box-shadow:0 20px 70px rgba(0,0,0,.55)}
+    .lightbox-cerrar,.lightbox-anterior,.lightbox-siguiente{position:absolute;border:1px solid rgba(242,213,139,.7);background:rgba(255,253,248,.12);color:#fff8e8;cursor:pointer}
+    .lightbox-cerrar{top:16px;right:16px;width:46px;height:46px;border-radius:50%;font-size:1.65rem}
+    .lightbox-anterior,.lightbox-siguiente{top:50%;width:48px;height:58px;transform:translateY(-50%);border-radius:999px;font-size:2rem}
+    .lightbox-anterior{left:15px}.lightbox-siguiente{right:15px}
+    .lightbox-contador{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);color:var(--dorado-claro);letter-spacing:3px}
+    @media(max-width:600px){
+      .album-boda{padding:52px 9px}.album-encabezado h2{font-size:3rem}
+      .album-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;gap:7px}
+      .album-foto:nth-child(n){grid-column:span 1;grid-row:span 1}
+      .album-foto:nth-child(1),.album-foto:nth-child(5),.album-foto:nth-child(9){grid-column:span 2;grid-row:span 2}
+      .lightbox-anterior{left:7px}.lightbox-siguiente{right:7px}
+    }
+
+  </style>
 </head>
   
 <body>
 
  <audio id="musica" preload="auto" loop playsinline>
-  <source src="./nuestra-cancion-limpia.mp3"?v=2 type="audio/mpeg">
+  <source src="./nuestra-cancion-limpia.mp3?v=2" type="audio/mpeg">
   Tu navegador no admite la reproducción de audio.
 </audio>  
 
@@ -986,6 +1028,39 @@
 
 </section>
 
+
+    <!-- ÁLBUM DE FOTOS -->
+    <section class="album-boda reveal" id="nuestroAlbum">
+      <div class="album-encabezado">
+        <p class="album-etiqueta">Yésica &amp; Luis</p>
+        <h2>Nuestros momentos</h2>
+        <div class="ornamento-dorado">✦ ♥ ✦</div>
+        <p>Instantes que guardamos en el corazón y que hoy queremos compartir contigo.</p>
+      </div>
+      <div class="album-grid" id="albumGrid">
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(0)"><img src="./foto1.jpg" alt="Fotografía 1" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(1)"><img src="./foto2.jpg" alt="Fotografía 2" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(2)"><img src="./foto3.jpg" alt="Fotografía 3" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(3)"><img src="./foto4.jpg" alt="Fotografía 4" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(4)"><img src="./foto5.jpg" alt="Fotografía 5" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(5)"><img src="./foto6.jpg" alt="Fotografía 6" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(6)"><img src="./foto7.jpg" alt="Fotografía 7" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(7)"><img src="./foto8.jpg" alt="Fotografía 8" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(8)"><img src="./foto9.jpg" alt="Fotografía 9" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(9)"><img src="./foto10.jpg" alt="Fotografía 10" loading="lazy"></button>
+      </div>
+      <button class="boton" id="botonAlbum" type="button" onclick="alternarAlbum()">Ver nuestro álbum ♡</button>
+      <p class="album-nota">Recuerdos de una historia que sigue creciendo...</p>
+    </section>
+
+    <div class="lightbox-album" id="lightboxAlbum" aria-hidden="true" onclick="cerrarLightboxFondo(event)">
+      <button class="lightbox-cerrar" type="button" onclick="cerrarFotoAlbum()">×</button>
+      <button class="lightbox-anterior" type="button" onclick="cambiarFotoAlbum(-1)">‹</button>
+      <img class="lightbox-imagen" id="lightboxImagen" src="" alt="Fotografía ampliada">
+      <button class="lightbox-siguiente" type="button" onclick="cambiarFotoAlbum(1)">›</button>
+      <div class="lightbox-contador" id="lightboxContador"></div>
+    </div>
+
     <section class="contador-portada reveal">
       <div class="contador-capa">
         <h2>Faltan...</h2>
@@ -1124,6 +1199,54 @@
         observador.observe(elemento);
       });
     }
+
+
+    const fotosAlbum = Array.from({length:10},(_,i)=>`./foto${i+1}.jpg`);
+    let fotoAlbumActual=0, inicioToqueAlbum=0;
+
+    function alternarAlbum(){
+      const grid=document.getElementById("albumGrid");
+      const boton=document.getElementById("botonAlbum");
+      const abierto=grid.classList.toggle("album-abierto");
+      boton.textContent=abierto?"Cerrar álbum ♡":"Ver nuestro álbum ♡";
+    }
+    function abrirFotoAlbum(i){
+      fotoAlbumActual=i; actualizarFotoAlbum();
+      const l=document.getElementById("lightboxAlbum");
+      l.classList.add("abierto"); l.setAttribute("aria-hidden","false");
+      document.body.style.overflow="hidden";
+    }
+    function actualizarFotoAlbum(){
+      document.getElementById("lightboxImagen").src=fotosAlbum[fotoAlbumActual];
+      document.getElementById("lightboxContador").textContent=`${fotoAlbumActual+1} / ${fotosAlbum.length}`;
+    }
+    function cambiarFotoAlbum(d){
+      fotoAlbumActual=(fotoAlbumActual+d+fotosAlbum.length)%fotosAlbum.length;
+      actualizarFotoAlbum();
+    }
+    function cerrarFotoAlbum(){
+      const l=document.getElementById("lightboxAlbum");
+      l.classList.remove("abierto"); l.setAttribute("aria-hidden","true");
+      document.body.style.overflow="";
+    }
+    function cerrarLightboxFondo(e){if(e.target.id==="lightboxAlbum")cerrarFotoAlbum()}
+    document.addEventListener("keydown",e=>{
+      const l=document.getElementById("lightboxAlbum");
+      if(!l||!l.classList.contains("abierto"))return;
+      if(e.key==="Escape")cerrarFotoAlbum();
+      if(e.key==="ArrowLeft")cambiarFotoAlbum(-1);
+      if(e.key==="ArrowRight")cambiarFotoAlbum(1);
+    });
+    document.addEventListener("touchstart",e=>{
+      const l=document.getElementById("lightboxAlbum");
+      if(l&&l.classList.contains("abierto"))inicioToqueAlbum=e.changedTouches[0].screenX;
+    },{passive:true});
+    document.addEventListener("touchend",e=>{
+      const l=document.getElementById("lightboxAlbum");
+      if(!l||!l.classList.contains("abierto"))return;
+      const d=e.changedTouches[0].screenX-inicioToqueAlbum;
+      if(Math.abs(d)>55)cambiarFotoAlbum(d>0?-1:1);
+    },{passive:true});
 
     function abrirInvitacion(){
       const bienvenida = document.getElementById("bienvenida");
