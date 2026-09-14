@@ -891,6 +891,74 @@
       .invitado-personalizado .nombre-invitado{font-size:1.75rem}
     }
 
+
+    /* ===== FONDO FIJO DURANTE EL SCROLL ===== */
+    body::before{
+      content:"";
+      position:fixed;
+      z-index:-2;
+      inset:0;
+      background-image:url("./Portada1.jpg");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      transform:scale(1.01);
+      opacity:0;
+      transition:opacity .9s ease;
+      pointer-events:none;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      z-index:-1;
+      inset:0;
+      background:
+        linear-gradient(rgba(251,247,239,.83),rgba(243,232,215,.86));
+      opacity:0;
+      transition:opacity .9s ease;
+      pointer-events:none;
+    }
+
+    body.abierto::before,
+    body.abierto::after{
+      opacity:1;
+    }
+
+    body.abierto{
+      background:transparent;
+    }
+
+    #contenidoPrincipal{
+      background:transparent;
+    }
+
+    /* Las secciones dejan ver suavemente la misma foto fija de la portada */
+    body.abierto .encabezado-invitacion,
+    body.abierto main > section:not(.contador-portada),
+    body.abierto .recuerdo,
+    body.abierto .album-boda{
+      background:rgba(255,253,248,.72) !important;
+      backdrop-filter:blur(2px);
+      -webkit-backdrop-filter:blur(2px);
+    }
+
+    /* El contador conserva su propia fotografía */
+    body.abierto .contador-portada{
+      background-image:
+        linear-gradient(rgba(26,18,10,.28),rgba(26,18,10,.54)),
+        url("./portada-contador.jpg");
+    }
+
+    @media(max-width:768px){
+      body::before{
+        background-position:39% center;
+      }
+      body::after{
+        background:linear-gradient(rgba(251,247,239,.86),rgba(243,232,215,.89));
+      }
+    }
+
 </style>
 </head>
   
