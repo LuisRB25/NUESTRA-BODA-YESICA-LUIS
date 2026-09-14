@@ -855,7 +855,43 @@
       .lightbox-anterior{left:7px}.lightbox-siguiente{right:7px}
     }
 
-  </style>
+  
+    /* ===== PERSONALIZACIÓN POR INVITADO ===== */
+    .invitado-personalizado{
+      position:relative;
+      z-index:6;
+      max-width:520px;
+      margin:0 auto 16px;
+      padding:12px 18px;
+      border-top:1px solid rgba(212,175,93,.55);
+      border-bottom:1px solid rgba(212,175,93,.55);
+      color:var(--cafe);
+    }
+    .invitado-personalizado .para{
+      display:block;
+      margin-bottom:3px;
+      color:var(--dorado-oscuro);
+      font-size:.72rem;
+      letter-spacing:3px;
+      text-transform:uppercase;
+    }
+    .invitado-personalizado .nombre-invitado{
+      display:block;
+      color:var(--cafe);
+      font-family:'Great Vibes',cursive;
+      font-size:2.15rem;
+      line-height:1.1;
+    }
+    @media(max-width:480px){
+      .invitado-personalizado{
+        max-width:92%;
+        margin-bottom:11px;
+        padding:9px 12px;
+      }
+      .invitado-personalizado .nombre-invitado{font-size:1.75rem}
+    }
+
+</style>
 </head>
   
 <body>
@@ -901,6 +937,12 @@
       <p class="etiqueta">Estás invitado a</p>
       <h2>Nuestra boda</h2>
       <div class="ornamento-dorado">✦ ♥ ✦</div>
+
+      <div class="invitado-personalizado" id="invitadoPersonalizado">
+        <span class="para">Especialmente para</span>
+        <span class="nombre-invitado" id="nombreInvitado">Nuestros invitados</span>
+      </div>
+
       <p>
         Acompáñanos a celebrar el inicio de nuestra nueva historia,
         llena de amor, sueños y felicidad.
@@ -1139,6 +1181,28 @@
   </main>
 
   <script>
+    /* Personalización desde el enlace:
+       ?invitado=Familia+Hernandez+Sanchez
+       El mismo index.html sirve para todos.
+    */
+    function cargarInvitado(){
+      const params = new URLSearchParams(window.location.search);
+      const nombre = (params.get("invitado") || "").trim();
+
+      const nombreEl = document.getElementById("nombreInvitado");
+      const bloque = document.getElementById("invitadoPersonalizado");
+
+      if(!nombre){
+        // El enlace general sigue funcionando sin mostrar este bloque.
+        if(bloque) bloque.style.display = "none";
+        return;
+      }
+
+      if(nombreEl) nombreEl.textContent = nombre;
+    }
+
+    cargarInvitado();
+
     const fechaBoda = new Date("2026-11-28T13:00:00").getTime();
 
     function actualizarContador(){
