@@ -892,26 +892,36 @@
     }
 
 
-    /* ===== LIGHTBOX DEFINITIVO: IMAGEN COMPLETA, SIN RECORTE ===== */
-    .lightbox-imagen{
-      display:none !important;
+    /* ===== ÁLBUM: AMPLIACIÓN CENTRADA Y COMPLETA ===== */
+    .lightbox-album{
+      padding:56px 56px 46px !important;
+      overflow:hidden;
     }
 
-    .lightbox-foto-completa{
-      width:calc(100vw - 90px);
-      height:calc(100svh - 90px);
-      max-width:1200px;
-      max-height:900px;
-      background-repeat:no-repeat;
-      background-position:center;
-      background-size:contain !important;
-      flex:0 0 auto;
+    .lightbox-imagen{
+      display:block !important;
+      position:absolute !important;
+      inset:50% auto auto 50% !important;
+      transform:translate(-50%,-50%) !important;
+      width:auto !important;
+      height:auto !important;
+      max-width:calc(100vw - 110px) !important;
+      max-height:calc(100svh - 110px) !important;
+      object-fit:contain !important;
+      object-position:50% 50% !important;
+      margin:0 !important;
+      border-radius:10px;
     }
 
     @media(max-width:600px){
-      .lightbox-foto-completa{
-        width:calc(100vw - 12px);
-        height:calc(100svh - 90px);
+      .lightbox-album{padding:52px 8px 44px !important;}
+      .lightbox-imagen{
+        max-width:calc(100vw - 16px) !important;
+        max-height:calc(100svh - 105px) !important;
+      }
+      .lightbox-anterior,.lightbox-siguiente{
+        z-index:3;
+        background:rgba(18,12,8,.48) !important;
       }
     }
 
@@ -1104,16 +1114,16 @@
         <p>Instantes que guardamos en el corazón y que hoy queremos compartir contigo.</p>
       </div>
       <div class="album-grid" id="albumGrid">
-        <button class="album-foto" type="button" onclick="abrirFotoAlbum(0)"><img src="./foto1.jpg" alt="Fotografía 1" loading="lazy"></button>
-        <button class="album-foto" type="button" onclick="abrirFotoAlbum(1)"><img src="./foto2.jpg" alt="Fotografía 2" loading="lazy"></button>
-        <button class="album-foto" type="button" onclick="abrirFotoAlbum(2)"><img src="./foto3.jpg" alt="Fotografía 3" loading="lazy"></button>
-        <button class="album-foto" type="button" onclick="abrirFotoAlbum(3)"><img src="./foto4.jpg" alt="Fotografía 4" loading="lazy"></button>
-        <button class="album-foto" type="button" onclick="abrirFotoAlbum(4)"><img src="./foto5.jpg" alt="Fotografía 5" loading="lazy"></button>
-        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(5)"><img src="./foto6.jpg" alt="Fotografía 6" loading="lazy"></button>
-        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(6)"><img src="./foto7.jpg" alt="Fotografía 7" loading="lazy"></button>
-        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(7)"><img src="./foto8.jpg" alt="Fotografía 8" loading="lazy"></button>
-        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(8)"><img src="./foto9.jpg" alt="Fotografía 9" loading="lazy"></button>
-        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(9)"><img src="./foto10.jpg" alt="Fotografía 10" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(0)"><img src="./foto1.jpg" data-base="foto1" onerror="probarExtensionFoto(this)" alt="Fotografía 1" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(1)"><img src="./foto2.jpg" data-base="foto2" onerror="probarExtensionFoto(this)" alt="Fotografía 2" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(2)"><img src="./foto3.jpg" data-base="foto3" onerror="probarExtensionFoto(this)" alt="Fotografía 3" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(3)"><img src="./foto4.jpg" data-base="foto4" onerror="probarExtensionFoto(this)" alt="Fotografía 4" loading="lazy"></button>
+        <button class="album-foto" type="button" onclick="abrirFotoAlbum(4)"><img src="./foto5.jpg" data-base="foto5" onerror="probarExtensionFoto(this)" alt="Fotografía 5" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(5)"><img src="./foto6.jpg" data-base="foto6" onerror="probarExtensionFoto(this)" alt="Fotografía 6" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(6)"><img src="./foto7.jpg" data-base="foto7" onerror="probarExtensionFoto(this)" alt="Fotografía 7" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(7)"><img src="./foto8.jpg" data-base="foto8" onerror="probarExtensionFoto(this)" alt="Fotografía 8" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(8)"><img src="./foto9.jpg" data-base="foto9" onerror="probarExtensionFoto(this)" alt="Fotografía 9" loading="lazy"></button>
+        <button class="album-foto album-extra" type="button" onclick="abrirFotoAlbum(9)"><img src="./foto10.jpg" data-base="foto10" onerror="probarExtensionFoto(this)" alt="Fotografía 10" loading="lazy"></button>
       </div>
       <button class="boton" id="botonAlbum" type="button" onclick="alternarAlbum()">Ver nuestro álbum ♡</button>
       <p class="album-nota">Recuerdos de una historia que sigue creciendo...</p>
@@ -1123,7 +1133,6 @@
       <button class="lightbox-cerrar" type="button" onclick="cerrarFotoAlbum()">×</button>
       <button class="lightbox-anterior" type="button" onclick="cambiarFotoAlbum(-1)">‹</button>
       <img class="lightbox-imagen" id="lightboxImagen" src="" alt="Fotografía ampliada">
-      <div class="lightbox-foto-completa" id="lightboxFotoCompleta" role="img" aria-label="Fotografía ampliada"></div>
       <button class="lightbox-siguiente" type="button" onclick="cambiarFotoAlbum(1)">›</button>
       <div class="lightbox-contador" id="lightboxContador"></div>
     </div>
@@ -1290,8 +1299,27 @@
     }
 
 
-    const fotosAlbum = Array.from({length:10},(_,i)=>`./foto${i+1}.jpg`);
+    const extensionesFoto = [".jpg",".jpeg",".JPG",".JPEG",".png",".PNG",".webp",".WEBP"];
+
+    function probarExtensionFoto(img){
+      const base = img.dataset.base;
+      let indice = Number(img.dataset.extIndex || 0) + 1;
+
+      if(indice >= extensionesFoto.length){
+        img.onerror = null;
+        console.error(`No se encontró ${base} con ninguna extensión compatible.`);
+        return;
+      }
+
+      img.dataset.extIndex = indice;
+      img.src = `./${base}${extensionesFoto[indice]}`;
+    }
+
     let fotoAlbumActual=0, inicioToqueAlbum=0;
+
+    function obtenerFotosAlbum(){
+      return Array.from(document.querySelectorAll("#albumGrid .album-foto img"));
+    }
 
     function alternarAlbum(){
       const grid=document.getElementById("albumGrid");
@@ -1299,33 +1327,47 @@
       const abierto=grid.classList.toggle("album-abierto");
       boton.textContent=abierto?"Cerrar álbum ♡":"Ver nuestro álbum ♡";
     }
+
     function abrirFotoAlbum(i){
-      fotoAlbumActual=i; actualizarFotoAlbum();
+      fotoAlbumActual=i;
+      actualizarFotoAlbum();
       const l=document.getElementById("lightboxAlbum");
-      l.classList.add("abierto"); l.setAttribute("aria-hidden","false");
+      l.classList.add("abierto");
+      l.setAttribute("aria-hidden","false");
       document.body.style.overflow="hidden";
     }
-    function actualizarFotoAlbum(){
-      const ruta = fotosAlbum[fotoAlbumActual];
-      const imagen = document.getElementById("lightboxImagen");
-      const visor = document.getElementById("lightboxFotoCompleta");
 
-      if(imagen) imagen.src = ruta;
-      if(visor) visor.style.backgroundImage = `url("${ruta}")`;
+    function actualizarFotoAlbum(){
+      const fotos = obtenerFotosAlbum();
+      const miniatura = fotos[fotoAlbumActual];
+      const ampliada = document.getElementById("lightboxImagen");
+
+      if(miniatura && ampliada){
+        ampliada.src = miniatura.currentSrc || miniatura.src;
+        ampliada.alt = miniatura.alt || "Fotografía ampliada";
+      }
 
       document.getElementById("lightboxContador").textContent =
-        `${fotoAlbumActual+1} / ${fotosAlbum.length}`;
+        `${fotoAlbumActual+1} / ${fotos.length}`;
     }
+
     function cambiarFotoAlbum(d){
-      fotoAlbumActual=(fotoAlbumActual+d+fotosAlbum.length)%fotosAlbum.length;
+      const total=obtenerFotosAlbum().length;
+      fotoAlbumActual=(fotoAlbumActual+d+total)%total;
       actualizarFotoAlbum();
     }
+
     function cerrarFotoAlbum(){
       const l=document.getElementById("lightboxAlbum");
-      l.classList.remove("abierto"); l.setAttribute("aria-hidden","true");
+      l.classList.remove("abierto");
+      l.setAttribute("aria-hidden","true");
       document.body.style.overflow="";
     }
-    function cerrarLightboxFondo(e){if(e.target.id==="lightboxAlbum")cerrarFotoAlbum()}
+
+    function cerrarLightboxFondo(e){
+      if(e.target.id==="lightboxAlbum") cerrarFotoAlbum();
+    }
+
     document.addEventListener("keydown",e=>{
       const l=document.getElementById("lightboxAlbum");
       if(!l||!l.classList.contains("abierto"))return;
@@ -1333,16 +1375,20 @@
       if(e.key==="ArrowLeft")cambiarFotoAlbum(-1);
       if(e.key==="ArrowRight")cambiarFotoAlbum(1);
     });
+
     document.addEventListener("touchstart",e=>{
       const l=document.getElementById("lightboxAlbum");
-      if(l&&l.classList.contains("abierto"))inicioToqueAlbum=e.changedTouches[0].screenX;
+      if(l&&l.classList.contains("abierto"))
+        inicioToqueAlbum=e.changedTouches[0].screenX;
     },{passive:true});
+
     document.addEventListener("touchend",e=>{
       const l=document.getElementById("lightboxAlbum");
       if(!l||!l.classList.contains("abierto"))return;
       const d=e.changedTouches[0].screenX-inicioToqueAlbum;
       if(Math.abs(d)>55)cambiarFotoAlbum(d>0?-1:1);
     },{passive:true});
+
 
     function abrirInvitacion(){
       const bienvenida = document.getElementById("bienvenida");
