@@ -925,6 +925,37 @@
       }
     }
 
+
+    /* ===== CENTRADO FINAL DEL VISOR DEL ÁLBUM ===== */
+    .lightbox-album.abierto{
+      display:grid !important;
+      place-items:center !important;
+      padding:54px 58px !important;
+    }
+    .lightbox-imagen{
+      position:static !important;
+      inset:auto !important;
+      transform:none !important;
+      display:block !important;
+      width:auto !important;
+      height:auto !important;
+      max-width:calc(100vw - 116px) !important;
+      max-height:calc(100dvh - 108px) !important;
+      margin:auto !important;
+      object-fit:contain !important;
+      object-position:center center !important;
+      align-self:center !important;
+      justify-self:center !important;
+    }
+    .lightbox-cerrar,.lightbox-anterior,.lightbox-siguiente,.lightbox-contador{z-index:4;}
+    @media(max-width:600px){
+      .lightbox-album.abierto{padding:54px 8px 46px !important;}
+      .lightbox-imagen{
+        max-width:calc(100vw - 16px) !important;
+        max-height:calc(100dvh - 100px) !important;
+      }
+    }
+
 </style>
 </head>
   
