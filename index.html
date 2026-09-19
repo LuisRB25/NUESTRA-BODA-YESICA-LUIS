@@ -892,22 +892,26 @@
     }
 
 
-    /* ===== LIGHTBOX: FOTO COMPLETA SIN RECORTES ===== */
-    .lightbox-album{padding:58px 12px 48px;}
+    /* ===== LIGHTBOX DEFINITIVO: IMAGEN COMPLETA, SIN RECORTE ===== */
     .lightbox-imagen{
-      width:auto !important;
-      height:auto !important;
-      max-width:calc(100vw - 24px) !important;
-      max-height:calc(100svh - 110px) !important;
-      object-fit:contain !important;
-      object-position:center !important;
-      border-radius:10px;
+      display:none !important;
     }
+
+    .lightbox-foto-completa{
+      width:calc(100vw - 90px);
+      height:calc(100svh - 90px);
+      max-width:1200px;
+      max-height:900px;
+      background-repeat:no-repeat;
+      background-position:center;
+      background-size:contain !important;
+      flex:0 0 auto;
+    }
+
     @media(max-width:600px){
-      .lightbox-album{padding:58px 6px 45px;}
-      .lightbox-imagen{
-        max-width:calc(100vw - 12px) !important;
-        max-height:calc(100svh - 105px) !important;
+      .lightbox-foto-completa{
+        width:calc(100vw - 12px);
+        height:calc(100svh - 90px);
       }
     }
 
@@ -1119,6 +1123,7 @@
       <button class="lightbox-cerrar" type="button" onclick="cerrarFotoAlbum()">×</button>
       <button class="lightbox-anterior" type="button" onclick="cambiarFotoAlbum(-1)">‹</button>
       <img class="lightbox-imagen" id="lightboxImagen" src="" alt="Fotografía ampliada">
+      <div class="lightbox-foto-completa" id="lightboxFotoCompleta" role="img" aria-label="Fotografía ampliada"></div>
       <button class="lightbox-siguiente" type="button" onclick="cambiarFotoAlbum(1)">›</button>
       <div class="lightbox-contador" id="lightboxContador"></div>
     </div>
@@ -1301,8 +1306,15 @@
       document.body.style.overflow="hidden";
     }
     function actualizarFotoAlbum(){
-      document.getElementById("lightboxImagen").src=fotosAlbum[fotoAlbumActual];
-      document.getElementById("lightboxContador").textContent=`${fotoAlbumActual+1} / ${fotosAlbum.length}`;
+      const ruta = fotosAlbum[fotoAlbumActual];
+      const imagen = document.getElementById("lightboxImagen");
+      const visor = document.getElementById("lightboxFotoCompleta");
+
+      if(imagen) imagen.src = ruta;
+      if(visor) visor.style.backgroundImage = `url("${ruta}")`;
+
+      document.getElementById("lightboxContador").textContent =
+        `${fotoAlbumActual+1} / ${fotosAlbum.length}`;
     }
     function cambiarFotoAlbum(d){
       fotoAlbumActual=(fotoAlbumActual+d+fotosAlbum.length)%fotosAlbum.length;
