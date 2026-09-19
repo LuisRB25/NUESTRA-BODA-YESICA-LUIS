@@ -891,6 +891,26 @@
       .invitado-personalizado .nombre-invitado{font-size:1.75rem}
     }
 
+
+    /* ===== LIGHTBOX: FOTO COMPLETA SIN RECORTES ===== */
+    .lightbox-album{padding:58px 12px 48px;}
+    .lightbox-imagen{
+      width:auto !important;
+      height:auto !important;
+      max-width:calc(100vw - 24px) !important;
+      max-height:calc(100svh - 110px) !important;
+      object-fit:contain !important;
+      object-position:center !important;
+      border-radius:10px;
+    }
+    @media(max-width:600px){
+      .lightbox-album{padding:58px 6px 45px;}
+      .lightbox-imagen{
+        max-width:calc(100vw - 12px) !important;
+        max-height:calc(100svh - 105px) !important;
+      }
+    }
+
 </style>
 </head>
   
