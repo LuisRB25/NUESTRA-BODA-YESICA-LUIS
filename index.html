@@ -1585,6 +1585,343 @@ main > section:not(.contador-portada):not(:last-child)::after{
   .evento-card h2{font-size:2.75rem !important}
 }
 
+
+/* ============================================================
+   COMPOSICIÓN FINAL — BASADA EN LA REFERENCIA APROBADA
+   ============================================================ */
+
+/* HERO: fotografía completa, clara y con la composición visible */
+.encabezado-invitacion{
+  position:relative !important;
+  min-height:auto !important;
+  aspect-ratio:16 / 10.3;
+  padding:7.5% 5% 6.5% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+  align-items:center !important;
+  overflow:hidden !important;
+  background:
+    linear-gradient(rgba(255,249,237,.06),rgba(255,247,233,.08)),
+    url("./fondo-nos-casamos-final.png") center center / cover no-repeat !important;
+  color:#493226 !important;
+}
+
+.encabezado-invitacion::before{
+  content:"" !important;
+  position:absolute !important;
+  inset:0 !important;
+  z-index:0 !important;
+  background:
+    radial-gradient(ellipse at 52% 24%,
+      rgba(255,250,240,.40) 0%,
+      rgba(255,250,240,.20) 28%,
+      rgba(255,250,240,.04) 56%,
+      transparent 72%) !important;
+  pointer-events:none;
+}
+
+.encabezado-invitacion > *{
+  position:relative !important;
+  z-index:1 !important;
+}
+
+.encabezado-invitacion .invitacion-etiqueta{
+  margin:0 0 1.6% !important;
+  color:#9d6b1d !important;
+  font-size:clamp(.72rem,1.25vw,1rem) !important;
+  font-weight:600 !important;
+  letter-spacing:.48em !important;
+}
+
+.encabezado-invitacion h1{
+  margin:0 !important;
+  color:#493126 !important;
+  font-family:'Cormorant Garamond',serif !important;
+  font-size:clamp(3rem,6.8vw,6rem) !important;
+  font-weight:400 !important;
+  line-height:.98 !important;
+  letter-spacing:.035em !important;
+  text-shadow:0 2px 14px rgba(255,248,235,.30) !important;
+}
+
+.encabezado-invitacion .ornamento-dorado{
+  margin:2.3% auto 2.2% !important;
+  color:#bd8728 !important;
+  font-size:1.08rem !important;
+  letter-spacing:.18em;
+}
+
+.encabezado-invitacion .mensaje-invitacion{
+  width:min(68%,720px) !important;
+  margin:0 auto !important;
+  color:#3f3028 !important;
+  font-size:clamp(1rem,1.55vw,1.32rem) !important;
+  line-height:1.48 !important;
+  text-shadow:0 1px 9px rgba(255,250,240,.65) !important;
+}
+
+/* Fecha flotante, como en la referencia */
+.encabezado-invitacion .fecha-evento{
+  position:absolute !important;
+  z-index:2 !important;
+  left:50% !important;
+  bottom:9.5% !important;
+  transform:translateX(-50%) !important;
+  width:min(58%,760px) !important;
+  min-height:112px;
+  margin:0 !important;
+  padding:18px 22px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:20px !important;
+  border:1px solid rgba(176,123,34,.62) !important;
+  background:rgba(255,249,238,.68) !important;
+  box-shadow:0 10px 28px rgba(73,49,30,.08) !important;
+  backdrop-filter:blur(4px) !important;
+  -webkit-backdrop-filter:blur(4px) !important;
+}
+
+.encabezado-invitacion .fecha-evento strong{
+  color:#aa761e !important;
+  font-size:4.2rem !important;
+  line-height:1 !important;
+}
+
+/* PADRES: aspecto más cercano a la referencia */
+.familia-seccion{
+  position:relative !important;
+  padding:74px 18px 86px !important;
+  background:
+    radial-gradient(circle at 0% 12%,rgba(207,176,119,.13),transparent 25%),
+    radial-gradient(circle at 100% 78%,rgba(207,176,119,.12),transparent 27%),
+    #fffdf8 !important;
+  overflow:hidden !important;
+}
+
+.familia-seccion::before,
+.familia-seccion::after{
+  content:"❧" !important;
+  position:absolute !important;
+  width:auto !important;
+  height:auto !important;
+  color:#b99050 !important;
+  opacity:.18 !important;
+  background:none !important;
+  font-family:Georgia,serif;
+  font-size:12rem;
+  line-height:1;
+  filter:none !important;
+  pointer-events:none;
+}
+.familia-seccion::before{
+  left:-28px !important;
+  top:50px !important;
+  transform:rotate(-28deg) !important;
+}
+.familia-seccion::after{
+  right:-32px !important;
+  bottom:35px !important;
+  transform:rotate(150deg) !important;
+}
+
+.familia-seccion > .reveal:first-child{
+  max-width:760px !important;
+  margin:0 auto 34px !important;
+}
+.familia-seccion > .reveal:first-child::before{
+  content:"✦   ♥   ✦" !important;
+  display:block;
+  margin:0 auto 18px;
+  color:#bc8b38;
+  letter-spacing:.55em;
+}
+.familia-seccion > .reveal:first-child h2{
+  max-width:680px;
+  margin:0 auto 14px !important;
+  color:#a2701e !important;
+  font-size:clamp(2.4rem,4.7vw,3.5rem) !important;
+  font-weight:500 !important;
+  line-height:1.08;
+}
+.familia-seccion > .reveal:first-child p{
+  margin:0;
+  color:#574439;
+  font-size:1.12rem;
+}
+
+.familias{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  gap:16px !important;
+  max-width:650px !important;
+  margin:34px auto 58px !important;
+}
+.familias .columna{
+  width:100% !important;
+  min-height:0 !important;
+  padding:26px 22px !important;
+  background:rgba(255,253,248,.78) !important;
+  border:1px solid rgba(190,140,53,.58) !important;
+  border-radius:20px !important;
+  box-shadow:0 13px 32px rgba(77,51,30,.055) !important;
+}
+.familias .columna h3{
+  margin:0 0 12px !important;
+  color:#a6721f !important;
+  font-size:1.4rem !important;
+}
+.familias .columna h3::after{
+  content:"  ─  ♥  ─";
+  display:block;
+  margin-top:6px;
+  color:#c09243;
+  font-size:.72rem;
+  letter-spacing:.15em;
+}
+.familias .columna p{
+  margin:0;
+  color:#49392f;
+  font-size:1.05rem;
+  line-height:1.45;
+}
+
+/* Padrinos: visualmente más livianos */
+.familia-seccion > .reveal:nth-of-type(2) h2{
+  margin:12px auto 24px !important;
+  color:#a2701e !important;
+  font-size:2.4rem !important;
+}
+.padrinos{
+  max-width:760px !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:10px !important;
+}
+.padrinos p,
+.padrinos p:last-child{
+  width:auto !important;
+  min-height:116px !important;
+  transform:none !important;
+  grid-column:auto !important;
+  padding:17px 12px !important;
+  background:rgba(255,253,248,.58) !important;
+  border:1px solid rgba(194,145,58,.34) !important;
+  box-shadow:none !important;
+}
+.padrinos p:last-child{
+  grid-column:1 / -1 !important;
+  width:calc(50% - 5px) !important;
+  justify-self:center !important;
+}
+
+/* En móvil conservamos la composición de la referencia sin recortar la escena */
+@media(max-width:700px){
+  .encabezado-invitacion{
+    aspect-ratio:auto !important;
+    min-height:770px !important;
+    padding:50px 18px 38px !important;
+    background:
+      linear-gradient(rgba(255,249,237,.05),rgba(255,247,233,.07)),
+      url("./fondo-nos-casamos-final.png") center top / 100% auto no-repeat,
+      #ead6b9 !important;
+  }
+
+  .encabezado-invitacion::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:0;
+    background:
+      linear-gradient(to bottom,
+        transparent 0%,
+        transparent 69%,
+        rgba(234,214,185,.72) 83%,
+        #ead6b9 100%);
+    pointer-events:none;
+  }
+
+  .encabezado-invitacion .invitacion-etiqueta{
+    margin-top:0 !important;
+    font-size:.72rem !important;
+    letter-spacing:.38em !important;
+  }
+
+  .encabezado-invitacion h1{
+    font-size:clamp(2.65rem,10vw,4.25rem) !important;
+  }
+
+  .encabezado-invitacion .ornamento-dorado{
+    margin:18px auto 22px !important;
+  }
+
+  .encabezado-invitacion .mensaje-invitacion{
+    width:90% !important;
+    max-width:570px !important;
+    font-size:1rem !important;
+    line-height:1.5 !important;
+  }
+
+  .encabezado-invitacion .fecha-evento{
+    bottom:8% !important;
+    width:80% !important;
+    min-height:104px;
+    padding:14px 12px !important;
+    gap:10px !important;
+  }
+
+  .encabezado-invitacion .fecha-evento strong{
+    font-size:3.5rem !important;
+  }
+
+  .familia-seccion{
+    padding:62px 14px 70px !important;
+  }
+}
+
+@media(max-width:480px){
+  .encabezado-invitacion{
+    min-height:700px !important;
+    padding-top:34px !important;
+  }
+
+  .encabezado-invitacion h1{
+    font-size:2.65rem !important;
+    letter-spacing:.015em !important;
+  }
+
+  .encabezado-invitacion .mensaje-invitacion{
+    width:94% !important;
+  }
+
+  .encabezado-invitacion .fecha-evento{
+    width:92% !important;
+    bottom:7% !important;
+    padding:13px 5px !important;
+    gap:5px !important;
+    font-size:.69rem !important;
+  }
+
+  .encabezado-invitacion .fecha-evento strong{
+    font-size:3.15rem !important;
+    padding:0 9px !important;
+  }
+
+  .familia-seccion > .reveal:first-child h2{
+    font-size:2.45rem !important;
+  }
+
+  .padrinos{
+    grid-template-columns:1fr 1fr !important;
+    gap:7px !important;
+  }
+  .padrinos p{
+    min-height:112px !important;
+    font-size:.86rem !important;
+  }
+}
+
 </style>
 </head>
   
