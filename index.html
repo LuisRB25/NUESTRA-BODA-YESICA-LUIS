@@ -1922,6 +1922,68 @@ main > section:not(.contador-portada):not(:last-child)::after{
   }
 }
 
+
+/* ===== FIX HERO MÓVIL: SIN HUECO + FECHA PEGADA A LA FOTO ===== */
+@media(max-width:700px){
+  .encabezado-invitacion{
+    /* La foto conserva todo su ancho y la sección termina justo después */
+    min-height:0 !important;
+    height:auto !important;
+    aspect-ratio:auto !important;
+    padding:38px 16px 34px !important;
+    padding-bottom:36px !important;
+    background:
+      linear-gradient(rgba(255,249,237,.05),rgba(255,247,233,.07)),
+      url("./fondo-nos-casamos-final.png") center top / 100% auto no-repeat !important;
+    background-color:#ead6b9 !important;
+  }
+
+  .encabezado-invitacion::after{
+    display:none !important;
+  }
+
+  .encabezado-invitacion .invitacion-etiqueta{
+    margin-bottom:14px !important;
+  }
+
+  .encabezado-invitacion .ornamento-dorado{
+    margin:18px auto 20px !important;
+  }
+
+  .encabezado-invitacion .mensaje-invitacion{
+    margin-bottom:34vw !important;
+  }
+
+  .encabezado-invitacion .fecha-evento{
+    position:relative !important;
+    left:auto !important;
+    bottom:auto !important;
+    transform:none !important;
+    width:94% !important;
+    min-height:100px !important;
+    margin:0 auto !important;
+    padding:13px 6px !important;
+    background:rgba(255,249,238,.78) !important;
+  }
+}
+
+@media(max-width:480px){
+  .encabezado-invitacion{
+    min-height:0 !important;
+    height:auto !important;
+    padding:32px 12px 28px !important;
+  }
+
+  .encabezado-invitacion .mensaje-invitacion{
+    margin-bottom:30vw !important;
+  }
+
+  .encabezado-invitacion .fecha-evento{
+    width:96% !important;
+    bottom:auto !important;
+  }
+}
+
 </style>
 </head>
   
