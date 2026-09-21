@@ -1351,6 +1351,240 @@
       }
     }
 
+
+/* ============================================================
+   REDISEÑO 2 — CONTINUIDAD VISUAL REAL
+   ============================================================ */
+
+#contenidoPrincipal{
+  background:#fbf6ec !important;
+}
+
+/* Hero: más contraste fotográfico y composición tipo editorial */
+.encabezado-invitacion{
+  min-height:760px !important;
+  padding:96px 22px 88px !important;
+  background:
+    linear-gradient(180deg,rgba(255,250,240,.08),rgba(255,247,235,.17)),
+    url("./fondo-nos-casamos.png") 45% center / cover no-repeat !important;
+}
+.encabezado-invitacion::before{
+  background:radial-gradient(ellipse at 52% 43%,rgba(255,249,237,.34) 0 25%,rgba(255,249,237,.10) 55%,transparent 76%) !important;
+}
+.encabezado-invitacion h1{
+  font-family:'Cormorant Garamond',serif !important;
+  font-size:clamp(3.4rem,8vw,5.6rem) !important;
+  font-weight:400 !important;
+}
+.encabezado-invitacion .fecha-evento{
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+  background:rgba(255,249,238,.12) !important;
+}
+
+/* Padres y padrinos: compactos, sin interminable columna de tarjetas */
+.familia-seccion{
+  padding:82px 18px 88px !important;
+  background:
+    radial-gradient(circle at 8% 8%,rgba(210,174,103,.12),transparent 24%),
+    radial-gradient(circle at 92% 88%,rgba(210,174,103,.10),transparent 25%),
+    linear-gradient(180deg,#fffdf8,#f8eedf) !important;
+}
+.familia-seccion > .reveal:first-child::before{
+  content:"✦  ♥  ✦";
+  display:block;
+  margin-bottom:18px;
+  color:#c49645;
+  font-size:.9rem;
+  letter-spacing:8px;
+}
+.familias{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  max-width:820px !important;
+  gap:14px !important;
+  margin:34px auto 48px !important;
+}
+.familias .columna{
+  width:auto !important;
+  min-height:170px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:25px 20px !important;
+  background:rgba(255,253,248,.68) !important;
+  border-radius:18px !important;
+}
+.familia-seccion > .reveal:nth-of-type(2)::after{
+  content:"";
+  display:block;
+  width:120px;
+  height:1px;
+  margin:15px auto 25px;
+  background:linear-gradient(90deg,transparent,#c79b50,transparent);
+}
+.padrinos{
+  max-width:850px !important;
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:12px !important;
+}
+.padrinos p,
+.padrinos p:last-child{
+  width:auto !important;
+  min-height:126px !important;
+  grid-column:auto !important;
+  padding:18px 12px !important;
+  background:rgba(255,253,248,.56) !important;
+  border-radius:15px !important;
+  box-shadow:none !important;
+}
+.padrinos p:nth-child(4),
+.padrinos p:nth-child(5){
+  transform:translateX(50%);
+}
+.padrinos strong{margin-bottom:3px}
+
+/* Historia: foto protagonista, menos hueco */
+.recuerdo{
+  padding:74px 18px 72px !important;
+  background:
+    linear-gradient(180deg,#fffdf9 0%,#fbf3e7 100%) !important;
+}
+.encabezado-recuerdo{margin-bottom:20px !important}
+.marco-recuerdo{
+  width:min(92%,650px) !important;
+  margin:25px auto 16px !important;
+}
+.adorno-recuerdo{margin:22px auto 8px !important}
+
+/* Álbum: 3 fotos, composición compacta y botón protagonista */
+.album-boda{
+  padding:72px 14px 78px !important;
+  background:#fffdf8 !important;
+}
+.album-grid{
+  width:min(92%,760px) !important;
+  grid-auto-rows:190px !important;
+  gap:8px !important;
+  margin:28px auto 24px !important;
+}
+.album-foto:nth-child(1){
+  grid-column:1 / -1 !important;
+  grid-row:span 2 !important;
+}
+#botonAlbum{
+  margin-top:4px !important;
+  background:#fffaf0 !important;
+}
+
+/* Contador: actúa como una pausa fotográfica */
+.contador-portada{
+  min-height:520px !important;
+}
+.contador-capa{padding:62px 10px !important}
+
+/* Ceremonia, recepción y confirmación: bloque final unificado */
+.evento-card{
+  position:relative;
+  width:min(92%,760px) !important;
+  max-width:760px !important;
+  margin:42px auto !important;
+  padding:54px 28px !important;
+  border:1px solid rgba(190,142,57,.42);
+  border-radius:24px;
+  background:rgba(255,253,248,.82);
+  box-shadow:0 16px 42px rgba(77,51,30,.07);
+  overflow:hidden;
+}
+.evento-card::before,
+.evento-card::after{
+  content:"";
+  position:absolute;
+  width:110px;
+  height:1px;
+  top:28px;
+  background:linear-gradient(90deg,transparent,#c79b50);
+}
+.evento-card::before{left:18px}
+.evento-card::after{right:18px;transform:scaleX(-1)}
+.evento-card .mini-etiqueta{
+  margin:0 0 8px;
+  color:#a57524;
+  font-size:.72rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+.evento-card h2{
+  margin:0 0 22px !important;
+  color:#9f701f !important;
+  font-family:'Great Vibes',cursive;
+  font-size:3.25rem !important;
+  font-weight:normal !important;
+}
+.evento-card p:not(.mini-etiqueta){
+  margin:8px 0;
+  color:#4e3b2f;
+  font-size:1.1rem;
+}
+.evento-card .boton{margin-top:24px}
+.ceremonia-card{margin-top:62px !important}
+.rsvp-card{margin-bottom:76px !important}
+
+/* Separadores: más sutiles */
+main > section:not(.contador-portada):not(:last-child)::after{
+  width:110px !important;
+  margin:38px auto -8px !important;
+  opacity:.55;
+}
+
+/* Móvil/tablet */
+@media(max-width:700px){
+  .encabezado-invitacion{
+    min-height:700px !important;
+    padding:74px 14px 64px !important;
+    background-position:43% center !important;
+  }
+  .familia-seccion{padding:64px 12px 70px !important}
+  .familias{
+    grid-template-columns:1fr 1fr !important;
+    gap:9px !important;
+  }
+  .familias .columna{
+    min-height:155px;
+    padding:20px 12px !important;
+  }
+  .padrinos{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+  }
+  .padrinos p:nth-child(4),
+  .padrinos p:nth-child(5){transform:none}
+  .padrinos p:last-child{
+    grid-column:1 / -1 !important;
+    width:calc(50% - 4px) !important;
+    justify-self:center;
+  }
+  .album-grid{grid-auto-rows:160px !important}
+  .evento-card{
+    width:calc(100% - 28px) !important;
+    margin:30px auto !important;
+    padding:48px 18px !important;
+  }
+}
+@media(max-width:480px){
+  .encabezado-invitacion{
+    min-height:680px !important;
+    background-position:40% center !important;
+  }
+  .encabezado-invitacion h1{font-size:2.7rem !important}
+  .familias{grid-template-columns:1fr !important}
+  .familias .columna{min-height:140px}
+  .padrinos p{font-size:.92rem}
+  .album-grid{grid-auto-rows:140px !important}
+  .evento-card h2{font-size:2.75rem !important}
+}
+
 </style>
 </head>
   
@@ -1583,7 +1817,8 @@
       </div>
     </section>
 
-    <section class="reveal">
+    <section class="reveal evento-card ceremonia-card">
+      <p class="mini-etiqueta">El momento más esperado</p>
       <h2>Ceremonia religiosa</h2>
       <p>28 de noviembre de 2026</p>
       <p>A las 13:00 hrs</p>
@@ -1600,7 +1835,8 @@
       </a>
     </section>
 
-    <section class="reveal">
+    <section class="reveal evento-card recepcion-card">
+      <p class="mini-etiqueta">Celebremos juntos</p>
       <h2>Recepción</h2>
       <p>Salón de eventos Mi Ranchito</p>
       <p>A partir de las 15:00 hrs</p>
@@ -1616,7 +1852,8 @@
       </a>
     </section>
 
-    <section class="reveal">
+    <section class="reveal evento-card rsvp-card">
+      <p class="mini-etiqueta">Nos encantará verte</p>
       <h2>Confirmar asistencia</h2>
       <p>Nos dará mucha alegría contar con tu presencia.</p>
 
