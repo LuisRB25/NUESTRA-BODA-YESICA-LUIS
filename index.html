@@ -926,34 +926,27 @@
     }
 
 
-    /* ===== CENTRADO FINAL DEL VISOR DEL ÁLBUM ===== */
-    .lightbox-album.abierto{
-      display:grid !important;
-      place-items:center !important;
-      padding:54px 58px !important;
+    /* FIX REAL: el visor ahora es hijo directo de BODY */
+    #lightboxAlbum{
+      position:fixed !important; inset:0 !important;
+      width:100vw !important; height:100dvh !important;
+      margin:0 !important; padding:54px 8px 46px !important;
+      z-index:999999 !important; overflow:hidden !important;
     }
-    .lightbox-imagen{
-      position:static !important;
-      inset:auto !important;
+    #lightboxAlbum.abierto{
+      display:flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+    }
+    #lightboxImagen{
+      position:static !important; inset:auto !important;
       transform:none !important;
       display:block !important;
-      width:auto !important;
-      height:auto !important;
-      max-width:calc(100vw - 116px) !important;
-      max-height:calc(100dvh - 108px) !important;
+      width:auto !important; height:auto !important;
+      max-width:100% !important; max-height:100% !important;
       margin:auto !important;
       object-fit:contain !important;
       object-position:center center !important;
-      align-self:center !important;
-      justify-self:center !important;
-    }
-    .lightbox-cerrar,.lightbox-anterior,.lightbox-siguiente,.lightbox-contador{z-index:4;}
-    @media(max-width:600px){
-      .lightbox-album.abierto{padding:54px 8px 46px !important;}
-      .lightbox-imagen{
-        max-width:calc(100vw - 16px) !important;
-        max-height:calc(100dvh - 100px) !important;
-      }
     }
 
 </style>
@@ -1160,14 +1153,6 @@
       <p class="album-nota">Recuerdos de una historia que sigue creciendo...</p>
     </section>
 
-    <div class="lightbox-album" id="lightboxAlbum" aria-hidden="true" onclick="cerrarLightboxFondo(event)">
-      <button class="lightbox-cerrar" type="button" onclick="cerrarFotoAlbum()">×</button>
-      <button class="lightbox-anterior" type="button" onclick="cambiarFotoAlbum(-1)">‹</button>
-      <img class="lightbox-imagen" id="lightboxImagen" src="" alt="Fotografía ampliada">
-      <button class="lightbox-siguiente" type="button" onclick="cambiarFotoAlbum(1)">›</button>
-      <div class="lightbox-contador" id="lightboxContador"></div>
-    </div>
-
     <section class="contador-portada reveal">
       <div class="contador-capa">
         <h2>Faltan...</h2>
@@ -1244,6 +1229,15 @@
     </section>
 
   </main>
+
+  <div class="lightbox-album" id="lightboxAlbum" aria-hidden="true" onclick="cerrarLightboxFondo(event)">
+      <button class="lightbox-cerrar" type="button" onclick="cerrarFotoAlbum()">×</button>
+      <button class="lightbox-anterior" type="button" onclick="cambiarFotoAlbum(-1)">‹</button>
+      <img class="lightbox-imagen" id="lightboxImagen" src="" alt="Fotografía ampliada">
+      <button class="lightbox-siguiente" type="button" onclick="cambiarFotoAlbum(1)">›</button>
+      <div class="lightbox-contador" id="lightboxContador"></div>
+    </div>
+
 
   <script>
     /* Personalización desde el enlace:
