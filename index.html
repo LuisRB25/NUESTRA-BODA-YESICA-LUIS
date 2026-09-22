@@ -2181,6 +2181,101 @@ main > section:not(.contador-portada):not(:last-child)::after{
   }
 }
 
+
+/* =========================================================
+   DETALLES FINOS: LEGIBILIDAD HERO + 3 FOTOS SIN RECORTE
+   ========================================================= */
+
+/* Contraste localizado: conserva la fotografía clara */
+.encabezado-invitacion .invitacion-etiqueta{
+  color:#81530f !important;
+  font-weight:700 !important;
+  text-shadow:
+    0 1px 2px rgba(255,252,244,.95),
+    0 0 10px rgba(255,250,238,.85) !important;
+}
+
+.encabezado-invitacion .mensaje-invitacion{
+  position:relative !important;
+  z-index:2 !important;
+  color:#33241d !important;
+  font-weight:500 !important;
+  text-shadow:
+    0 1px 2px rgba(255,252,244,.98),
+    0 0 12px rgba(255,249,235,.95) !important;
+}
+
+.encabezado-invitacion .mensaje-invitacion::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:-14px -24px;
+  border-radius:28px;
+  background:radial-gradient(
+    ellipse at center,
+    rgba(255,250,239,.72) 0%,
+    rgba(255,250,239,.48) 48%,
+    rgba(255,250,239,0) 78%
+  );
+  pointer-events:none;
+}
+
+/* Vista previa del álbum: mostrar la foto completa */
+.album-grid{
+  grid-auto-rows:auto !important;
+  align-items:start !important;
+}
+
+.album-foto{
+  height:auto !important;
+  min-height:0 !important;
+  background:#f8f0e3 !important;
+}
+
+.album-foto:nth-child(1){
+  grid-column:1 / -1 !important;
+  grid-row:auto !important;
+}
+
+.album-foto img{
+  width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  display:block !important;
+}
+
+/* Solo 3 fotografías visibles; el álbum completo sigue en el lightbox */
+.album-foto:nth-child(n+4){
+  display:none !important;
+}
+
+@media(max-width:700px){
+  .encabezado-invitacion .invitacion-etiqueta{
+    font-size:.75rem !important;
+  }
+
+  .encabezado-invitacion .mensaje-invitacion{
+    width:90% !important;
+    font-size:clamp(.90rem,3.25vw,1.04rem) !important;
+    line-height:1.48 !important;
+  }
+
+  .encabezado-invitacion .mensaje-invitacion::before{
+    inset:-11px -14px;
+  }
+
+  .album-grid{
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+  }
+
+  .album-foto:nth-child(1){
+    grid-column:1 / -1 !important;
+  }
+}
+
 </style>
 </head>
   
