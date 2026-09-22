@@ -1984,6 +1984,203 @@ main > section:not(.contador-portada):not(:last-child)::after{
   }
 }
 
+
+/* ==========================================================
+   MAQUETACIÓN LIMPIA FINAL — REFERENCIA REAL, SIN PARCHES
+   ========================================================== */
+
+/* 1. FOTO: relación original 3:2, completa, sin crop ni huecos */
+.encabezado-invitacion{
+  width:100% !important;
+  aspect-ratio:3 / 2 !important;
+  min-height:0 !important;
+  height:auto !important;
+  box-sizing:border-box !important;
+  padding:7.5% 6% 5% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  background:
+    linear-gradient(rgba(255,249,238,.05),rgba(255,249,238,.05)),
+    url("./fondo-nos-casamos-final.png") center center / 100% 100% no-repeat !important;
+  overflow:hidden !important;
+}
+.encabezado-invitacion::before{
+  background:radial-gradient(ellipse at 54% 28%,rgba(255,250,241,.30),rgba(255,250,241,.08) 48%,transparent 72%) !important;
+}
+.encabezado-invitacion .invitacion-etiqueta{
+  margin:0 0 1.5% !important;
+  font-size:clamp(.66rem,1.7vw,.92rem) !important;
+  letter-spacing:.45em !important;
+  color:#9b6818 !important;
+}
+.encabezado-invitacion h1{
+  margin:0 !important;
+  font-size:clamp(2.6rem,7.2vw,5.3rem) !important;
+  line-height:1 !important;
+  color:#402a20 !important;
+  text-shadow:0 1px 10px rgba(255,250,240,.45) !important;
+}
+.encabezado-invitacion .ornamento-dorado{
+  margin:2.5% auto 2.3% !important;
+  color:#b77c17 !important;
+}
+.encabezado-invitacion .mensaje-invitacion{
+  width:min(78%,720px) !important;
+  margin:0 !important;
+  font-size:clamp(.94rem,2vw,1.28rem) !important;
+  line-height:1.45 !important;
+  color:#3d2c23 !important;
+  text-shadow:0 1px 8px rgba(255,250,240,.82) !important;
+}
+
+/* 2. FECHA: bloque independiente inmediatamente debajo de la foto */
+.fecha-franja{
+  width:100%;
+  padding:28px 5%;
+  background:linear-gradient(180deg,#f6e8ce,#f9efdd);
+}
+.fecha-franja .fecha-evento{
+  position:static !important;
+  inset:auto !important;
+  transform:none !important;
+  width:min(100%,760px) !important;
+  min-height:118px !important;
+  margin:0 auto !important;
+  padding:18px 22px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:18px !important;
+  color:#49362a !important;
+  background:rgba(255,252,245,.72) !important;
+  border:1px solid rgba(173,118,28,.70) !important;
+  box-shadow:0 10px 28px rgba(90,58,25,.06) !important;
+  backdrop-filter:none !important;
+}
+.fecha-franja .fecha-evento strong{
+  color:#a66f14 !important;
+  font-size:4.3rem !important;
+}
+
+/* 3. PADRES: fondo botánico real derivado de la referencia aprobada */
+.familia-seccion{
+  padding:64px 18px 82px !important;
+  background:
+    url("./adorno-botanico-izq.png") left top / 28% auto no-repeat,
+    url("./adorno-botanico-der.png") right bottom / 28% auto no-repeat,
+    #fffdf8 !important;
+}
+.familia-seccion::before,
+.familia-seccion::after{
+  display:none !important;
+}
+.familia-seccion > .reveal:first-child::before{
+  content:"✦   ♥   ✦" !important;
+  display:block !important;
+  margin:0 auto 17px !important;
+  color:#b98324 !important;
+  letter-spacing:.45em !important;
+}
+.familia-seccion > .reveal:first-child h2{
+  max-width:680px !important;
+  margin:0 auto 13px !important;
+  color:#9f6c18 !important;
+  font-size:clamp(2.35rem,5vw,3.45rem) !important;
+  line-height:1.08 !important;
+}
+.familia-seccion > .reveal:first-child p{
+  color:#493a31 !important;
+  font-size:1.08rem !important;
+}
+.familias{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:14px !important;
+  max-width:620px !important;
+  margin:32px auto 52px !important;
+}
+.familias .columna{
+  width:100% !important;
+  min-height:0 !important;
+  padding:24px 18px !important;
+  background:rgba(255,253,248,.90) !important;
+  border:1px solid rgba(185,126,30,.62) !important;
+  border-radius:19px !important;
+  box-shadow:0 12px 30px rgba(85,56,27,.055) !important;
+}
+.familias .columna h3{
+  color:#9f6c18 !important;
+  margin:0 0 9px !important;
+}
+.familias .columna h3::after{
+  content:"—  ♥  —";
+  display:block;
+  margin-top:5px;
+  color:#bf8c39;
+  font-size:.72rem;
+  letter-spacing:.12em;
+}
+.familias .columna p{margin:0 !important}
+
+/* 4. El resto hereda el mismo lenguaje visual */
+.recuerdo,.album-boda{
+  background:#fffdf8 !important;
+}
+.evento-card{
+  background:rgba(255,253,248,.94) !important;
+  border-color:rgba(185,126,30,.50) !important;
+}
+.evento-card h2,
+.album-encabezado h2,
+.encabezado-recuerdo h2{
+  color:#9f6c18 !important;
+}
+
+/* MÓVIL: exactamente foto 3:2 + fecha, sin altura artificial */
+@media(max-width:700px){
+  .encabezado-invitacion{
+    aspect-ratio:3 / 2 !important;
+    min-height:0 !important;
+    height:auto !important;
+    padding:7.2% 4.5% 4% !important;
+    background:
+      linear-gradient(rgba(255,249,238,.04),rgba(255,249,238,.04)),
+      url("./fondo-nos-casamos-final.png") center center / 100% 100% no-repeat !important;
+  }
+  .encabezado-invitacion::after{display:none !important}
+  .encabezado-invitacion h1{
+    font-size:clamp(2.35rem,9.2vw,3.9rem) !important;
+  }
+  .encabezado-invitacion .mensaje-invitacion{
+    width:88% !important;
+    margin:0 !important;
+    font-size:clamp(.82rem,3.1vw,1.02rem) !important;
+  }
+  .fecha-franja{
+    padding:24px 4% !important;
+  }
+  .fecha-franja .fecha-evento{
+    width:100% !important;
+    min-height:105px !important;
+    padding:13px 6px !important;
+    gap:7px !important;
+    font-size:.72rem !important;
+  }
+  .fecha-franja .fecha-evento strong{
+    font-size:3.35rem !important;
+    padding:0 8px !important;
+  }
+  .familia-seccion{
+    padding:58px 14px 68px !important;
+    background:
+      url("./adorno-botanico-izq.png") left top / 36% auto no-repeat,
+      url("./adorno-botanico-der.png") right bottom / 36% auto no-repeat,
+      #fffdf8 !important;
+  }
+}
+
 </style>
 </head>
   
@@ -2057,13 +2254,17 @@ main > section:not(.contador-portada):not(:last-child)::after{
         de esta nueva etapa de nuestras vidas.
       </p>
 
-      <div class="fecha-evento">
+
+    </header>
+
+    <div class="fecha-franja reveal">
+<div class="fecha-evento">
         <span>Sábado</span>
         <strong>28</strong>
         <span>Noviembre<br>2026</span>
         <span>13:00 hrs</span>
       </div>
-    </header>
+    </div>
 
     <section class="familia-seccion">
       <div class="reveal">
