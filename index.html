@@ -2275,6 +2275,41 @@ main > section:not(.contador-portada):not(:last-child)::after{
     grid-column:1 / -1 !important;
   }
 }
+    /* ===== CONTRASTE FINO: NOS CASAMOS + YÉSICA & LUIS ===== */
+
+/* ¡NOS CASAMOS! */
+.encabezado-invitacion .invitacion-etiqueta{
+  color:#8b5d17 !important;
+  font-weight:700 !important;
+  text-shadow:
+    0 1px 1px rgba(255,255,255,.85),
+    0 2px 5px rgba(58,38,23,.18) !important;
+}
+
+/* YÉSICA & LUIS */
+.encabezado-invitacion h1{
+  color:#3b251c !important;
+  font-weight:500 !important;
+
+  /* contorno marfil MUY fino */
+  -webkit-text-stroke:0.25px rgba(255,248,232,.80);
+
+  /* sombra elegante, sin efecto neón */
+  text-shadow:
+    0 1px 1px rgba(255,250,238,.90),
+    0 3px 7px rgba(47,29,18,.22) !important;
+}
+    
+    .encabezado-invitacion::before{
+  background:
+    radial-gradient(
+      ellipse at 50% 24%,
+      rgba(255,248,232,.38) 0%,
+      rgba(255,248,232,.22) 32%,
+      rgba(255,248,232,.07) 55%,
+      transparent 72%
+    ) !important;
+}
 
 </style>
 </head>
