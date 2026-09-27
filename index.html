@@ -2609,27 +2609,105 @@ main > section:not(.contador-portada):not(:last-child)::after{
 
 
   <script>
-    /* Personalización desde el enlace:
-       ?invitado=Familia+Hernandez+Sanchez
-       El mismo index.html sirve para todos.
-    */
-    function cargarInvitado(){
-      const params = new URLSearchParams(window.location.search);
-      const nombre = (params.get("invitado") || "").trim();
 
-      const nombreEl = document.getElementById("nombreInvitado");
-      const bloque = document.getElementById("invitadoPersonalizado");
+    /* ==================================================
+   INVITACIONES PERSONALIZADAS
+   Cada familia tiene un código único.
+   ================================================== */
 
-      if(!nombre){
-        // El enlace general sigue funcionando sin mostrar este bloque.
-        if(bloque) bloque.style.display = "none";
-        return;
-      }
+const INVITACIONES_VALIDAS = {
+  "4KL6-DH2Y-QRJ8": "Familia García Cerero",
+  "ZA8V-AGBJ-TKD3": "Familia Ramón Vázquez",
+  "Z7A7-V8UL-X25K": "Familia Meza García"
+};
 
-      if(nombreEl) nombreEl.textContent = nombre;
-    }
+function cargarInvitado(){
 
-    cargarInvitado();
+  const params = new URLSearchParams(window.location.search);
+
+  const codigo = (params.get("i") || "")
+    .trim()
+    .toUpperCase();
+
+  const nombre = INVITACIONES_VALIDAS[codigo];
+
+  const nombreEl =
+    document.getElementById("nombreInvitado");
+
+  const bloque =
+    document.getElementById("invitadoPersonalizado");
+
+
+  /* ─────────────────────────────
+     CÓDIGO NO VÁLIDO
+     ───────────────────────────── */
+
+  if(!nombre){
+
+    document.body.innerHTML = `
+      <div style="
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:30px;
+        box-sizing:border-box;
+        background:#fbf6ec;
+        text-align:center;
+        color:#4b3426;
+        font-family:Georgia,serif;
+      ">
+
+        <div style="max-width:520px;">
+
+          <div style="
+            font-size:2.5rem;
+            color:#a2721f;
+            margin-bottom:15px;
+          ">
+            Y &amp; L
+          </div>
+
+          <h1 style="
+            font-size:2rem;
+            margin:0 0 15px;
+          ">
+            Invitación no válida
+          </h1>
+
+          <p style="
+            margin:0;
+            line-height:1.6;
+            font-size:1rem;
+          ">
+            Este enlace no corresponde a una
+            invitación personalizada válida.
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+    return;
+  }
+
+
+  /* ─────────────────────────────
+     INVITACIÓN VÁLIDA
+     ───────────────────────────── */
+
+  if(nombreEl){
+    nombreEl.textContent = nombre;
+  }
+
+  if(bloque){
+    bloque.style.display = "";
+  }
+}
+    
+
+cargarInvitado();
 
     const fechaBoda = new Date("2026-11-28T13:00:00").getTime();
 
