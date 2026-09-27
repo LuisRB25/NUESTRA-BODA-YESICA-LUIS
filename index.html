@@ -2399,6 +2399,38 @@ main > section:not(.contador-portada):not(:last-child)::after{
   font-size:1.25rem !important;
   line-height:1.5 !important;
 }
+    /* ===== FECHA MÁS VISIBLE ===== */
+
+.fecha-franja .fecha-evento{
+  color:#3f3027 !important;
+  font-weight:500 !important;
+}
+
+/* SÁBADO / NOVIEMBRE 2026 / 13:00 HRS */
+.fecha-franja .fecha-evento span{
+  color:#3f3027 !important;
+  font-size:1.05rem !important;
+  font-weight:500 !important;
+  letter-spacing:.4px !important;
+}
+
+/* EL 28 */
+.fecha-franja .fecha-evento strong{
+  color:#a66f12 !important;
+  font-size:4.25rem !important;
+  font-weight:500 !important;
+}
+    @media(max-width:480px){
+
+  .fecha-franja .fecha-evento span{
+    font-size:.88rem !important;
+  }
+
+  .fecha-franja .fecha-evento strong{
+    font-size:3.8rem !important;
+  }
+
+}
 </style>
 </head>
   
