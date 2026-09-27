@@ -2311,6 +2311,55 @@ main > section:not(.contador-portada):not(:last-child)::after{
     ) !important;
 }
 
+    /* ===== ALINEACIÓN FINAL DE ADORNOS EN TARJETAS ===== */
+
+.evento-card{
+  position:relative !important;
+}
+
+/* Quitamos cualquier adorno anterior que esté desacomodado */
+.evento-card::before,
+.evento-card::after{
+  content:none !important;
+}
+
+/* Etiqueta superior */
+.evento-card .mini-etiqueta{
+  position:relative !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  width:100% !important;
+  margin:0 auto 14px !important;
+
+  gap:18px !important;
+  text-align:center !important;
+}
+
+/* Dos líneas perfectamente iguales */
+.evento-card .mini-etiqueta::before,
+.evento-card .mini-etiqueta::after{
+  content:"" !important;
+
+  display:block !important;
+  flex:1 1 0 !important;
+
+  height:1px !important;
+  max-width:115px !important;
+
+  background:rgba(171,116,25,.62) !important;
+
+  position:static !important;
+  transform:none !important;
+  margin:0 !important;
+}
+
+/* Mantiene el texto centrado */
+.evento-card .mini-etiqueta{
+  white-space:nowrap !important;
+}
+    
 </style>
 </head>
   
