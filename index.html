@@ -3268,11 +3268,11 @@ function rsvpGuardar(estado){
     const input=document.createElement('input');input.name=k;input.value=v;form.appendChild(input);
   }
   document.body.appendChild(form);
-  const timeout=setTimeout(()=>{terminar();rsvpAviso('No pudimos verificar el envío. Consulta nuevamente antes de volver a confirmar.');},18000);
+  const timeout=setTimeout(()=>{terminar();rsvpAviso('No pudimos verificar el envío. Consulta nuevamente antes de volver a confirmar.');},30000);
   function terminar(){clearTimeout(timeout);window.removeEventListener('message',recibir);form.remove();setTimeout(()=>iframe.remove(),500);rsvpEl('rsvpEnviar').disabled=false;rsvpEl('rsvpNo').disabled=false;}
   function recibir(e){
     if(!e.data||e.data.tipo!=='BODA_RSVP'||e.data.token!==token)return;
-    if(e.origin!=='null'&&!/^https:\/\/[a-z0-9.-]*googleusercontent\.com$/.test(e.origin))return;
+    if(e.source!==iframe.contentWindow)return; // Verificar el iframe que enviamos, independientemente del dominio de redirección de Google.
     terminar();
     if(e.data.ok){rsvpPintar({estado,asistentes});rsvpAviso('Tu respuesta se guardó correctamente.');}
     else rsvpAviso(e.data.error||'No se pudo guardar. Inténtalo de nuevo.');
