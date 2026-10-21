@@ -2385,52 +2385,6 @@ main > section:not(.contador-portada):not(:last-child)::after{
   font-size:1.12rem !important;
   line-height:1.55 !important;
 }
-
-    /* ===== TAMAÑO FINAL DE TEXTOS SECUNDARIOS ===== */
-
-/* Acompáñanos a celebrar el inicio de nuestra nueva historia... */
-.curva-portada > p:last-child{
-  font-size:1.18rem !important;
-  line-height:1.55 !important;
-}
-
-/* Nos acompañan en este momento tan especial... */
-.familia-seccion > .reveal:first-child > p{
-  font-size:1.25rem !important;
-  line-height:1.5 !important;
-}
-    /* ===== FECHA MÁS VISIBLE ===== */
-
-.fecha-franja .fecha-evento{
-  color:#3f3027 !important;
-  font-weight:500 !important;
-}
-
-/* SÁBADO / NOVIEMBRE 2026 / 13:00 HRS */
-.fecha-franja .fecha-evento span{
-  color:#3f3027 !important;
-  font-size:1.05rem !important;
-  font-weight:500 !important;
-  letter-spacing:.4px !important;
-}
-
-/* EL 28 */
-.fecha-franja .fecha-evento strong{
-  color:#a66f12 !important;
-  font-size:4.25rem !important;
-  font-weight:500 !important;
-}
-    @media(max-width:480px){
-
-  .fecha-franja .fecha-evento span{
-    font-size:.88rem !important;
-  }
-
-  .fecha-franja .fecha-evento strong{
-    font-size:3.8rem !important;
-  }
-
-}
 </style>
 </head>
   
@@ -2702,10 +2656,19 @@ main > section:not(.contador-portada):not(:last-child)::after{
       </a>
     </section>
 
+    <section id="bloquePases" class="reveal" hidden style="text-align:center;max-width:620px;margin:24px auto;padding:25px 20px;border:1px solid #c8a66b;background:#fbf7ef;color:#4b3426;border-radius:12px;">
+      <h2 style="font-family:Georgia,serif;color:#926a29;font-weight:normal;margin:0 0 12px;">Tus pases personalizados</h2>
+      <p id="pasesPersonalizados" style="font-size:1.25rem;margin:8px 0;"></p>
+      <label for="cantidadConfirmada">¿Cuántas personas asistirán?</label>
+      <select id="cantidadConfirmada" aria-label="Cantidad de asistentes" style="display:block;margin:12px auto;padding:9px 14px;font-size:1rem;border:1px solid #b99a65;background:white;color:#4b3426;"></select>
+      <p style="font-size:.9rem;line-height:1.5;">Selecciona cuántas personas asistirán y registra esa misma cantidad en el formulario de confirmación. El formulario se abre por separado.</p>
+    </section>
+
     <section class="reveal evento-card rsvp-card">
       <p class="mini-etiqueta">Nos encantará verte</p>
       <h2>Confirmar asistencia</h2>
       <p>Nos dará mucha alegría contar con tu presencia.</p>
+      <p style="font-size:.9rem;">Al abrir el formulario, indica la cantidad de asistentes seleccionada, sin exceder los pases de esta invitación.</p>
 
       <a
         class="boton"
@@ -2736,9 +2699,502 @@ main > section:not(.contador-portada):not(:last-child)::after{
    ================================================== */
 
 const INVITACIONES_VALIDAS = {
-  "4KL6-DH2Y-QRJ8": "Familia García Cerero",
-  "ZA8V-AGBJ-TKD3": "Familia Ramón Vázquez",
-  "Z7A7-V8UL-X25K": "Familia Meza García"
+  "WWIZ-AI67-62NE": {
+    "nombre": "Familia Bonilla García",
+    "pases": 2
+  },
+  "IGAP-8GAO-4ZNR": {
+    "nombre": "Familia Bonilla Arellano",
+    "pases": 4
+  },
+  "4KL6-DH2Y-QRJ8": {
+    "nombre": "Familia García Cerero",
+    "pases": 6
+  },
+  "YBHY-P48J-SZ16": {
+    "nombre": "Familia Rodríguez Rodríguez",
+    "pases": 8
+  },
+  "EB9C-7009-FK4V": {
+    "nombre": "Familia López García",
+    "pases": 2
+  },
+  "6DPI-BPSP-4BHF": {
+    "nombre": "Familia García García",
+    "pases": 4
+  },
+  "0H85-ZCRU-05PA": {
+    "nombre": "Familia Fernández García",
+    "pases": 2
+  },
+  "A6XJ-YDEM-U1OZ": {
+    "nombre": "Rafael Fernández y familia",
+    "pases": 4
+  },
+  "TAM2-DHX7-87US": {
+    "nombre": "Luis Miguel Fernández y familia",
+    "pases": 3
+  },
+  "A3LX-SNV0-OD6P": {
+    "nombre": "Maximiliano Fernández y familia",
+    "pases": 4
+  },
+  "YKJK-N76D-TF32": {
+    "nombre": "Familia García Ortíz",
+    "pases": 2
+  },
+  "MBR7-PVV7-MQUX": {
+    "nombre": "Luis Ernesto García y familia",
+    "pases": 4
+  },
+  "OJW6-5H5Z-ADPV": {
+    "nombre": "Ivan García y familia",
+    "pases": 2
+  },
+  "T4M5-8FYF-PLYE": {
+    "nombre": "Familia Martínez Rodríguez",
+    "pases": 4
+  },
+  "W970-HDB7-OXEF": {
+    "nombre": "Julio López y familia",
+    "pases": 3
+  },
+  "QKUP-O8UE-I63G": {
+    "nombre": "Familia Roa García",
+    "pases": 2
+  },
+  "8XRF-AG32-IDU1": {
+    "nombre": "Familia Roa Aguilar",
+    "pases": 6
+  },
+  "1BVL-KK98-ET7T": {
+    "nombre": "Familia Aguilar Roa",
+    "pases": 3
+  },
+  "4UHY-XKLH-3OL8": {
+    "nombre": "Carlos Rodríguez y familia",
+    "pases": 3
+  },
+  "Z7A7-V8UL-X25K": {
+    "nombre": "Familia Meza García",
+    "pases": 2
+  },
+  "DHXA-4L73-P4QO": {
+    "nombre": "Humberto Meza y Familia",
+    "pases": 3
+  },
+  "HLCN-MIEL-T80V": {
+    "nombre": "Miguel Meza y Familia",
+    "pases": 6
+  },
+  "ZA8V-AGBJ-TKD3": {
+    "nombre": "Familia Ramon Vázquez",
+    "pases": 2
+  },
+  "J74X-FK9S-A3IY": {
+    "nombre": "Orlando Ramón y Familia",
+    "pases": 5
+  },
+  "BALM-0OHP-UX8S": {
+    "nombre": "Familia García Ramón",
+    "pases": 5
+  },
+  "4ZEW-7H5J-74Q1": {
+    "nombre": "Irma Ramón Vázquez",
+    "pases": 1
+  },
+  "7BJ0-RO65-433K": {
+    "nombre": "Anaelia Ramón Vázquez",
+    "pases": 1
+  },
+  "P7EQ-Q39R-HNT8": {
+    "nombre": "Beatríz Ramón Vázquez",
+    "pases": 1
+  },
+  "43YM-N7WK-I12K": {
+    "nombre": "María Ramón y Familia",
+    "pases": 2
+  },
+  "M3ZN-MJVJ-EEMG": {
+    "nombre": "Familia García Ramón",
+    "pases": 2
+  },
+  "ERAJ-0L0Z-HUG2": {
+    "nombre": "Natividad Ramón Vázquez",
+    "pases": 1
+  },
+  "6YBE-18HT-BONO": {
+    "nombre": "Familia Sosa Ramón",
+    "pases": 3
+  },
+  "DY2G-AMRY-N7M4": {
+    "nombre": "Clotilde Ramón y familia",
+    "pases": 8
+  },
+  "KN1G-W9JF-YSRE": {
+    "nombre": "Familia Baez Ramón",
+    "pases": 5
+  },
+  "1R5W-HEO8-Q310": {
+    "nombre": "Familia López Ramón",
+    "pases": 2
+  },
+  "KI9I-YLSW-9H8D": {
+    "nombre": "Victor Hugo Ramón y familia",
+    "pases": 4
+  },
+  "C418-N64X-NMVH": {
+    "nombre": "Familia Carballo Ramón",
+    "pases": 2
+  },
+  "7L5K-1ZO1-2T1V": {
+    "nombre": "Eduardo Ramón y Familia",
+    "pases": 2
+  },
+  "NHC1-S3MY-NQRT": {
+    "nombre": "Leonardo Daniel Romero y Familia",
+    "pases": 2
+  },
+  "RCV1-88OF-5G09": {
+    "nombre": "Diego Martinez y Familia",
+    "pases": 3
+  },
+  "MFW1-LMXV-SBED": {
+    "nombre": "Familia Rodríguez Ortíz",
+    "pases": 3
+  },
+  "YXF2-2S38-R7I2": {
+    "nombre": "Familia Agapito Contreras",
+    "pases": 4
+  },
+  "JWNP-WL98-I4IP": {
+    "nombre": "Familia Contreras Alonso",
+    "pases": 6
+  },
+  "FMU1-DVQ0-ISN1": {
+    "nombre": "Honorio Contreras y familia",
+    "pases": 4
+  },
+  "WTXO-87XS-HOF9": {
+    "nombre": "Familia García Méndez",
+    "pases": 5
+  },
+  "J1PH-0WSR-5S8D": {
+    "nombre": "Ramón García y esposa",
+    "pases": 2
+  },
+  "R4Z0-UMG0-8OIO": {
+    "nombre": "Rondalla Sonata de Luna",
+    "pases": 10
+  },
+  "2EH4-YJUE-4PMN": {
+    "nombre": "Cesar Balcazar",
+    "pases": 2
+  },
+  "D3E6-IE4G-6D7U": {
+    "nombre": "Antonio García",
+    "pases": 2
+  },
+  "ZG8Q-GUN1-Y7T8": {
+    "nombre": "Karina Rodríguez",
+    "pases": 2
+  },
+  "FHSH-GS37-ACC4": {
+    "nombre": "David Salgado",
+    "pases": 2
+  },
+  "AH8W-SD50-YJHU": {
+    "nombre": "Ulises Perez",
+    "pases": 2
+  },
+  "R3QP-5WA1-A83V": {
+    "nombre": "Luis Manuel Maza",
+    "pases": 2
+  },
+  "CUCW-Q1HQ-T9IR": {
+    "nombre": "Jesus Sanchez",
+    "pases": 2
+  },
+  "FKA3-VNW3-HGMG": {
+    "nombre": "Alfredo López",
+    "pases": 2
+  },
+  "FI7C-RCNO-XPN9": {
+    "nombre": "Victor Hugo Ramírez y familia",
+    "pases": 5
+  },
+  "CORN-A9RX-Q82L": {
+    "nombre": "Guillermo Martínez",
+    "pases": 2
+  },
+  "N8ER-AFXM-XCUU": {
+    "nombre": "Antonio Cortéz y familia",
+    "pases": 3
+  },
+  "05WA-I6CR-HDMU": {
+    "nombre": "Juan Jesus Hernandez",
+    "pases": 2
+  },
+  "C2ET-T7Q0-12DP": {
+    "nombre": "Familia Torres López",
+    "pases": 2
+  },
+  "5L8X-XEQD-RHWA": {
+    "nombre": "Familia Soto García",
+    "pases": 4
+  },
+  "4LGJ-P3V4-W8BC": {
+    "nombre": "Obdulia Sánchez H.",
+    "pases": 2
+  },
+  "PS1W-QX3W-41QP": {
+    "nombre": "Ricardo Iván Cruz V.",
+    "pases": 2
+  },
+  "QUBB-89DM-V34K": {
+    "nombre": "Felix Robledo Zamora",
+    "pases": 2
+  },
+  "87YD-PQNP-7JPO": {
+    "nombre": "Hector Herrera y familia",
+    "pases": 2
+  },
+  "Y8CV-G8IL-SWKG": {
+    "nombre": "Cristobal Tadeo Medina M.",
+    "pases": 2
+  },
+  "TGIL-S4Z1-553O": {
+    "nombre": "Rafael Alarcón",
+    "pases": 2
+  },
+  "HEGO-YPV0-HFPF": {
+    "nombre": "Edwuard David Pot",
+    "pases": 2
+  },
+  "G6Q6-ZAQ6-LH0V": {
+    "nombre": "Adonis Julian Sosa",
+    "pases": 2
+  },
+  "OUS0-PAZS-WMTH": {
+    "nombre": "Rosario Ramon",
+    "pases": 2
+  },
+  "JJY3-RFE3-HQFS": {
+    "nombre": "Anabel Ramon ",
+    "pases": 2
+  },
+  "O7YN-VWGL-I1K4": {
+    "nombre": "Adriana Ramon",
+    "pases": 1
+  },
+  "0XEN-CS3F-SAJW": {
+    "nombre": "Mtra Laurita",
+    "pases": 2
+  },
+  "N143-F2TE-BLKX": {
+    "nombre": "Mtra Maura Hernandez",
+    "pases": 2
+  },
+  "OCUF-3XMM-U9C4": {
+    "nombre": "Mtra Josefina",
+    "pases": 2
+  },
+  "KXGN-FL46-G9Q3": {
+    "nombre": "Jose Guadalupe Hernandez Acosta y familia",
+    "pases": 5
+  },
+  "E5FF-DDSM-9WR3": {
+    "nombre": "Reynaldo Sanchez Mendoza y familia",
+    "pases": 2
+  },
+  "2WYB-9JNV-A35S": {
+    "nombre": "Celerina Sanchez Ortega y familia",
+    "pases": 2
+  },
+  "UVRS-PZPR-6MGQ": {
+    "nombre": "Luis Sanchez Ortega y familia",
+    "pases": 3
+  },
+  "9WSQ-UVBS-NMS4": {
+    "nombre": "Guadalupe Sanchez Ortega y familia",
+    "pases": 5
+  },
+  "JZ4K-SF9Y-GM6T": {
+    "nombre": "Reynaldo Sanchez Ortega y familia",
+    "pases": 6
+  },
+  "6PQG-JGMV-9JFZ": {
+    "nombre": "Tia Enedina y familia",
+    "pases": 15
+  },
+  "CPBJ-HY6R-LEV7": {
+    "nombre": "Rosendo Hernandez Acosta y familia",
+    "pases": 6
+  },
+  "ZFKX-CP6S-F9D3": {
+    "nombre": "Tio Andres y familia",
+    "pases": 20
+  },
+  "85AP-6VSZ-FMEG": {
+    "nombre": "Juan Hernandez Martinez y familia",
+    "pases": 8
+  },
+  "PZ4L-XS2F-FPRD": {
+    "nombre": "Tia Jova y familia",
+    "pases": 4
+  },
+  "WDUN-AN9R-7Y26": {
+    "nombre": "Tio Reysitos y familia",
+    "pases": 3
+  },
+  "UVRT-YSVB-T52K": {
+    "nombre": "Tia Virginia y familia",
+    "pases": 2
+  },
+  "7S4M-4XM5-6YSC": {
+    "nombre": "Tia Sara y familia",
+    "pases": 4
+  },
+  "AM3Y-QC2K-2T55": {
+    "nombre": "Menoya y familia",
+    "pases": 5
+  },
+  "CEGR-WG4B-2XXZ": {
+    "nombre": "Joven y familia",
+    "pases": 3
+  },
+  "2FQZ-GEJQ-KFN8": {
+    "nombre": "Doña Marisol y familia",
+    "pases": 2
+  },
+  "4HQH-Z83Z-QXBP": {
+    "nombre": "Doña Concha y familia",
+    "pases": 5
+  },
+  "C9XW-WQHK-J7KU": {
+    "nombre": "Maestra y familia",
+    "pases": 3
+  },
+  "C6V6-J8VZ-X445": {
+    "nombre": "Maestro Gustavo Hernandez y familia",
+    "pases": 4
+  },
+  "GPLY-AWSZ-4ETA": {
+    "nombre": "Compadre Ricardo y familia",
+    "pases": 2
+  },
+  "3QZG-PJHE-P52G": {
+    "nombre": "Don Juan y familia",
+    "pases": 2
+  },
+  "Z6ZE-RKJG-QUED": {
+    "nombre": "Toño y familia",
+    "pases": 2
+  },
+  "PV3T-P42R-KL5N": {
+    "nombre": "Don Jorge y familia",
+    "pases": 2
+  },
+  "RB54-LNTX-GZDR": {
+    "nombre": "Don Efren y familia",
+    "pases": 6
+  },
+  "ERK7-PWS4-2WPW": {
+    "nombre": "Padrino Carlos y familia",
+    "pases": 6
+  },
+  "XM8D-7LF2-C3UD": {
+    "nombre": "Abel y familia",
+    "pases": 5
+  },
+  "7AD9-GHYL-VAJT": {
+    "nombre": "Marcelote y familia",
+    "pases": 9
+  },
+  "YDZ7-RBP6-NUG4": {
+    "nombre": "Compadre De San Antonio y familia",
+    "pases": 2
+  },
+  "B5EU-P3VZ-B8HT": {
+    "nombre": "Dr Jesus y familia",
+    "pases": 3
+  },
+  "UJ6X-PLHJ-YZ9K": {
+    "nombre": "Maestra Toñita y familia",
+    "pases": 3
+  },
+  "3533-XHY7-YLF6": {
+    "nombre": "Don Faustino y familia",
+    "pases": 2
+  },
+  "YDZK-AD9J-VJ2L": {
+    "nombre": "Don Felix y familia",
+    "pases": 2
+  },
+  "JJMK-TU9P-TRM7": {
+    "nombre": "Pepe y familia",
+    "pases": 4
+  },
+  "F3AP-H2KR-UL9P": {
+    "nombre": "Gerbacio y familia",
+    "pases": 7
+  },
+  "RMB5-6UM3-7YVM": {
+    "nombre": "Rafa Garcia y familia",
+    "pases": 2
+  },
+  "CMVX-3GSQ-BZD7": {
+    "nombre": "Mtra. Monse y familia",
+    "pases": 4
+  },
+  "HMWA-C5MW-WP94": {
+    "nombre": "Directora y familia",
+    "pases": 2
+  },
+  "GATF-SE8W-GEGL": {
+    "nombre": "Mtra. Jaquelin y familia",
+    "pases": 2
+  },
+  "ECRS-SM9A-ZVCD": {
+    "nombre": "Mtra. Edna y familia",
+    "pases": 4
+  },
+  "9HLE-PUJU-H95H": {
+    "nombre": "Mtra. Claudia y familia",
+    "pases": 4
+  },
+  "RS75-MFUV-D8KG": {
+    "nombre": "Mamá De Jeni y familia",
+    "pases": 9
+  },
+  "KD4P-TZME-CEE6": {
+    "nombre": "Arianna y familia",
+    "pases": 2
+  },
+  "4FGK-GEBV-6RXN": {
+    "nombre": "Ruben Hernandez y familia",
+    "pases": 4
+  },
+  "Y3AA-VGT9-NFJY": {
+    "nombre": "Elsy Joyce y familia",
+    "pases": 7
+  },
+  "JP9G-SJE2-VATC": {
+    "nombre": "Ceci y familia",
+    "pases": 3
+  },
+  "7DZ5-XPHM-Y44F": {
+    "nombre": "Ing. Fog y familia",
+    "pases": 3
+  },
+  "48PH-2FM2-7QYW": {
+    "nombre": "Ing. Palmer y familia",
+    "pases": 2
+  },
+  "HG7E-32Q7-FATZ": {
+    "nombre": "Ing. Ximena y familia",
+    "pases": 4
+  }
 };
 
 function cargarInvitado(){
@@ -2749,7 +3205,8 @@ function cargarInvitado(){
     .trim()
     .toUpperCase();
 
-  const nombre = INVITACIONES_VALIDAS[codigo];
+  const invitacion = INVITACIONES_VALIDAS[codigo];
+  const nombre = invitacion?.nombre;
 
   const nombreEl =
     document.getElementById("nombreInvitado");
@@ -2824,6 +3281,18 @@ function cargarInvitado(){
   if(bloque){
     bloque.style.display = "";
   }
+  const pasesEl = document.getElementById("pasesPersonalizados");
+  const seleccionEl = document.getElementById("cantidadConfirmada");
+  if(Number.isInteger(invitacion.pases) && invitacion.pases > 0 && pasesEl && seleccionEl){
+    pasesEl.textContent = invitacion.pases + (invitacion.pases === 1 ? " pase reservado" : " pases reservados");
+    seleccionEl.innerHTML = "";
+    for(let i=1;i<=invitacion.pases;i++){
+      const opt=document.createElement("option");opt.value=i;opt.textContent=i+(i===1?" persona":" personas");
+      seleccionEl.appendChild(opt);
+    }
+    document.getElementById("bloquePases").hidden=false;
+  }
+
 }
     
 
