@@ -2385,6 +2385,18 @@ main > section:not(.contador-portada):not(:last-child)::after{
   font-size:1.12rem !important;
   line-height:1.55 !important;
 }
+
+/* Confirmación integrada, sobria y adaptada a celular */
+#bloquePases[hidden],#rsvpFormulario[hidden],#rsvpConfirmado[hidden]{display:none!important}
+#bloquePases .rsvp-cupo{font-size:1.28rem;color:#745226;margin:14px auto 22px}
+#bloquePases .rsvp-label{display:block;font-size:.85rem;margin:8px 0;color:#594637}
+#bloquePases .rsvp-select{min-width:165px;max-width:100%;padding:12px 18px;margin:10px auto 20px;display:block;border:1px solid #bda26d;border-radius:4px;background:#fffdf9;color:#48362b;font-size:1rem;text-align:center}
+#bloquePases .rsvp-enviar{cursor:pointer;border:0}
+#bloquePases .rsvp-enviar:disabled{opacity:.5;cursor:wait}
+#bloquePases .rsvp-no,#bloquePases .rsvp-editar{display:block;margin:18px auto 0;background:transparent;border:0;border-bottom:1px solid #bda26d;color:#745226;padding:5px;cursor:pointer;font:inherit}
+#bloquePases .rsvp-check{font-size:2rem;color:#a88747;margin:4px}
+#bloquePases #rsvpConfirmado h3{color:#85632e;font-weight:500;font-size:1.55rem}
+#bloquePases .rsvp-mensaje{font-size:.9rem;line-height:1.5;margin-top:12px;color:#7b4b35}
 </style>
 </head>
   
@@ -2656,28 +2668,24 @@ main > section:not(.contador-portada):not(:last-child)::after{
       </a>
     </section>
 
-    <section id="bloquePases" class="reveal" hidden style="text-align:center;max-width:620px;margin:24px auto;padding:25px 20px;border:1px solid #c8a66b;background:#fbf7ef;color:#4b3426;border-radius:12px;">
-      <h2 style="font-family:Georgia,serif;color:#926a29;font-weight:normal;margin:0 0 12px;">Tus pases personalizados</h2>
-      <p id="pasesPersonalizados" style="font-size:1.25rem;margin:8px 0;"></p>
-      <label for="cantidadConfirmada">¿Cuántas personas asistirán?</label>
-      <select id="cantidadConfirmada" aria-label="Cantidad de asistentes" style="display:block;margin:12px auto;padding:9px 14px;font-size:1rem;border:1px solid #b99a65;background:white;color:#4b3426;"></select>
-      <p style="font-size:.9rem;line-height:1.5;">Selecciona cuántas personas asistirán y registra esa misma cantidad en el formulario de confirmación. El formulario se abre por separado.</p>
-    </section>
-
-    <section class="reveal evento-card rsvp-card">
+    <section id="bloquePases" class="reveal evento-card rsvp-card" hidden>
       <p class="mini-etiqueta">Nos encantará verte</p>
       <h2>Confirmar asistencia</h2>
-      <p>Nos dará mucha alegría contar con tu presencia.</p>
-      <p style="font-size:.9rem;">Al abrir el formulario, indica la cantidad de asistentes seleccionada, sin exceder los pases de esta invitación.</p>
-
-      <a
-        class="boton"
-        href="https://docs.google.com/forms/d/e/1FAIpQLSecyADGBUg2BuRoezHR4y5-qg-bLTPtGfHX9mhOSMz1iPzpgA/viewform"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Confirmar asistencia
-      </a>
+      <p id="pasesPersonalizados" class="rsvp-cupo"></p>
+      <div id="rsvpFormulario">
+        <p>¿Cuántas personas asistirán?</p>
+        <label class="rsvp-label" for="cantidadConfirmada">Asistentes de tu invitación</label>
+        <select id="cantidadConfirmada" class="rsvp-select"></select>
+        <button class="boton rsvp-enviar" type="button" id="rsvpEnviar">Confirmar asistencia</button>
+        <button class="rsvp-no" type="button" id="rsvpNo">No podremos asistir</button>
+      </div>
+      <div id="rsvpConfirmado" hidden aria-live="polite">
+        <p class="rsvp-check">♡</p>
+        <h3>¡Gracias por confirmar!</h3>
+        <p id="rsvpResumen"></p>
+        <button class="rsvp-editar" id="rsvpEditar" type="button">Modificar respuesta</button>
+      </div>
+      <p id="rsvpMensaje" class="rsvp-mensaje" role="status" aria-live="polite"></p>
     </section>
 
   </main>
@@ -3197,6 +3205,82 @@ const INVITACIONES_VALIDAS = {
   }
 };
 
+
+/* PASO DE CONFIGURACIÓN: pega aquí la URL de tu implementación de Apps Script (/exec). */
+const RSVP_API_URL = "PEGAR_AQUI_URL_APPS_SCRIPT";
+let rsvpCodigo = "", rsvpMax = 0, rsvpRespuesta = null;
+const rsvpEl = id => document.getElementById(id);
+const rsvpConfigurado = () => /^https:\/\/script\.google\.com\/macros\/s\/.+\/exec$/.test(RSVP_API_URL);
+function rsvpAviso(m){ rsvpEl('rsvpMensaje').textContent = m; }
+function rsvpPintar(resp){
+  rsvpRespuesta=resp;
+  const ok=resp && resp.estado === 'confirmado';
+  rsvpEl('rsvpFormulario').hidden=!!resp;
+  rsvpEl('rsvpConfirmado').hidden=!resp;
+  if(resp){
+    rsvpEl('rsvpResumen').textContent=ok
+      ? `Tenemos registrados ${resp.asistentes} ${resp.asistentes===1?'asistente':'asistentes'} de tu invitación.`
+      : 'Hemos registrado que no podrán asistir. ¡Gracias por avisarnos!';
+  }
+}
+function inicializarConfirmacion(codigo, invitacion){
+  rsvpCodigo=codigo; rsvpMax=Number(invitacion.pases);
+  if(!Number.isInteger(rsvpMax)||rsvpMax<1)return;
+  rsvpEl('bloquePases').hidden=false;
+  rsvpEl('pasesPersonalizados').textContent=`Hemos reservado ${rsvpMax} ${rsvpMax===1?'pase':'pases'} para ustedes`;
+  const sel=rsvpEl('cantidadConfirmada');sel.innerHTML='';
+  for(let i=1;i<=rsvpMax;i++){
+    const op=document.createElement('option');op.value=i;op.textContent=`${i} ${i===1?'persona':'personas'}`;sel.appendChild(op);
+  }
+  sel.value=String(rsvpMax);
+  rsvpEl('rsvpEnviar').addEventListener('click',()=>rsvpGuardar('confirmado'));
+  rsvpEl('rsvpNo').addEventListener('click',()=>rsvpGuardar('no_asiste'));
+  rsvpEl('rsvpEditar').addEventListener('click',()=>{rsvpPintar(null);rsvpAviso('Puedes modificar tu respuesta.');});
+  if(!rsvpConfigurado()){
+    rsvpEl('rsvpEnviar').disabled=true;rsvpEl('rsvpNo').disabled=true;
+    rsvpAviso('La confirmación estará disponible próximamente.');return;
+  }
+  rsvpConsultar();
+}
+function rsvpConsultar(){
+  rsvpAviso('Consultando tu confirmación…');
+  const cb='rsvpCallback_'+Date.now()+'_'+Math.floor(Math.random()*10000);
+  const script=document.createElement('script');
+  const timeout=setTimeout(()=>{limpiar();rsvpAviso('No se pudo consultar tu respuesta. Inténtalo de nuevo más tarde.');},12000);
+  function limpiar(){clearTimeout(timeout);delete window[cb];script.remove();}
+  window[cb]=(data)=>{limpiar();if(data.ok){rsvpPintar(data.respuesta||null);rsvpAviso('');}else rsvpAviso(data.error||'No se pudo consultar tu respuesta.');};
+  script.onerror=()=>{limpiar();rsvpAviso('No se pudo conectar con el registro.');};
+  script.src=RSVP_API_URL+'?codigo='+encodeURIComponent(rsvpCodigo)+'&callback='+encodeURIComponent(cb);
+  document.head.appendChild(script);
+}
+function rsvpGuardar(estado){
+  if(!rsvpConfigurado())return;
+  const asistentes=estado==='confirmado'?Number(rsvpEl('cantidadConfirmada').value):0;
+  if(!Number.isInteger(asistentes)||asistentes<0||asistentes>rsvpMax)return rsvpAviso('Cantidad no válida.');
+  if(estado==='confirmado'&&asistentes===0)return rsvpAviso('Selecciona al menos una persona.');
+  if(estado==='no_asiste'&&!confirm('¿Confirmas que no podrán asistir?'))return;
+  rsvpEl('rsvpEnviar').disabled=true;rsvpEl('rsvpNo').disabled=true;
+  rsvpAviso('Guardando tu respuesta…');
+  const iframe=document.createElement('iframe');iframe.name='rsvpFrame_'+Date.now();iframe.style.display='none';document.body.appendChild(iframe);
+  const form=document.createElement('form');form.method='POST';form.action=RSVP_API_URL;form.target=iframe.name;form.style.display='none';
+  const token='rsvp_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  for(const [k,v] of Object.entries({codigo:rsvpCodigo,estado,asistentes:String(asistentes),token})){
+    const input=document.createElement('input');input.name=k;input.value=v;form.appendChild(input);
+  }
+  document.body.appendChild(form);
+  const timeout=setTimeout(()=>{terminar();rsvpAviso('No pudimos verificar el envío. Consulta nuevamente antes de volver a confirmar.');},18000);
+  function terminar(){clearTimeout(timeout);window.removeEventListener('message',recibir);form.remove();setTimeout(()=>iframe.remove(),500);rsvpEl('rsvpEnviar').disabled=false;rsvpEl('rsvpNo').disabled=false;}
+  function recibir(e){
+    if(!e.data||e.data.tipo!=='BODA_RSVP'||e.data.token!==token)return;
+    if(e.origin!=='null'&&!/^https:\/\/[a-z0-9.-]*googleusercontent\.com$/.test(e.origin))return;
+    terminar();
+    if(e.data.ok){rsvpPintar({estado,asistentes});rsvpAviso('Tu respuesta se guardó correctamente.');}
+    else rsvpAviso(e.data.error||'No se pudo guardar. Inténtalo de nuevo.');
+  }
+  window.addEventListener('message',recibir);
+  form.submit();
+}
+
 function cargarInvitado(){
 
   const params = new URLSearchParams(window.location.search);
@@ -3281,17 +3365,7 @@ function cargarInvitado(){
   if(bloque){
     bloque.style.display = "";
   }
-  const pasesEl = document.getElementById("pasesPersonalizados");
-  const seleccionEl = document.getElementById("cantidadConfirmada");
-  if(Number.isInteger(invitacion.pases) && invitacion.pases > 0 && pasesEl && seleccionEl){
-    pasesEl.textContent = invitacion.pases + (invitacion.pases === 1 ? " pase reservado" : " pases reservados");
-    seleccionEl.innerHTML = "";
-    for(let i=1;i<=invitacion.pases;i++){
-      const opt=document.createElement("option");opt.value=i;opt.textContent=i+(i===1?" persona":" personas");
-      seleccionEl.appendChild(opt);
-    }
-    document.getElementById("bloquePases").hidden=false;
-  }
+  inicializarConfirmacion(codigo, invitacion);
 
 }
     
