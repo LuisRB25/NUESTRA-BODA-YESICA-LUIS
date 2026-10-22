@@ -3253,32 +3253,84 @@ function rsvpConsultar(){
   script.src=RSVP_API_URL+'?codigo='+encodeURIComponent(rsvpCodigo)+'&callback='+encodeURIComponent(cb);
   document.head.appendChild(script);
 }
+// Consulta JSONP independiente: permite comprobar en la hoja si se guardó.
+function rsvpLeerGuardado(){
+  return new Promise((resolve,reject)=>{
+    const cb='rsvpVerificar_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+    const script=document.createElement('script');
+    let listo=false;
+    const timer=setTimeout(()=>finalizar(new Error('La consulta tardó demasiado')),9000);
+    function finalizar(error,data){
+      if(listo)return;
+      listo=true;clearTimeout(timer);script.remove();
+      try{delete window[cb];}catch(e){window[cb]=undefined;}
+      if(error)reject(error);else resolve(data);
+    }
+    window[cb]=data=>finalizar(null,data);
+    script.onerror=()=>finalizar(new Error('No se pudo consultar Google Sheets'));
+    script.src=RSVP_API_URL+'?codigo='+encodeURIComponent(rsvpCodigo)+'&callback='+encodeURIComponent(cb)+'&_='+Date.now();
+    document.head.appendChild(script);
+  });
+}
 function rsvpGuardar(estado){
   if(!rsvpConfigurado())return;
   const asistentes=estado==='confirmado'?Number(rsvpEl('cantidadConfirmada').value):0;
   if(!Number.isInteger(asistentes)||asistentes<0||asistentes>rsvpMax)return rsvpAviso('Cantidad no válida.');
   if(estado==='confirmado'&&asistentes===0)return rsvpAviso('Selecciona al menos una persona.');
   if(estado==='no_asiste'&&!confirm('¿Confirmas que no podrán asistir?'))return;
-  rsvpEl('rsvpEnviar').disabled=true;rsvpEl('rsvpNo').disabled=true;
-  rsvpAviso('Guardando tu respuesta…');
-  const iframe=document.createElement('iframe');iframe.name='rsvpFrame_'+Date.now();iframe.style.display='none';document.body.appendChild(iframe);
-  const form=document.createElement('form');form.method='POST';form.action=RSVP_API_URL;form.target=iframe.name;form.style.display='none';
+  rsvpEl('rsvpEnviar').disabled=true;
+  rsvpEl('rsvpNo').disabled=true;
+  rsvpAviso('Enviando y verificando tu confirmación…');
+  // Enviamos como formulario tradicional a un iframe oculto: no requiere CORS.
+  const iframe=document.createElement('iframe');
+  iframe.name='rsvpFrame_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  iframe.style.display='none';
+  document.body.appendChild(iframe);
+  const form=document.createElement('form');
+  form.method='POST';form.action=RSVP_API_URL;form.target=iframe.name;form.style.display='none';
   const token='rsvp_'+Date.now()+'_'+Math.random().toString(36).slice(2);
   for(const [k,v] of Object.entries({codigo:rsvpCodigo,estado,asistentes:String(asistentes),token})){
-    const input=document.createElement('input');input.name=k;input.value=v;form.appendChild(input);
+    const input=document.createElement('input');input.type='hidden';input.name=k;input.value=v;form.appendChild(input);
   }
   document.body.appendChild(form);
-  const timeout=setTimeout(()=>{terminar();rsvpAviso('No pudimos verificar el envío. Consulta nuevamente antes de volver a confirmar.');},30000);
-  function terminar(){clearTimeout(timeout);window.removeEventListener('message',recibir);form.remove();setTimeout(()=>iframe.remove(),500);rsvpEl('rsvpEnviar').disabled=false;rsvpEl('rsvpNo').disabled=false;}
+  let terminado=false;
+  const temporizadores=[];
+  function finalizar(ok,mensaje){
+    if(terminado)return;
+    terminado=true;
+    temporizadores.forEach(clearTimeout);
+    window.removeEventListener('message',recibir);
+    form.remove();setTimeout(()=>iframe.remove(),1000);
+    rsvpEl('rsvpEnviar').disabled=false;
+    rsvpEl('rsvpNo').disabled=false;
+    if(ok)rsvpPintar({estado,asistentes});
+    rsvpAviso(mensaje);
+  }
   function recibir(e){
     if(!e.data||e.data.tipo!=='BODA_RSVP'||e.data.token!==token)return;
-    if(e.source!==iframe.contentWindow)return; // Verificar el iframe que enviamos, independientemente del dominio de redirección de Google.
-    terminar();
-    if(e.data.ok){rsvpPintar({estado,asistentes});rsvpAviso('Tu respuesta se guardó correctamente.');}
-    else rsvpAviso(e.data.error||'No se pudo guardar. Inténtalo de nuevo.');
+    // Apps Script puede emitir el mensaje desde un marco anidado.
+    // El token aleatorio identifica la respuesta de este envío.
+    if(e.data.ok)finalizar(true,'Tu respuesta se guardó correctamente.');
+    else finalizar(false,e.data.error||'Google rechazó la confirmación.');
   }
   window.addEventListener('message',recibir);
-  form.submit();
+  try{form.submit();}
+  catch(error){finalizar(false,'No se pudo enviar el formulario: '+error.message);return;}
+  // No dependemos solo de postMessage: comprobamos directamente en Sheets.
+  const comprobar=async()=>{
+    if(terminado)return;
+    try{
+      const data=await rsvpLeerGuardado();
+      const resp=data&&data.respuesta;
+      if(data&&data.ok&&resp&&resp.estado===estado&&Number(resp.asistentes)===asistentes){
+        finalizar(true,'¡Confirmación registrada y verificada en Google Sheets!');
+      }else if(data&&!data.ok){
+        finalizar(false,data.error||'Google no pudo consultar el registro.');
+      }
+    }catch(e){/* Seguimos intentando hasta el plazo máximo. */}
+  };
+  [2500,6000,11000,18000,26000].forEach(ms=>temporizadores.push(setTimeout(comprobar,ms)));
+  temporizadores.push(setTimeout(()=>finalizar(false,'No se pudo verificar el guardado. Revisa la hoja Confirmaciones antes de intentar otra vez.'),38000));
 }
 
 function cargarInvitado(){
