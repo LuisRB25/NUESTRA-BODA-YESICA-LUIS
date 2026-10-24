@@ -3032,8 +3032,8 @@ const INVITACIONES_VALIDAS = {
     "pases": 6
   },
   "6PQG-JGMV-9JFZ": {
-    "nombre": "Enedina Sanchez Mendoza y familia",
-    "pases": 15
+    "nombre": "Enedina Sánchez Mendoza y familia",
+    "pases": 2
   },
   "CPBJ-HY6R-LEV7": {
     "nombre": "Rosendo Hernandez Acosta y familia",
@@ -3048,7 +3048,7 @@ const INVITACIONES_VALIDAS = {
     "pases": 8
   },
   "PZ4L-XS2F-FPRD": {
-    "nombre": "Jovita Hernandez Martinez y familia",
+    "nombre": "Jovita Hernández Martínez y familia",
     "pases": 4
   },
   "WDUN-AN9R-7Y26": {
@@ -3064,8 +3064,8 @@ const INVITACIONES_VALIDAS = {
     "pases": 4
   },
   "Z8RQ-7CAW-0TFP": {
-    "nombre": "Fernando Hernandez Landa y familia",
-    "pases": 5
+    "nombre": "Fernando Hernández Landa",
+    "pases": 2
   },
   "NW04-SECY-AZLC": {
     "nombre": "Rafael Lopez Hernandez y familia",
@@ -3246,6 +3246,26 @@ const INVITACIONES_VALIDAS = {
   "XU6J-U53V-AD5S": {
     "nombre": "Fausto Gustavo Hernández Ortiz y familia",
     "pases": null
+  },
+  "L6KY-S0RB-GZS1": {
+    "nombre": "Maricruz Sánchez y familia",
+    "pases": 4
+  },
+  "KPLQ-1MIX-ARYH": {
+    "nombre": "Verónica Sánchez y familia",
+    "pases": 4
+  },
+  "GIXZ-3KPW-XJBI": {
+    "nombre": "Moisés Sánchez y familia",
+    "pases": 6
+  },
+  "UNEI-9J0C-635M": {
+    "nombre": "Elena Hernández Martínez",
+    "pases": 2
+  },
+  "XG6X-JBWH-EPQM": {
+    "nombre": "Daniela Hernández Landa",
+    "pases": 2
   }
 };
 
@@ -3386,6 +3406,15 @@ function cargarInvitado(){
   const codigo = (params.get("i") || "")
     .trim()
     .toUpperCase();
+
+  // Enlace general: misma invitación, sin nombre ni confirmación.
+  if (codigo === 'Y-L-INVITADOS') {
+    const bloqueGeneral = document.getElementById('invitadoPersonalizado');
+    if (bloqueGeneral) bloqueGeneral.style.display = 'none';
+    const pasesGeneral = document.getElementById('bloquePases');
+    if (pasesGeneral) pasesGeneral.hidden = true;
+    return;
+  }
 
   const invitacion = INVITACIONES_VALIDAS[codigo];
   const nombre = invitacion?.nombre;
