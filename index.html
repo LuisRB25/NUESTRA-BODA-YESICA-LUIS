@@ -2413,6 +2413,14 @@ main > section:not(.contador-portada):not(:last-child)::after{
       touch-action:manipulation;
       pointer-events:auto;
     }
+    /* Animación específica: conserva el centrado horizontal al terminar. */
+    #bienvenida > .boton-abrir{
+      animation:entradaBotonCentrado 1.4s ease 3s forwards;
+    }
+    @keyframes entradaBotonCentrado{
+      from{opacity:0;transform:translate(-50%, 15px)}
+      to{opacity:1;transform:translate(-50%, 0)}
+    }
     #bienvenida > .boton-abrir:hover,
     #bienvenida > .boton-abrir:active{
       transform:translateX(-50%) translateY(-3px);
