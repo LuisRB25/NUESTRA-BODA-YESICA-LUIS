@@ -2397,7 +2397,31 @@ main > section:not(.contador-portada):not(:last-child)::after{
 #bloquePases .rsvp-check{font-size:2rem;color:#a88747;margin:4px}
 #bloquePases #rsvpConfirmado h3{color:#85632e;font-weight:500;font-size:1.55rem}
 #bloquePases .rsvp-mensaje{font-size:.9rem;line-height:1.5;margin-top:12px;color:#7b4b35}
-</style>
+
+    /* ÚNICO AJUSTE: botón siempre al pie de la portada, sobre la curva,
+       fuera de la zona de nombres y respetando el área segura del móvil. */
+    #bienvenida > .boton-abrir{
+      position:absolute;
+      z-index:30;
+      left:50%;
+      bottom:calc(12px + env(safe-area-inset-bottom, 0px));
+      transform:translateX(-50%);
+      margin:0;
+      min-width:215px;
+      max-width:calc(100% - 32px);
+      white-space:nowrap;
+      touch-action:manipulation;
+      pointer-events:auto;
+    }
+    #bienvenida > .boton-abrir:hover,
+    #bienvenida > .boton-abrir:active{
+      transform:translateX(-50%) translateY(-3px);
+    }
+    #bienvenida .curva-portada{
+      padding-bottom:calc(108px + env(safe-area-inset-bottom, 0px));
+    }
+
+  </style>
 </head>
   
 <body>
@@ -2428,13 +2452,7 @@ main > section:not(.contador-portada):not(:last-child)::after{
         <span>Este será uno de ellos.</span>
       </p>
 
-      <button
-  type="button"
-  class="boton boton-abrir"
-  onclick="abrirInvitacion()"
->
-  Abrir invitación
-</button>
+
       
       <div class="flecha-portada">⌄</div>
     </div>
@@ -2454,6 +2472,7 @@ main > section:not(.contador-portada):not(:last-child)::after{
         llena de amor, sueños y felicidad.
       </p>
     </div>
+    <button type="button" class="boton boton-abrir" onclick="abrirInvitacion()">Abrir invitación</button>
   </div>
 
   <!-- INVITACIÓN -->
@@ -3096,7 +3115,7 @@ const INVITACIONES_VALIDAS = {
     "pases": 2
   },
   "Z6ZE-RKJG-QUED": {
-    "nombre": "Antonio y familia",
+    "nombre": "Antonio Sangabriel Fernandez y familia",
     "pases": 2
   },
   "PV3T-P42R-KL5N": {
@@ -3140,7 +3159,7 @@ const INVITACIONES_VALIDAS = {
     "pases": 2
   },
   "JJMK-TU9P-TRM7": {
-    "nombre": "Jose y familia",
+    "nombre": "Jose Ortega Alarcon y familia",
     "pases": 4
   },
   "F3AP-H2KR-UL9P": {
@@ -3148,7 +3167,7 @@ const INVITACIONES_VALIDAS = {
     "pases": 7
   },
   "RMB5-6UM3-7YVM": {
-    "nombre": "Rafa Garcia y familia",
+    "nombre": "Rafa Garcia Ramos y familia",
     "pases": 2
   },
   "CMVX-3GSQ-BZD7": {
