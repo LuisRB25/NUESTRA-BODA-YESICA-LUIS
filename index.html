@@ -2922,17 +2922,6 @@ const INVITACIONES_VALIDAS = {
     "nombre": "Rondalla Sonata de Luna",
     "pases": null
   },
-  
-},
-  "ESCUELA-RICARDO-FLORES-MAGON": {
-    "nombre": "Escuela Ricardo Flores Magón",
-    "pases": null
-  },
-
-
-
-
-  
   "2EH4-YJUE-4PMN": {
     "nombre": "Cesar Balcazar",
     "pases": 2
@@ -3046,7 +3035,7 @@ const INVITACIONES_VALIDAS = {
     "pases": 2
   },
   "KXGN-FL46-G9Q3": {
-    "nombre": "Familia Hernández Sánchez",
+    "nombre": "Jose Guadalupe Hernandez Acosta y familia",
     "pases": null
   },
   "E5FF-DDSM-9WR3": {
@@ -3444,6 +3433,17 @@ function cargarInvitado(){
   const codigo = (params.get("i") || "")
     .trim()
     .toUpperCase();
+
+  // Invitación especial para la escuela: nombre visible, sin pases ni RSVP.
+  if (codigo === 'ESCUELA-RICARDO-FLORES-MAGON') {
+    const nombreEscuela = document.getElementById('nombreInvitado');
+    if (nombreEscuela) nombreEscuela.textContent = 'Escuela Flores Magón';
+    const bloqueEscuela = document.getElementById('invitadoPersonalizado');
+    if (bloqueEscuela) bloqueEscuela.style.display = '';
+    const pasesEscuela = document.getElementById('bloquePases');
+    if (pasesEscuela) pasesEscuela.hidden = true;
+    return;
+  }
 
   // Enlace general: misma invitación, sin nombre ni confirmación.
   if (codigo === 'Y-L-INVITADOS') {
