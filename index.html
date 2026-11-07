@@ -3293,6 +3293,14 @@ const INVITACIONES_VALIDAS = {
   "XG6X-JBWH-EPQM": {
     "nombre": "Daniela Hernández Landa",
     "pases": 2
+  },
+  "ROAM-2026-YL04": {
+    "nombre": "Familia Roa Moreno",
+    "pases": 4
+  },
+  "MARI-2026-YL03": {
+    "nombre": "Maricarmen García",
+    "pases": 3
   }
 };
 
@@ -3442,6 +3450,17 @@ function cargarInvitado(){
     if (bloqueEscuela) bloqueEscuela.style.display = '';
     const pasesEscuela = document.getElementById('bloquePases');
     if (pasesEscuela) pasesEscuela.hidden = true;
+    return;
+  }
+
+  // Invitación personalizada sin RSVP ni selector de personas.
+  if (codigo === 'ALEJANDRA-CONTRERAS-FAMILIA') {
+    const nombreAlejandra = document.getElementById('nombreInvitado');
+    if (nombreAlejandra) nombreAlejandra.textContent = 'Alejandra Contreras y familia';
+    const bloqueAlejandra = document.getElementById('invitadoPersonalizado');
+    if (bloqueAlejandra) bloqueAlejandra.style.display = '';
+    const pasesAlejandra = document.getElementById('bloquePases');
+    if (pasesAlejandra) pasesAlejandra.hidden = true;
     return;
   }
 
