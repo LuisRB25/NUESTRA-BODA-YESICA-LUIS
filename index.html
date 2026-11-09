@@ -3464,6 +3464,17 @@ function cargarInvitado(){
     return;
   }
 
+  // Invitación especial de Alfredo Becerra y familia: sin pases ni RSVP.
+  if (codigo === 'ALFREDO-BECERRA-FAMILIA') {
+    const nombreAlfredo = document.getElementById('nombreInvitado');
+    if (nombreAlfredo) nombreAlfredo.textContent = 'Alfredo Becerra y familia';
+    const bloqueAlfredo = document.getElementById('invitadoPersonalizado');
+    if (bloqueAlfredo) bloqueAlfredo.style.display = '';
+    const pasesAlfredo = document.getElementById('bloquePases');
+    if (pasesAlfredo) pasesAlfredo.hidden = true;
+    return;
+  }
+
   // Enlace general: misma invitación, sin nombre ni confirmación.
   if (codigo === 'Y-L-INVITADOS') {
     const bloqueGeneral = document.getElementById('invitadoPersonalizado');
