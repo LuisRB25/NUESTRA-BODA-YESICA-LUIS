@@ -3475,6 +3475,17 @@ function cargarInvitado(){
     return;
   }
 
+  // Invitación personalizada de Juan Pablo Garces y familia: sin pases ni RSVP.
+  if (codigo === 'JUAN-PABLO-GARCES-FAMILIA') {
+    const nombreJuanPablo = document.getElementById('nombreInvitado');
+    if (nombreJuanPablo) nombreJuanPablo.textContent = 'Juan Pablo Garces y familia';
+    const bloqueJuanPablo = document.getElementById('invitadoPersonalizado');
+    if (bloqueJuanPablo) bloqueJuanPablo.style.display = '';
+    const pasesJuanPablo = document.getElementById('bloquePases');
+    if (pasesJuanPablo) pasesJuanPablo.hidden = true;
+    return;
+  }
+
   // Enlace general: misma invitación, sin nombre ni confirmación.
   if (codigo === 'Y-L-INVITADOS') {
     const bloqueGeneral = document.getElementById('invitadoPersonalizado');
