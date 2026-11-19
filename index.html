@@ -3486,6 +3486,17 @@ function cargarInvitado(){
     return;
   }
 
+  // Invitación personalizada de Daria Gonzales y familia: sin pases ni RSVP.
+  if (codigo === 'DARIA-GONZALES-FAMILIA') {
+    const nombreDaria = document.getElementById('nombreInvitado');
+    if (nombreDaria) nombreDaria.textContent = 'Daria Gonzales y familia';
+    const bloqueDaria = document.getElementById('invitadoPersonalizado');
+    if (bloqueDaria) bloqueDaria.style.display = '';
+    const pasesDaria = document.getElementById('bloquePases');
+    if (pasesDaria) pasesDaria.hidden = true;
+    return;
+  }
+
   // Enlace general: misma invitación, sin nombre ni confirmación.
   if (codigo === 'Y-L-INVITADOS') {
     const bloqueGeneral = document.getElementById('invitadoPersonalizado');
